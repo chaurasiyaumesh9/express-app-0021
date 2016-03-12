@@ -41,16 +41,7 @@
 				<!-- <div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="product in productList | filter:{in_stock:true}"> -->
 				
 				<div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="product in productList | filterProductsByCategory:currentCategory" >
-					<section class="thumbnail-product">
-						<div class="thumbnail-img-wrapper">
-							<img src="{{ product.images | smallImg }}" class="thumbnail-img" />
-						</div>
-						<p class="product-name"> <b>{{ product.name }}</b> </p>
-						<p class="price-block"> 
-							<span class="price regular-price"><i class="fa fa-inr"></i>{{ product.price }}</span> 
-							<span class="price special-price"><i class="fa fa-inr"></i>{{ product.special_price }}</span> 
-						</p>
-					</section>
+					<product-thumbnail></product-thumbnail>
 				</div>
 				
 			</div>

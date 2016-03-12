@@ -61,7 +61,7 @@ cartApp.filter('filterProductsByCategory', function( ){
 cartApp.directive('productThumbnail', function(){
 	return {
 		restrict:"EA",
-		replace:true,
+		replace:false,
 		templateUrl:"./templates/product-thumbnail.html"
 	}
 });
