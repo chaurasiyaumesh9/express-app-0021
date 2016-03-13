@@ -86,7 +86,7 @@
 						<button class="btn btn-primary" ng-click="uploadFiles( product )"> Upload Files </button>
 					 
 					 <table class="table table-striped">
-						<thead ng-show="product.temp.length>0 || product.images.length>0">
+						<thead ng-show="product.temp.length>0">
 							<tr>
 								<th> Image </th>
 								<th> Large Image </th>

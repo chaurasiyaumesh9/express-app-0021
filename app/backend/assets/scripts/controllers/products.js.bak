@@ -125,7 +125,7 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 
 	$scope.showFiles = function(files, errFiles) {
         $scope.product.temp = files;
-		//console.log('$scope.product.temp :',$scope.product.temp);
+		console.log('$scope.product.temp :',$scope.product.temp);
         $scope.product.invalidImages =  errFiles;
 
 		//return false;
