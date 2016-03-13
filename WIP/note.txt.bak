@@ -1,0 +1,7 @@
+CRITICAL
+2. check by passing blank values. / Need frontend data validation
+8. Configure Grunt to manage tasks like restart server on save changes + using sass/compass + minifying js/css
+9. using angular material/ Material design lite { http://www.material-ui.com/#/components/flat-button , http://noeticforce.com/best-material-design-web-frameworks}
+10. update deleted rows count after deletion of rws on category & products listing page.
+11. implement cancel button and its logic. should act similar to go back button. also delete the uploaded images on server for new products.
+
