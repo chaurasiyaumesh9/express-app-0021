@@ -15,6 +15,20 @@ a.theader:visited{
 	outline:none;
 	border: 0 none;
 }
+#main{
+	padding:0 0 15px 0;
+}
+.dataset{
+	position:relative;
+	min-height:410px;
+}
+
+.spinner{
+	position:absolute;left:50%;top:50%;
+	-webkit-transform:translate(-50%,-50%);
+	-moz-transform:translate(-50%,-50%);
+}
+.spinner img{ max-width:65px;max-height:65px; height:auto;width:auto;}
 
 .datepickerdemoBasicUsage {
   /** Demo styles for mdCalendar. */ }

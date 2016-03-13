@@ -4,7 +4,7 @@
 	</div>
 </div>
 
-<div class="container" ng-init="loadDefaults();getAllCategories();">
+<div class="container" ng-init="loadDefaults();getProductCategories();">
 	 <div class="alert alert-success" ng-show="addSuccess">
 	  <strong>Success!</strong> New Product Added Successfully!
 	</div> 
@@ -12,6 +12,7 @@
 	<form ng-submit="addNewProduct( product )" method="POST" role="form">
 		<product></product>
 		<button type="submit" class="btn btn-primary"> Save </button>
+		<a href="#products" class="btn btn-default" ng-click="revertAddingProduct( product )"> Cancel </a>
 		<a href="#products" class="pull-right">Go Back</a>
 	</form>
 </div>

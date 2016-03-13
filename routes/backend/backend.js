@@ -144,7 +144,7 @@ var products = {
 		
 	},
 	uploadImages: function( req, res ){
-		var upload = multer({ storage : storage}).single('productPic');
+		var upload = multer({ storage : storage, inMemory: true }).single('productPic');
 		upload( req,res,function(err) {
 			if(err) {
 				console.log( err );

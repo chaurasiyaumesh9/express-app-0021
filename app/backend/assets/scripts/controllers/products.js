@@ -1,4 +1,4 @@
-adminApp.controller('productsCtrl', function($scope, $routeParams, productService, categoryService, $timeout, common,$mdToast, $document, Upload){
+adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, productService, categoryService, $timeout, common,Upload){
 	$scope.message = "Manage Your Products";
 	$scope.addSuccess = false, $scope.updateSuccess = false;
 	$scope.currentPage = 1;
@@ -14,15 +14,15 @@ adminApp.controller('productsCtrl', function($scope, $routeParams, productServic
 	$scope.loadDefaults = function(){
 		$scope.product = { in_stock: false, categories:[] };
 	}
-	$scope.getAllCategories = getAllCategories;
+	$scope.getProductCategories = getProductCategories; //providing access to scope view
 	$scope.pageChangeHandler = function(num) {};
+	getAllCategories();
 	$scope.loadDefaults();
 
 	if ( $routeParams.id )
 	{
 		productID = $routeParams.id; // check if in edit/view mode
 		productService.getProductById( productID ).then( function( response ){
-			//console.log('response :',response);
 			$scope.product = response;
 			$scope.product.valid_from = common.stringToDate( $scope.product.valid_from );
 			$scope.product.valid_till  = common.stringToDate( $scope.product.valid_till );
@@ -32,20 +32,17 @@ adminApp.controller('productsCtrl', function($scope, $routeParams, productServic
 	}
 	
 	$scope.addNewProduct = function( product ){	
-		//console.log('addNewProduct :',product);
-
 		productService.addNewProduct( product ).then( function( response ){
 			$scope.addSuccess = true;			
 			$timeout(function() { $scope.addSuccess = false;}, 3000); //need to make it generic for all the messages
 			$scope.loadDefaults(); //re-initalize my page by loading defaults
-			$scope.getAllCategories(); //re-initalize all the empty categories
+			$scope.getProductCategories(); //re-initalize all the empty categories
 		}, function( errorMessage ){
 			console.warn( errorMessage );
 		});
 	}
 
 	$scope.updateProduct = function( product ){
-		//console.log('product :',product);
 		product.updated_at = new Date();
 		productService.updateProduct( product ).then( function( response ){
 			$scope.updateSuccess = true;
@@ -63,14 +60,25 @@ adminApp.controller('productsCtrl', function($scope, $routeParams, productServic
 			console.warn( errorMessage );
 		});
 	}
+
+	$scope.revertAddingProduct = function( product ){
+		console.log('revertAddingProduct :', product);
+	}
 	getProductList();
 
 	function getProductList(){
-		
+		$scope.loading = true;
 		productService.getProductList().then( function( response ){
-			
 			$scope.productList = response;
-			
+			$scope.loading = false;
+		}, function( errorMessage ){
+			console.warn( errorMessage );
+		});
+	}
+
+	function getProductCategories(){
+		categoryService.getAllCategories().then( function( response ){
+			$scope.product.categories = response;
 		}, function( errorMessage ){
 			console.warn( errorMessage );
 		});
@@ -78,7 +86,7 @@ adminApp.controller('productsCtrl', function($scope, $routeParams, productServic
 
 	function getAllCategories(){
 		categoryService.getAllCategories().then( function( response ){
-			$scope.product.categories = response;
+			$scope.categories = response;
 		}, function( errorMessage ){
 			console.warn( errorMessage );
 		});
@@ -90,11 +98,10 @@ adminApp.controller('productsCtrl', function($scope, $routeParams, productServic
 		{
 			$scope.product['images'].splice( pos, 1);
 		}
-		console.log( pos );
+		//console.log( pos );
 	}
 
 	$scope.uploadFiles = function( product ){
-		//console.log('uploadFiles product :', product);
 		product['images'] = product['images'] || [];
 		for ( var i=0; i<product['temp'].length ;i++ )
 		{
@@ -118,6 +125,7 @@ adminApp.controller('productsCtrl', function($scope, $routeParams, productServic
 
 	$scope.showFiles = function(files, errFiles) {
         $scope.product.temp = files;
+		console.log('$scope.product.temp :',$scope.product.temp);
         $scope.product.invalidImages =  errFiles;
     }
 	$scope.deleteProducts = function(){
@@ -168,6 +176,11 @@ adminApp.controller('productsCtrl', function($scope, $routeParams, productServic
 			}	
 		}
 		return arr;
+	}
+
+	$scope.loadCategoryProducts = function( category ){
+		$scope.currentCategory = category;
+		//console.log('$scope.productsCategory :',$scope.currentCategory);
 	}
 
 });

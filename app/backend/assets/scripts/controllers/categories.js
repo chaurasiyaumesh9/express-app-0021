@@ -24,8 +24,10 @@ adminApp.controller('categoriesCtrl', function($scope, $http, $routeParams, cate
 
 	
 	function getAllCategories(){
+		$scope.loading = true;
 		categoryService.getAllCategories().then( function( response ){
 			$scope.categories = response;
+			$scope.loading = false;
 		}, function( errorMessage ){
 			console.warn( errorMessage );
 		});

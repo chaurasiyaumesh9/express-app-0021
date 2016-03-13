@@ -81,7 +81,9 @@
 						<h1> No Images Yet!  </h1>
 						<h5> Get it uploaded now...</h5>
 					</div>
-					 <button multiple ngf-select="showFiles($files, $invalidFiles);uploadFiles( product )" accept="image/*" ngf-max-size="20MB"> Select Files </button>
+						<button multiple ngf-select="showFiles($files, $invalidFiles);uploadFiles( product );" accept="image/*" ngf-max-size="20MB"> Select Files </button>
+						<!-- <button class="btn btn-primary" ng-click="uploadFiles( product )"> Upload Files </button> -->
+					 
 					 <table class="table table-striped" ng-show="product.images.length>0">
 						<thead>
 							<tr>
@@ -92,10 +94,21 @@
 								<th> Remove </th>
 							</tr>
 						</thead>
-						<tbody>
+						
+						<!-- <tbody ng-show="product.temp.length > 0">
+							<tr ng-repeat="image in product.temp">
+								<td> 
+									<img ngf-thumbnail="image" class="img-preview" />
+								</td>
+								<td> <input type="checkbox" ng-model="image.role.large" > </td>
+								<td> <input type="checkbox" ng-model="image.role.small" > </td>
+								<td> <input type="checkbox" ng-model="image.role.thumbnail" > </td>
+								<td> <a class="btn btn-danger" href="" ng-click="removeProductImage( image )"> <i class="fa fa-trash"></i> </a> </td>
+							</tr>
+						</tbody> -->
+						<tbody ng-show="product.images.length>0">
 							<tr ng-repeat="image in product.images">
 								<td> 
-									<!-- <img ngf-thumbnail="image" class="img-preview" /> -->
 									<img src="{{ image.url }}" class="img-preview" />
 								</td>
 								<td> <input type="checkbox" ng-model="image.role.large" > </td>
@@ -125,7 +138,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label for="name"> Categories assigned to this product : </label>
+								<label for="name"> Categories : </label>
 								<div class="categories">
 									<div class="category" ng-repeat="category in product.categories" >
 										<input type="checkbox" ng-model="category.selected" > {{ category.name }} 
