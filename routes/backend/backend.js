@@ -145,8 +145,7 @@ var products = {
 	},
 	uploadImages: function( req, res ){
 		var upload = multer({ storage : storage, inMemory: true }).single('productPic');
-		var data = req.body ;		
-		console.log('data :',data);
+		
 		upload( req,res,function(err) {
 			if(err) {
 				//console.log( err );
@@ -157,10 +156,10 @@ var products = {
 				//console.log('data :',req.data);
 				var path = "../uploads/" + file.filename;
 				var img = {
-					url:  path,
-					size: file.size
+					url:  path
 				}
 					res.json( {image: img} );
+					//res.json( img );
 			}
 			//res.redirect("/");
 		});

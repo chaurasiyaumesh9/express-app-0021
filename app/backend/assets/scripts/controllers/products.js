@@ -128,7 +128,7 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 				url: "/admin/uploads",
 				data: { productPic: file }
 			}).then(function (response) {
-				console.log('response.data : ',response);
+				
 				product['images'].push( response.data['image'] );	//image role is not getting captured..Need to check			
 				$timeout(function () {
 					file.result = response.data;
