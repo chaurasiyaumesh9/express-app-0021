@@ -1,4 +1,4 @@
-adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, productService, categoryService, $timeout, common,Upload){
+adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, productService, categoryService, $timeout, common,Upload, $q){
 	$scope.message = "Manage Your Products";
 	$scope.addSuccess = false, $scope.updateSuccess = false;
 	$scope.currentPage = 1;
@@ -32,24 +32,33 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	}
 	
 	$scope.addNewProduct = function( product ){	
-		productService.addNewProduct( product ).then( function( response ){
-			$scope.addSuccess = true;			
-			$timeout(function() { $scope.addSuccess = false;}, 3000); //need to make it generic for all the messages
-			$scope.loadDefaults(); //re-initalize my page by loading defaults
-			$scope.getProductCategories(); //re-initalize all the empty categories
-		}, function( errorMessage ){
-			console.warn( errorMessage );
-		});
+		$scope.uploadFiles( product ).then( function(){
+			//console.log('uploaded all!',product);
+			productService.addNewProduct( product ).then( function( response ){
+				//console.log('added to DB!');
+				$scope.addSuccess = true;			
+				$timeout(function() { $scope.addSuccess = false;}, 3000); //need to make it generic for all the messages
+				$scope.loadDefaults(); //re-initalize my page by loading defaults
+				$scope.getProductCategories(); //re-initalize all the empty categories
+			}, function( errorMessage ){
+				console.warn( errorMessage );
+			});
+		});		
 	}
 
 	$scope.updateProduct = function( product ){
 		product.updated_at = new Date();
-		productService.updateProduct( product ).then( function( response ){
-			$scope.updateSuccess = true;
-			$timeout(function() { $scope.updateSuccess = false;}, 3000); //need to make it generic for all the messages
-		}, function( errorMessage ){
-			console.warn( errorMessage );
+		$scope.uploadFiles( product ).then( function(){
+			//console.log('uploaded all!');
+			productService.updateProduct( product ).then( function( response ){
+				//console.log('updated to DB!');
+				$scope.updateSuccess = true;
+				$timeout(function() { $scope.updateSuccess = false;}, 3000); //need to make it generic for all the messages
+			}, function( errorMessage ){
+				console.warn( errorMessage );
+			});
 		});
+		//$scope.uploadFiles( product );
 	}
 
 	$scope.deleteProduct = function( product ){
@@ -92,43 +101,55 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 		});
 	}
 
-	$scope.removeProductImage = function( image ){
-		var pos = $scope.product['images'].indexOf( image );
+	$scope.removeProductImage = function( arr, image ){
+		var pos = arr.indexOf( image );
 		if ( pos != -1 )
 		{
-			$scope.product['images'].splice( pos, 1);
+			arr.splice( pos, 1);
 		}
-		//console.log( pos );
 	}
 
+	
 	$scope.uploadFiles = function( product ){
-		product['images'] = product['images'] || [];
-		for ( var i=0; i<product['temp'].length ;i++ )
+		var requests = [];
+		if ( !$scope.product['toBeUploaded'] )
 		{
-			var file = product['temp'][i];
-			Upload.upload({
+			$scope.product['toBeUploaded'] = [];
+		}
+		if ( !product['images'])
+		{
+			product['images'] = [];
+		}
+		for ( var i=0; i<$scope.product['toBeUploaded'].length ;i++ )
+		{
+			var file = $scope.product['toBeUploaded'][i];
+			requests[i] = Upload.upload({ 
+				method: "post",
 				url: "/admin/uploads",
-                data: {productPic: file}
-            }).then(function (response) {
-				product['images'].push( response.data['image'] );
-                $timeout(function () {
-                    file.result = response.data;
-                });
-            }, function (response) {
-                if (response.status > 0)
-                    $scope.errorMsg = response.status + ': ' + response.data;
-            }, function (evt) {
-                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-            });;
+				data: { productPic: file }
+			}).then(function (response) {
+				console.log('response.data : ',response);
+				product['images'].push( response.data['image'] );	//image role is not getting captured..Need to check			
+				$timeout(function () {
+					file.result = response.data;
+				});
+			}, function (response) {
+				if (response.status > 0)
+					$scope.errorMsg = response.status + ': ' + response.data;
+			}, function (evt) {
+				file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+			});;
+		}
+		return ( $q.all( requests ).then( handleSuccess ) );
+
+		function handleSuccess(){
+			$scope.product['toBeUploaded'] = [];
 		}
 	}
 
 	$scope.showFiles = function(files, errFiles) {
-        $scope.product.temp = files;
-		//console.log('$scope.product.temp :',$scope.product.temp);
+		$scope.product['toBeUploaded'] = files;
         $scope.product.invalidImages =  errFiles;
-
-		//return false;
     }
 	$scope.deleteProducts = function(){
 		var checked = getCheckedProducts();

@@ -145,12 +145,16 @@ var products = {
 	},
 	uploadImages: function( req, res ){
 		var upload = multer({ storage : storage, inMemory: true }).single('productPic');
+		var data = req.body ;		
+		console.log('data :',data);
 		upload( req,res,function(err) {
 			if(err) {
-				console.log( err );
+				//console.log( err );
 				return res.end("Error uploading file.",err);
 			}else{
 				var file = req.file;
+				//console.log('file :',file);
+				//console.log('data :',req.data);
 				var path = "../uploads/" + file.filename;
 				var img = {
 					url:  path,

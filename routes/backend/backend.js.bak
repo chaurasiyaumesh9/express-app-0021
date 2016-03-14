@@ -10,17 +10,15 @@ var mongoose = require('mongoose');
 
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
-    //callback(null, '././uploads');
-	callback(null, 'https://github.com/chaurasiyaumesh9/express-app-0021/tree/master/uploads');
-	
+    callback(null, '././uploads');
   },
   filename: function (req, file, callback) {
 	 // console.log(req.params.id );
 	  var pid = req.params.id;
+    //callback(null, file.fieldname + '-' + Date.now());
 	var datetimestamp = Date.now();
 	var newFileName = file.fieldname + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1];
-	//var url = "../../uploads/" + newFileName;
-	var url = "https://github.com/chaurasiyaumesh9/express-app-0021/tree/master/uploads/" + newFileName;
+	var url = "../../uploads/" + newFileName;
 	callback(null, newFileName );
   }
 });
@@ -147,12 +145,16 @@ var products = {
 	},
 	uploadImages: function( req, res ){
 		var upload = multer({ storage : storage, inMemory: true }).single('productPic');
+		var data = req.body ;		
+		console.log('data :',data);
 		upload( req,res,function(err) {
 			if(err) {
 				console.log( err );
 				return res.end("Error uploading file.",err);
 			}else{
 				var file = req.file;
+				//console.log('file :',file);
+				//console.log('data :',req.data);
 				var path = "../uploads/" + file.filename;
 				var img = {
 					url:  path,
