@@ -102,8 +102,11 @@ var products = {
 			}
 		});*/
 		Product.find({ }, function(err, results) {
+			//db.products.find({ categories: { $elemMatch: { selected: true, name: "Men" } } } ).pretty();
+			//Product.find( { categories: { $elemMatch: { selected: true, name: "Women" } } } , function(err, results) {
 		  if (!err)
 			{
+			  console.log('results :',results.length);
 				res.json( results );
 			}else{
 				console.log('Error while performing the query..check function products.getProductList() for more details..', err );
