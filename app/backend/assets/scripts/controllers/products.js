@@ -22,8 +22,10 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	if ( $routeParams.id )
 	{
 		productID = $routeParams.id; // check if in edit/view mode
+		$scope.loading = true;
 		productService.getProductById( productID ).then( function( response ){
 			$scope.product = response;
+			$scope.loading = false;
 			$scope.product.valid_from = common.stringToDate( $scope.product.valid_from );
 			$scope.product.valid_till  = common.stringToDate( $scope.product.valid_till );
 		} , function(errorMessage ){ 
@@ -32,11 +34,13 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	}
 	
 	$scope.addNewProduct = function( product ){	
+		$scope.loading = true;
 		$scope.uploadFiles( product ).then( function(){
 			//console.log('uploaded all!',product);
 			productService.addNewProduct( product ).then( function( response ){
 				//console.log('added to DB!');
-				$scope.addSuccess = true;			
+				$scope.addSuccess = true;		
+				$scope.loading = false;
 				$timeout(function() { $scope.addSuccess = false;}, 3000); //need to make it generic for all the messages
 				$scope.loadDefaults(); //re-initalize my page by loading defaults
 				$scope.getProductCategories(); //re-initalize all the empty categories
@@ -71,7 +75,7 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	}
 
 	$scope.revertAddingProduct = function( product ){
-		console.log('revertAddingProduct :', product);
+		//console.log('revertAddingProduct :', product);
 	}
 	getProductList();
 
@@ -102,6 +106,7 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	}
 
 	$scope.removeProductImage = function( arr, image ){
+		// logic needs to be redefined as - remove images from uploads directory if images exist in DB.
 		var pos = arr.indexOf( image );
 		if ( pos != -1 )
 		{
@@ -109,7 +114,6 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 		}
 	}
 
-	
 	$scope.uploadFiles = function( product ){
 		var requests = [];
 		if ( !$scope.product['toBeUploaded'] )
@@ -128,8 +132,11 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 				url: "/admin/uploads",
 				data: { productPic: file }
 			}).then(function (response) {
-				
-				product['images'].push( response.data['image'] );	//image role is not getting captured..Need to check			
+				var objectRole = response.config.data['productPic']['role'];
+				var objectUrl = response.data['image']['url'];
+				var o = { role : objectRole, url: objectUrl};
+				//console.log('o :',o);
+				product['images'].push( o );
 				$timeout(function () {
 					file.result = response.data;
 				});

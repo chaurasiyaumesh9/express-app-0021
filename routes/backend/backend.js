@@ -124,7 +124,7 @@ var products = {
 		});
 	},
 	addNewProduct: function(req, res){
-		console.log('invoking addNewProduct....');
+		//console.log('invoking addNewProduct....');
 		if ( !req.body.product )
 		{
 			return;
