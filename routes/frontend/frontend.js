@@ -64,7 +64,20 @@ var products = {
 				console.log('Error while performing the query..check function products.getProductById() for more details..', err );
 			}
 		});
+	},
+	getProductsByCategory: function (req, res){
+		var cUrl = req.params.categoryUrl;
+		var cId = req.params.categoryId;
+		Product.find( { categories: { $elemMatch: { selected: true, _id: cId, url:cUrl } } } , function(err, results) {
+			if (!err)
+			{
+				res.json( results );
+			}else{
+				console.log('Error while performing the query..check function products.getProductsByCategory() for more details..', err );
+			}
+		});
 	}
+			
 };
 
 
@@ -76,12 +89,16 @@ router.get('/categories/:id', function(req, res){
 	categories.getCategoryById( req, res );
 });
 
-
 router.get('/products', function(req, res){
 	products.getProductList(req, res);
 });
 router.get('/products/:id', function(req, res){
 	products.getProductById(req, res);
 });
+router.get('/products/:categoryUrl/:categoryId', function(req, res){
+	products.getProductsByCategory(req, res);
+});
+
+
 
 module.exports = router;

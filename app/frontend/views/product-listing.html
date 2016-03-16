@@ -1,0 +1,16 @@
+<div class="container">
+	<div class="jumbotron text-center">
+		<h1> <i class="fa fa-tags"></i> {{ activeCategory }} </h1>
+	</div>
+</div>
+
+<div id="main">
+	<div class="container">
+		<div class="spinner" ng-show="loading"> <img src="../assets/images/loding.gif"  border="0" alt=""></div>
+		<div class="row">
+			<div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="product in productList" >
+				<product-thumbnail></product-thumbnail>
+			</div>
+		</div>
+	</div>
+</div>

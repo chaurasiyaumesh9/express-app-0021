@@ -6,11 +6,9 @@
 	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">	
 	<link rel="stylesheet" href="assets/stylesheets/style.css">	
-	<style type="text/css">
-		
-	</style>
+	
 </head>
-<body ng-controller="sampleCartAppCtrl">
+<body ng-controller="defaultCtrl">
 	<!-- HEADER AND NAVBAR -->
 	<nav class="navbar navbar-default">
 		<div class="container">
@@ -26,34 +24,25 @@
 			
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<!-- <li ng-repeat="category in categories"><a href="#/{{category.url}}" ng-click="loadCategoryProducts( category )"> {{category.name}} </a></li> -->
-					<li> <a href="#/" ng-click="currentCategory={}"><i class="fa fa-home"></i>Home</a> </li>
-					<li ng-repeat="category in categories"><a href="" ng-click="loadCategoryProducts( category )"> {{category.name}} </a></li>
+					<li> <a href="#/"><i class="fa fa-home"></i>Home</a> </li>
+					<li ng-repeat="category in categories"><a href="#/products/{{category.url}}/{{ category._id }}" ng-click="setCurrentCategory( category )"> {{category.name}} </a></li> 
 				</ul>
 			</div>
 		</div>
 	</nav>
-
-	 <div class="container">
- 		<div class="jumbotron text-center">
- 			 <h1> <span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Fronend! Loving It! </h1>
- 		</div>
- 	</div> 
-	<div class="container" >
-		<div id="main" >
-			<div class="spinner" ng-show="loading"> <img src="../assets/images/loding.gif"  border="0" alt=""></div>
-			<div class="row">
-				<!-- <div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="product in productList | filter:{in_stock:true}"> -->
-				
-				<div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="product in productList | filterProductsByCategory:currentCategory" >
-					<product-thumbnail></product-thumbnail>
-				</div>
-			</div>
-			<!-- <div ng-view> </div> -->
+		<div >
+			<div ng-view> </div>
 		</div>
-	</div>
  <script src="../bower_components/angular/angular.min.js"> </script>
  <script src="../bower_components/angular-route/angular-route.min.js"> </script>
  <script src="assets/scripts/app.js"> </script>
+ <script src="assets/scripts/directives/productThumbnail.js"> </script>
+ <script src="assets/scripts/services/products.js"> </script>
+ <script src="assets/scripts/services/categories.js"> </script>
+ <script src="assets/scripts/filters/filters.js"> </script>
+ <script src="assets/scripts/controllers/defaultCtrl.js"> </script>
+ <script src="assets/scripts/controllers/defaultCtrl.js"> </script>
+ <script src="assets/scripts/controllers/productListingCtrl.js"> </script>
+ <script src="assets/scripts/controllers/hompageCtrl.js"> </script>
 </body>
 </html>

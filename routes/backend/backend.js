@@ -106,7 +106,7 @@ var products = {
 			//Product.find( { categories: { $elemMatch: { selected: true, name: "Women" } } } , function(err, results) {
 		  if (!err)
 			{
-			  console.log('results :',results.length);
+			  //console.log('results :',results.length);
 				res.json( results );
 			}else{
 				console.log('Error while performing the query..check function products.getProductList() for more details..', err );
