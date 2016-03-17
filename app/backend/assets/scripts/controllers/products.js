@@ -112,7 +112,7 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 		if ( pos != -1 )
 		{
 			//arr.splice( pos, 1);
-			console.log(arr[pos]);
+			//console.log(arr[pos]);
 			arr[pos]['deleted'] = true;
 		}
 	}

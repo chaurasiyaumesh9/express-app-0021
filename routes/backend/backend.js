@@ -179,18 +179,23 @@ var products = {
 		//console.log('updatedProduct :',updatedProduct );
 		//this.deleteImages( updatedProduct );
 		//res.json({});
-
-		for ( var i=0;i< updatedProduct['images'].length; i++ )
+		var temp = updatedProduct['images'];
+		for ( var i=0;i< temp.length; i++ )
 		{
-			if ( updatedProduct['images'][i]['deleted'] )
+			if ( temp[i]['deleted'] )
 			{
 				
-				var splitUrl = updatedProduct['images'][i]['url'].split('/');
+				var splitUrl = temp[i]['url'].split('/');
 				//console.log( splitUrl[splitUrl.length - 1]);
 				var uploadPath = process.env.UPLOAD_PATH;
 				var filePath = uploadPath + splitUrl[splitUrl.length - 1]  ; 
 				//console.log( filePath );
-				updatedProduct['images'].splice(i,1);
+				var index = updatedProduct['images'].indexOf( temp[i] );
+				if ( index != -1 )
+				{
+					updatedProduct['images'].splice(index,1);
+				}
+				
 				fs.exists( filePath , function(exists) {
 				  if(exists) {
 					//Show in green
@@ -204,6 +209,7 @@ var products = {
 				});
 			}
 		}
+		//updatedProduct['images'] = temp;
 		
 		Product.findByIdAndUpdate( updatedProduct._id, updatedProduct, function(err, product) {
 		  if (!err)
