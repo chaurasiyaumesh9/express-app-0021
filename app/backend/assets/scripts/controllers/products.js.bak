@@ -24,7 +24,7 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 		productID = $routeParams.id; // check if in edit/view mode
 		$scope.loading = true;
 		productService.getProductById( productID ).then( function( response ){
-			console.log('getProductById :',response);
+			console.log()
 			$scope.product = response;
 			$scope.loading = false;
 			$scope.product.valid_from = common.stringToDate( $scope.product.valid_from );

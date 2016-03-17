@@ -109,7 +109,7 @@
 									<td> <a class="btn btn-danger" href="" ng-click="removeProductImage(product.images, image )"> <i class="fa fa-trash"></i> </a> </td>
 								</tr>
 								
-								<tr ng-repeat="image in product.toBeUploaded" ng-hide="image.deleted">
+								<tr ng-repeat="image in product.toBeUploaded">
 									<td> 
 										<img ngf-src="image" class="img-preview" />
 									</td>

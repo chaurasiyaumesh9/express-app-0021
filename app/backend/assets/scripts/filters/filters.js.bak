@@ -10,7 +10,7 @@ adminApp.filter('removeDeleted', function( ){
 		{
 			arr = [];
 		}
-		//console.log('arr :',arr);
+		console.log('arr :',arr);
 		for (var i=0;i<arr.length ;i++ )
 		{
 			if ( arr[i]['deleted'] )
