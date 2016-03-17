@@ -9,7 +9,9 @@ var backend =  require('./routes/backend/backend');
 var frontend =  require('./routes/frontend/frontend');
 
 var port = process.env.PORT || 8010;
-process.env.NODE_PATH =  __dirname ;
+process.env.NODE_PATH =  path.join( __dirname + "/") ;
+process.env.UPLOAD_PATH =  path.join( __dirname + "/uploads/") ;
+
 
 console.log( 'process.env.NODE_PATH :',process.env.NODE_PATH);
 
