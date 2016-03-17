@@ -21,3 +21,26 @@ adminApp.filter('removeDeleted', function( ){
 		return arr;
 	}
 });
+
+adminApp.filter('filterProductsByCategory', function( ){
+	return function( list, searchCategory ){
+		if ( !list )
+		{
+			return [];
+		}
+		if ( !searchCategory.name ) //checking if no category then load all
+		{
+			return list;
+		}
+		var out = [];
+		angular.forEach(list, function( product ){
+			angular.forEach( product.categories, function( category ){
+				if ( category._id === searchCategory._id && category.selected )
+				{
+					out.push( product );
+				}
+			});
+		});
+		return out;
+	  }
+});

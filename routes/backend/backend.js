@@ -179,37 +179,36 @@ var products = {
 		//console.log('updatedProduct :',updatedProduct );
 		//this.deleteImages( updatedProduct );
 		//res.json({});
-		var temp = updatedProduct['images'];
-		for ( var i=0;i< temp.length; i++ )
+
+		var temp = [];
+		for ( var i=0;i< updatedProduct['images'].length; i++ )
 		{
-			if ( temp[i]['deleted'] )
+			if ( updatedProduct['images'][i]['deleted'] )
 			{
-				
-				var splitUrl = temp[i]['url'].split('/');
-				//console.log( splitUrl[splitUrl.length - 1]);
-				var uploadPath = process.env.UPLOAD_PATH;
-				var filePath = uploadPath + splitUrl[splitUrl.length - 1]  ; 
-				//console.log( filePath );
-				var index = updatedProduct['images'].indexOf( temp[i] );
-				if ( index != -1 )
-				{
-					updatedProduct['images'].splice(index,1);
-				}
-				
-				fs.exists( filePath , function(exists) {
-				  if(exists) {
-					//Show in green
-					console.log( 'File exists. Deleting now ...', filePath);
-					fs.unlink( filePath );
-					
-				  } else {
-					//Show in red
-					console.log('File not found, so not deleting.',filePath);
-				  }
-				});
+				temp.push(i); //getting index of deleted prdocucts images in []
 			}
 		}
-		//updatedProduct['images'] = temp;
+		for ( var i=0;i<temp.length ;i++ )
+		{
+			//deleting files from directory
+			var splitUrl = updatedProduct['images'][temp[i]]['url'].split('/');
+			var uploadPath = process.env.UPLOAD_PATH;
+			var filePath = uploadPath + splitUrl[splitUrl.length - 1]  ;
+			
+			fs.exists( filePath , function(exists) {
+			  if(exists) {
+				console.log( 'File exists. Deleting now ...', filePath);
+				fs.unlink( filePath );
+			  } else {
+				console.log('File not found, so not deleting.',filePath);
+			  }
+			});
+		}
+		for ( var i=0;i<temp.length ;i++ ){
+			//deleteing from DB
+			updatedProduct['images'].splice( temp[i],1);
+		}
+
 		
 		Product.findByIdAndUpdate( updatedProduct._id, updatedProduct, function(err, product) {
 		  if (!err)

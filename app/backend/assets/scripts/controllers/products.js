@@ -24,7 +24,7 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 		productID = $routeParams.id; // check if in edit/view mode
 		$scope.loading = true;
 		productService.getProductById( productID ).then( function( response ){
-			console.log('getProductById :',response);
+			//console.log('getProductById :',response);
 			$scope.product = response;
 			$scope.loading = false;
 			$scope.product.valid_from = common.stringToDate( $scope.product.valid_from );
@@ -52,6 +52,7 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	}
 
 	$scope.updateProduct = function( product ){
+		console.log('updateProduct :',product);
 		product.updated_at = new Date();
 		$scope.uploadFiles( product ).then( function(){
 			//console.log('uploaded all!');
@@ -109,6 +110,7 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	$scope.removeProductImage = function( arr, image ){
 		// logic needs to be redefined as - remove images from uploads directory if images exist in DB.
 		var pos = arr.indexOf( image );
+		//console.log('pos :',pos);
 		if ( pos != -1 )
 		{
 			//arr.splice( pos, 1);
@@ -129,26 +131,29 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 		}
 		for ( var i=0; i<$scope.product['toBeUploaded'].length ;i++ )
 		{
-			var file = $scope.product['toBeUploaded'][i];
-			requests[i] = Upload.upload({ 
-				method: "post",
-				url: "/admin/uploads",
-				data: { productPic: file }
-			}).then(function (response) {
-				var objectRole = response.config.data['productPic']['role'];
-				var objectUrl = response.data['image']['url'];
-				var o = { role : objectRole, url: objectUrl};
-				//console.log('o :',o);
-				product['images'].push( o );
-				$timeout(function () {
-					file.result = response.data;
-				});
-			}, function (response) {
-				if (response.status > 0)
-					$scope.errorMsg = response.status + ': ' + response.data;
-			}, function (evt) {
-				file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-			});;
+			if ( !$scope.product['toBeUploaded'][i]['deleted'])
+			{
+				var file = $scope.product['toBeUploaded'][i];
+				requests[i] = Upload.upload({ 
+					method: "post",
+					url: "/admin/uploads",
+					data: { productPic: file }
+				}).then(function (response) {
+					var objectRole = response.config.data['productPic']['role'];
+					var objectUrl = response.data['image']['url'];
+					var o = { role : objectRole, url: objectUrl};
+					//console.log('o :',o);
+					product['images'].push( o );
+					$timeout(function () {
+						file.result = response.data;
+					});
+				}, function (response) {
+					if (response.status > 0)
+						$scope.errorMsg = response.status + ': ' + response.data;
+				}, function (evt) {
+					file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+				});;
+			}
 		}
 		return ( $q.all( requests ).then( handleSuccess ) );
 
