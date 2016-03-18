@@ -176,41 +176,40 @@ var products = {
 			return;
 		}
 		var updatedProduct = req.body.product ;
+		var toBeDeleted = [];
 		//console.log('updatedProduct :',updatedProduct );
-		//this.deleteImages( updatedProduct );
-		//res.json({});
 
-		var temp = [];
-		for ( var i=0;i< updatedProduct['images'].length; i++ )
-		{
-			if ( updatedProduct['images'][i]['deleted'] )
-			{
-				temp.push(i); //getting index of deleted prdocucts images in []
-			}
-		}
-		for ( var i=0;i<temp.length ;i++ )
-		{
-			//deleting files from directory
-			var splitUrl = updatedProduct['images'][temp[i]]['url'].split('/');
-			var uploadPath = process.env.UPLOAD_PATH;
-			var filePath = uploadPath + splitUrl[splitUrl.length - 1]  ;
-			
-			fs.exists( filePath , function(exists) {
-			  if(exists) {
-				console.log( 'File exists. Deleting now ...', filePath);
-				fs.unlink( filePath );
-			  } else {
-				console.log('File not found, so not deleting.',filePath);
-			  }
-			});
-		}
-		for ( var i=0;i<temp.length ;i++ ){
-			//deleteing from DB
-			updatedProduct['images'].splice( temp[i],1);
-		}
+		// Three step process to update the product -
+		// 1. Find the images to be deleted
+		// 2. Delete it from Upload directory
+		// 3. Update DB and send back latest data as response
 
+		function Step1(){
+			for ( var i=0;i< updatedProduct['images'].length; i++ ){
+				if ( updatedProduct['images'][i]['deleted'] ){
+					var splitUrl = updatedProduct['images'][i]['url'].split('/');
+					var uploadPath = process.env.UPLOAD_PATH;
+					var filePath = uploadPath + splitUrl[splitUrl.length - 1]  ;
+					updatedProduct['images'].splice(i,1);
+					toBeDeleted.push( filePath );
+					Step1();
+				}
+			 }
+		}
+		Step1();
+		Step2();
 		
-		Product.findByIdAndUpdate( updatedProduct._id, updatedProduct, function(err, product) {
+		function Step2(){
+			deleteFiles( toBeDeleted, function( err ){
+				if (err) {
+					console.log(err);
+				  } else {
+					console.log('all files removed');
+				  }
+			});	
+		}
+		// Step - 3
+		Product.findByIdAndUpdate( updatedProduct._id, updatedProduct,{new: true}, function(err, product) {
 		  if (!err)
 			{
 				res.json( product );
@@ -218,6 +217,21 @@ var products = {
 				console.log('Error while performing the query..check function products.updateProduct() for more details..', err );
 			}
 		});
+
+		function deleteFiles(files, callback){
+		  var i = files.length;
+		  files.forEach(function(filepath){
+			fs.unlink(filepath, function(err) {
+			  i--;
+			  if (err) {
+				callback(err);
+				return;
+			  } else if (i <= 0) {
+				callback(null);
+			  }
+			});
+		  });
+		}
 		
 	},
 	deleteProduct: function(req, res){
@@ -229,14 +243,6 @@ var products = {
 				console.log('Error while performing the query..check function products.deleteProduct() for more details..', err );
 			}
 		});
-		/*Product.findByIdAndUpdate( req.params.id , {is_deleted: true}, function(err) {
-		  if (!err)
-			{
-				res.json( {} );
-			}else{
-				console.log('Error while performing the query..check function products.deleteProduct() for more details..', err );
-			}
-		});*/
 	}
 };
 

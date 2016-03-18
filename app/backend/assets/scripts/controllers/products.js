@@ -24,7 +24,7 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 		productID = $routeParams.id; // check if in edit/view mode
 		$scope.loading = true;
 		productService.getProductById( productID ).then( function( response ){
-			//console.log('getProductById :',response);
+			console.log('getProductById :',response);
 			$scope.product = response;
 			$scope.loading = false;
 			$scope.product.valid_from = common.stringToDate( $scope.product.valid_from );
@@ -36,7 +36,7 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	
 	$scope.addNewProduct = function( product ){	
 		$scope.loading = true;
-		$scope.uploadFiles( product ).then( function(){
+		$scope.uploadFiles( product ).then( function( response ){
 			//console.log('uploaded all!',product);
 			productService.addNewProduct( product ).then( function( response ){
 				//console.log('added to DB!');
@@ -54,10 +54,14 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	$scope.updateProduct = function( product ){
 		console.log('updateProduct :',product);
 		product.updated_at = new Date();
-		$scope.uploadFiles( product ).then( function(){
+		$scope.uploadFiles( product ).then( function( response ){
 			//console.log('uploaded all!');
 			productService.updateProduct( product ).then( function( response ){
 				//console.log('updated to DB!');
+				console.log('updateProduct response :',response);
+				$scope.product = response;
+				$scope.product.valid_from = common.stringToDate( $scope.product.valid_from );
+				$scope.product.valid_till  = common.stringToDate( $scope.product.valid_till );
 				$scope.updateSuccess = true;
 				$timeout(function() { $scope.updateSuccess = false;}, 3000); //need to make it generic for all the messages
 			}, function( errorMessage ){
@@ -163,7 +167,14 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	}
 
 	$scope.showFiles = function(files, errFiles) {
-		$scope.product['toBeUploaded'] = files;
+		if ( !$scope.product['toBeUploaded'] )
+		{
+			$scope.product['toBeUploaded'] = [];
+		}
+		for ( var i=0;i<files.length ;i++ )
+		{
+			$scope.product['toBeUploaded'].push( files[i] );
+		}
         $scope.product.invalidImages =  errFiles;
     }
 	$scope.deleteProducts = function(){

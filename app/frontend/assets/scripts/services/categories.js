@@ -1,6 +1,7 @@
 cartApp.service('categoryService', function($http, $q){
 	return({
-		getActiveCategories: getActiveCategories
+		getActiveCategories: getActiveCategories,
+		getCategoryById: getCategoryById
 	});
 
 	function getActiveCategories(){
@@ -13,6 +14,19 @@ cartApp.service('categoryService', function($http, $q){
         });
         return( request.then( handleSuccess, handleError ) );
 	}
+	function getCategoryById( id ) {
+        var request = $http({
+            method: "get",
+            url: "/categories/" + id,
+            params: {
+                action: "get"
+            },
+            data: {
+                id: id
+            }
+        });
+        return( request.then( handleSuccess, handleError ) );
+    }
 	
 	function handleError( response ) {
         if ( ! angular.isObject( response.data ) || ! response.data.message ) {
