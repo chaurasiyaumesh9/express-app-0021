@@ -12,8 +12,11 @@ var port = process.env.PORT || 8010;
 process.env.NODE_PATH =  path.join( __dirname + "/") ;
 process.env.UPLOAD_PATH =  path.join( __dirname + "/uploads/") ;
 
+//process.env.NODE_ENV = "development";
+//process.env.NODE_CONFIG = "dev";
 
-console.log( 'process.env.NODE_PATH :',process.env.NODE_PATH);
+
+//console.log( 'process.env.NODE_PATH :',process.env.NODE_PATH);
 
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)

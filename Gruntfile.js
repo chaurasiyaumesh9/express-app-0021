@@ -1,44 +1,41 @@
-module.exports = function(grunt) {
 
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    watch: {
-      gruntfile: {
-        files: ['Gruntfile.js']
-      },
-		 livereload: {
-        options: {
-          livereload: '<%= connect.options.livereload %>'
-        },
-        files: [
-          'public/admin/pages/*.html'
-        ]
-      }
+module.exports = function( grunt ){
+	var yeomanConfig = {
+		app: 'app'
+	};
+	var path = require('path');
 	
-    },
-	 connect: {
-      options: {
-        port: 8090,
-        // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
-        livereload: 35729
-      },
-      livereload: {
-        options: {
-          open: true
-        }
-      },
-      test: {
-        options: {
-          port: 8091
-        }
-      }
-    }
-  });
+	grunt.initConfig({
+		yeoman: yeomanConfig,
+		watch:{
+			files: ["**/*.html"]
+		},
+		express: {
+			options: {
+				port: 8010,
+				hostname: 'localhost'
+			},
+			livereload: {
+				options: {
+					livereload: true,
+					serverreload: true,
+					bases: [ 'app/frontend']
+				}
+			}
+		},
+		open: {
+			server: {
+				url: 'http://localhost:<%= express.options.port %>'
+			}
+		}
+	});
+	
+	grunt.loadNpmTasks("grunt-contrib-watch");
+	grunt.loadNpmTasks('grunt-express');
+	grunt.loadNpmTasks('grunt-open');
+	
+	
+	grunt.registerTask('default', ['express:livereload','open','watch'] );
 
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  
-  
-  grunt.registerTask('default', ['watch']);
+}
 
-};
