@@ -1,5 +1,6 @@
 cartApp.controller('productListingCtrl', function( $scope, $routeParams, productService, categoryService ){
 	$scope.message = "Product Listing Page!"; //just for testing purpose
+	$scope.layout = 'grid';
 	if ( $routeParams.categoryUrl )
 	{
 		var cUrl = $routeParams.categoryUrl; // check if in edit/view mode

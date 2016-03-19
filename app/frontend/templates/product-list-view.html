@@ -1,0 +1,14 @@
+<div  class="container_fluid">
+	<div  class="row">
+		<div  class="col-md-4">
+			<a href="" style="display:block;"> <img src="{{ product.images | smallImg }}" style="display:block;margin:0 auto;max-width:200px;height:auto;width:auto;max-height:200px;" /> </a>
+		</div>
+		<div  class="col-md-8">
+			<p class="product-name"> <b> <a href=""> {{ product.name }} </a> </b> </p>		
+			<p class="price-block"> 
+				<span class="price regular-price {{ product.special_price > 0? 'strickeout':'' }}"><i class="fa fa-inr"></i>{{ product.price }}</span> 
+				<span class="price special-price" ng-show="product.special_price > 0"><i class="fa fa-inr"></i>{{ product.special_price }}</span> 
+			</p>
+		</div>
+	</div>
+</div>

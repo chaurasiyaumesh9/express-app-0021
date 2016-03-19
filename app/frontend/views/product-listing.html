@@ -7,10 +7,43 @@
 <div id="main">
 	<div class="container">
 		<div class="spinner" ng-show="loading"> <img src="../assets/images/loding.gif"  border="0" alt=""></div>
+		<!-- <div class="row">
+			<div class="col-md-8"></div>
+			<div class="col-md-4">
+				<div class="well well-sm clearfix">
+					<div class="btn-group pull-right">
+						<a href="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span></a> 
+						<a href="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span></a>
+					</div>
+				</div> 
+			</div> 
+		</div> -->
 		<div class="row">
-			<div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="product in productList" >
-				<product-thumbnail></product-thumbnail>
+			<div class="col-md-12">
+				<div class="bar">
+					<a class="list-icon" ng-class="{active: layout == 'list'}" ng-click="layout = 'list'"></a>
+					<a class="grid-icon" ng-class="{active: layout == 'grid'}" ng-click="layout = 'grid'"></a>
+				</div>	
 			</div>
 		</div>
+		<div class="row grid" ng-show="layout == 'grid'" >
+			<div class="col-md-12"  >
+				<div class="container_fluid" >
+					<div class="row">
+						<div class="col-md-3" ng-repeat="product in productList">
+							<product-grid-view></product-grid-view>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row list" ng-show="layout == 'list'" >
+			<div class="col-md-12"  >
+				<div ng-repeat="product in productList" style="border-bottom:1px solid #eaeaea; margin:5px auto;padding:5px;">
+					<product-list-view></product-list-view>
+				</div>
+			</div>
+		</div>
+
 	</div>
 </div>
