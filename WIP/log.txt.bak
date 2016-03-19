@@ -5,7 +5,7 @@ CRITICAL
 10. update deleted rows count after deletion of rws on category & products listing page.
 11. implement cancel button and its logic. should act similar to 'go back' button. also delete the uploaded images on server for new products.
 12. load image while content gets loaded
-13. admin - filter products by category
+13. admin - filter products bt category
 14. admin - delete multiple products images @once.
 15. frontend - PDP in-stock/out of stock logic
 16. frontend - list view /grid view

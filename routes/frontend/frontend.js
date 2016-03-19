@@ -34,16 +34,7 @@ var categories = {
 
 var products = {
 	getProductList: function (req, res){
-		//console.log('getProductList :', req.data );
-		/*Product.find({ is_deleted: false }, function(err, results) {
-		  if (!err)
-			{
-				res.json( results );
-			}else{
-				console.log('Error while performing the query..check function products.getProductList() for more details..', err );
-			}
-		});*/
-		Product.find({}, function(err, results) {
+		Product.find({ discontinued:false }, function(err, results) {
 		  if (!err)
 			{
 				res.json( results );
@@ -68,7 +59,7 @@ var products = {
 	getProductsByCategory: function (req, res){
 		var cUrl = req.params.categoryUrl;
 		var cId = req.params.categoryId;
-		Product.find( { categories: { $elemMatch: { selected: true, _id: cId, url:cUrl } } } , function(err, results) {
+		Product.find( { categories: { $elemMatch: { selected: true, _id: cId, url:cUrl } }, discontinued:{$ne: true} } , function(err, results) {
 			if (!err)
 			{
 				res.json( results );

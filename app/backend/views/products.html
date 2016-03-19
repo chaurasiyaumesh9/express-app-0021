@@ -91,6 +91,13 @@
 							</a>
 						</th>
 						<th>  
+							<a href="" ng-click="sortType = 'discontinued'; sortReverse = !sortReverse" class="theader">
+								Discontinued
+								<span ng-show="sortType == 'discontinued' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'discontinued' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>  
 							<a href="" ng-click="sortType = 'in_stock'; sortReverse = !sortReverse" class="theader">
 								In Stock
 								<span ng-show="sortType == 'in_stock' && !sortReverse" class="fa fa-caret-down"></span>
@@ -111,6 +118,7 @@
 						
 						<td> {{ product.price }} </td>
 						<td> {{ product.quantity }} </td>
+						<td> {{ product.discontinued | yesNo }} </td>
 						<td> {{ product.in_stock | yesNo}} </td>
 						<td> <a class="btn btn-primary" href="#/products/edit-view-product/{{ product._id }}"> <!-- <i class="fa fa-eye"></i> --> View  </a> </td> 
 						<!-- <td> <md-button class="md-raised md-primary md-hue-1" ng-href="#/products/edit-view-product/{{ product.id }}"> View </md-button> </td> -->

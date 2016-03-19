@@ -15,6 +15,7 @@ var ProductSchema = new Schema({
 	valid_from: Date,
 	valid_till: Date,
 	is_deleted: Boolean,
+	discontinued: Boolean,
 	updated_at: Date,
 	categories:{ type : Array , "default" : [] },
 	images:{ type : Array , "default" : [] }
@@ -23,7 +24,7 @@ var ProductSchema = new Schema({
 
 ProductSchema.pre('save', function(next) {
   // get the current date
-  this.is_deleted = false;
+  this.is_deleted = false; //deleted false by default as of now
   var currentDate = new Date();
   
   // change the updated_at field to current date
