@@ -1,6 +1,9 @@
 {
   "name": "e-cart",
   "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "app-root-path": "^1.0.0",
     "body-parser": "~1.0.0",

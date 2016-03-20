@@ -24,6 +24,10 @@ adminApp.filter('removeDeleted', function( ){
 
 adminApp.filter('filterProductsByCategory', function( ){
 	return function( list, searchCategory ){
+		if ( !searchCategory )
+		{
+			searchCategory = {};
+		}
 		if ( !list )
 		{
 			return [];

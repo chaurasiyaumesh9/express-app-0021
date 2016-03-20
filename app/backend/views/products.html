@@ -7,8 +7,8 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-3">
-			<div class="btn-group">
-			  <button type="button" class="btn btn-primary"> Look-up By Category </button>
+			 <div class="btn-group">
+			  <button type="button" class="btn btn-primary"> {{ currentCategory.name || 'Look-up By Category' }} </button>
 			  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				<span class="caret"></span>
 				<span class="sr-only">Toggle Dropdown</span>
@@ -16,7 +16,10 @@
 			  <ul class="dropdown-menu">
 				<li ng-repeat="category in categories"><a href="" ng-click="loadCategoryProducts( category )"> {{category.name}} </a></li>
 			  </ul>
-			</div>
+			</div> 
+
+			<a href="" ng-click="currentCategory = {}"> <i class="fa fa-refresh"></i> </a>
+
 		</div>
 		<div class="col-xs-6">
 			<form>
@@ -108,7 +111,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr dir-paginate="product in productList | orderBy:sortType:sortReverse | filter:searchProduct | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+					<tr dir-paginate="product in productList | orderBy:sortType:sortReverse | filterProductsByCategory:currentCategory | filter:searchProduct | filter:q | itemsPerPage: pageSize" current-page="currentPage">
 						<td> <input type="checkbox" ng-model="product.selected" ng-click="checkIndividual()" /> </td>
 						<td> {{ product.name }} </td>
 						
