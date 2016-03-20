@@ -1,3 +1,32 @@
-<div class="jumbotron text-center">
-	<h1> {{ message }} </h1>
+ <div class="container">
+	<div class="jumbotron text-center">
+		<h1> {{ message }} </h1>
+	</div>
+</div>
+
+<loader></loader>
+<div class="product-details-page">
+	<div class="container" ng-init="product = { images:[] }">
+		<div class="row">
+			<div class="col-md-4 col-sm-4 col-xs-12">
+				<a href="#/products/{{activeCategory._id}}/{{product._id}}"> <img src="{{ product.images | smallImg }}" class="product-image" /> </a> 
+			</div>
+			<div class="col-md-8 col-sm-8 col-xs-12">
+				<p class="product-name"> <b> <a href="#/products/{{activeCategory._id}}/{{product._id}}"> {{ product.name }} </a> </b> </p>		
+				<p class="price-block"> 
+					<span class="price regular-price {{ product.special_price > 0? 'strickeout':'' }}"><i class="fa fa-inr"></i>{{ product.price }}</span> 
+					<span class="price special-price" ng-show="product.special_price > 0"><i class="fa fa-inr"></i>{{ product.special_price }}</span> 
+				</p>
+				<p> Quantity : <input type="text" ng-model="product.quantity" style="width:80px;" /></p>
+				<p class="descritpion">
+					{{ product.description }}
+				</p>
+
+				<p><button class="btn btn-primary"> Add to Cart </button></p>
+				<p><button class="btn btn-primary"> Add to Wishlist </button></p>
+				
+				<a href="#/products/{{activeCategory._id}}/" class="pull-right"> Go Back </a>
+			</div>
+		</div>
+	</div>
 </div>

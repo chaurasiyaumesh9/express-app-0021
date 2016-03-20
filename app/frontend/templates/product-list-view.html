@@ -1,10 +1,11 @@
 <div class="container_fluid product-list-view">
 	<div  class="row">
 		<div  class="col-md-4">
-			<a href="" class="product-image-wrapper"> <img src="{{ product.images | smallImg }}" class="product-image" /> </a>
+			<a href="#/products/{{activeCategory._id}}/{{product._id}}" class="product-image-wrapper"> <img src="{{ product.images | smallImg }}" class="product-image" /> </a> 
+			<!-- <a href="" class="product-image-wrapper"> <img src="{{ product.images | smallImg }}" class="product-image" /> </a> -->
 		</div>
 		<div  class="col-md-8">
-			<p class="product-name"> <b> <a href=""> {{ product.name }} </a> </b> </p>		
+			<p class="product-name"> <b> <a href="#/products/{{activeCategory._id}}/{{product._id}}"> {{ product.name }} </a> </b> </p>		
 			<p class="price-block"> 
 				<span class="price regular-price {{ product.special_price > 0? 'strickeout':'' }}"><i class="fa fa-inr"></i>{{ product.price }}</span> 
 				<span class="price special-price" ng-show="product.special_price > 0"><i class="fa fa-inr"></i>{{ product.special_price }}</span> 

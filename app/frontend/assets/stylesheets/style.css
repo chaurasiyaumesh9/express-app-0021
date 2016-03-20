@@ -104,6 +104,9 @@ section, footer, header, aside, nav{
 	border-bottom:1px solid #eaeaea;
 	padding:5px 15px;
 } 
+.product-details-page{
+	text-align:left;
+}
 
 .product-list-view{
 	text-align: left;

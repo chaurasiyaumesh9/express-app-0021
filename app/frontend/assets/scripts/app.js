@@ -9,6 +9,11 @@ cartApp.config(function( $routeProvider, $locationProvider ) {
 		.when('/products/:cid', {
 			templateUrl : 'views/product-listing.html',
 			controller:'productListingCtrl'
+		})
+		.when('/products/:cid/:pid', {
+			templateUrl : 'views/product-details.html',
+			controller:'productDetailsCtrl'
 		});
 		
 });
+

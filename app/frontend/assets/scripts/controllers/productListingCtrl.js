@@ -1,6 +1,5 @@
 cartApp.controller('productListingCtrl', function( $scope, $routeParams, productService, categoryService ){
 	$scope.message = "Product Listing Page!"; //just for testing purpose
-	console.log('productListingCtrl :');
 	$scope.layout = 'grid';
 	
 	$scope.loading = true;

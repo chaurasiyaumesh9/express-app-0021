@@ -1,6 +1,7 @@
 cartApp.service('productService', function($http, $q){
 	return({
 		getProductsByCategory: getProductsByCategory,
+		getProductById: getProductById,
 		getAllProducts: getAllProducts
 	});
 
@@ -8,6 +9,17 @@ cartApp.service('productService', function($http, $q){
 		var request = $http({
             method: "get",
             url: "/products",
+            params: {
+                action: "get"
+            }
+        });
+        return( request.then( handleSuccess, handleError ) );
+	}
+	function getProductById( pid ){
+		//console.log('getProductById:',pid);
+		var request = $http({
+            method: "get",
+            url: "/product/" + pid,
             params: {
                 action: "get"
             }
