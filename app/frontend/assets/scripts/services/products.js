@@ -15,10 +15,11 @@ cartApp.service('productService', function($http, $q){
         return( request.then( handleSuccess, handleError ) );
 	}
 	
-	function getProductsByCategory( curl, cid ){
+	function getProductsByCategory( cid ){
+		//console.log('getProductsByCategory:',cid);
 		var request = $http({
             method: "get",
-            url: "/products/" + curl + "/" + cid,
+            url: "/products/" + cid,
             params: {
                 action: "get"
             }

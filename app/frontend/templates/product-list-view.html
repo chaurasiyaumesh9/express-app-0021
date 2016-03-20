@@ -1,4 +1,4 @@
-<div  class="container_fluid product-list-view">
+<div class="container_fluid product-list-view">
 	<div  class="row">
 		<div  class="col-md-4">
 			<a href="" class="product-image-wrapper"> <img src="{{ product.images | smallImg }}" class="product-image" /> </a>
@@ -10,7 +10,7 @@
 				<span class="price special-price" ng-show="product.special_price > 0"><i class="fa fa-inr"></i>{{ product.special_price }}</span> 
 			</p>
 			<p class="descritpion">
-				{{ product.description }}
+				{{ product.short_description }}
 			</p>
 		</div>
 	</div>

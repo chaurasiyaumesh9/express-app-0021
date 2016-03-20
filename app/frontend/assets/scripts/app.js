@@ -6,8 +6,9 @@ cartApp.config(function( $routeProvider, $locationProvider ) {
 			templateUrl : 'views/homepage.html',
 			controller:'hompageCtrl'
 		})
-		.when('/products/:categoryUrl/:categoryId', {
+		.when('/products/:cid', {
 			templateUrl : 'views/product-listing.html',
 			controller:'productListingCtrl'
 		});
+		
 });

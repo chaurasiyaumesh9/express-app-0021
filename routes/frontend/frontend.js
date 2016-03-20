@@ -44,22 +44,11 @@ var products = {
 		});
 
 	},
-	getProductById: function (req, res){
-		var pid = req.params.id;
-
-		Product.findById( pid, function(err, product ) {
-			if (!err)
-			{
-				res.json( product );
-			}else{
-				console.log('Error while performing the query..check function products.getProductById() for more details..', err );
-			}
-		});
-	},
 	getProductsByCategory: function (req, res){
-		var cUrl = req.params.categoryUrl;
-		var cId = req.params.categoryId;
-		Product.find( { categories: { $elemMatch: { selected: true, _id: cId, url:cUrl } }, discontinued:{$ne: true} } , function(err, results) {
+		//var cUrl = req.params.categoryUrl;
+		var cId = req.params.cid;
+		//console.log('cId :',cId);
+		Product.find( { categories: { $elemMatch: { selected: true, _id: cId } }, discontinued:{$ne: true} } , function(err, results) {
 			if (!err)
 			{
 				res.json( results );
@@ -83,10 +72,8 @@ router.get('/categories/:id', function(req, res){
 router.get('/products', function(req, res){
 	products.getProductList(req, res);
 });
-router.get('/products/:id', function(req, res){
-	products.getProductById(req, res);
-});
-router.get('/products/:categoryUrl/:categoryId', function(req, res){
+router.get('/products/:cid', function(req, res){
+	//console.log('wfwef');
 	products.getProductsByCategory(req, res);
 });
 

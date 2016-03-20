@@ -7,9 +7,10 @@ cartApp.controller('defaultCtrl', function( $scope, categoryService ){
 			console.warn( errorMessage );
 		});
 	}
-	$scope.setCurrentCategory = function( category ){
-		$scope.activeCategory = category.name;	
-		$scope.loading = true;
+	$scope.setActiveCategory = function( category ){
+		//$scope.activeCategory = category.name;	
+		$scope.activeCategory = category;
+		//$scope.loading = true;
 	}
 	
 });

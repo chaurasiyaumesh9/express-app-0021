@@ -5,7 +5,7 @@
 </div>
 
 <loader></loader>
-<div class="category-listing-page" ng-hide="loading">
+<div class="category-listing-page">
 	<div class="container">
 		<div class="alert alert-danger" ng-show="deletionSuccess">
 		  <strong>{{ deleteCount }} </strong> Categorie(s) deleted successfully!

@@ -6,14 +6,18 @@ cartApp.filter('yesNo', function() {
 
 cartApp.filter('smallImg', function( ){
 	return function( arr ){
+		var url;
 		for (var i=0;i<arr.length ;i++ )
 		{
 			//console.log('arr :',arr[i]);
 			if ( arr[i].role['small'])
 			{
-				return arr[i]['url'];
+				url = arr[i]['url'];
+				break;
+				//return arr[i]['url'];
 			}
 		}
+		return url;
 	}
 });
 

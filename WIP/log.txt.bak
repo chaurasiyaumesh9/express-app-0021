@@ -4,9 +4,9 @@ CRITICAL
 9. using angular material/ Material design lite { http://www.material-ui.com/#/components/flat-button , http://noeticforce.com/best-material-design-web-frameworks}
 10. update deleted rows count after deletion of rws on category & products listing page.
 11. implement cancel button and its logic. should act similar to 'go back' button. also delete the uploaded images on server for new products.
-12. load image while content gets loaded
-13. admin - filter products by category
-14. admin - delete multiple products images @once.
+12. loading image while content gets loaded - { DONE }
+13. admin - filter products by category {{ DONE }}
+14. admin - delete multiple products images @once. {{ nice to have }}
 15. frontend - PDP in-stock/out of stock logic
 16. frontend - list view /grid view {{ DONE }}
-17. frontend - filter products
+17. frontend - filter products by [popular, heigh price, low price, new ]
