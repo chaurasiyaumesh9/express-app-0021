@@ -4,46 +4,46 @@
 	</div>
 </div>
 
-<div class="container">
-	<div class="row">
-		<div class="col-xs-3">
-			 <div class="btn-group">
-			  <button type="button" class="btn btn-primary"> {{ currentCategory.name || 'Look-up By Category' }} </button>
-			  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<span class="caret"></span>
-				<span class="sr-only">Toggle Dropdown</span>
-			  </button>
-			  <ul class="dropdown-menu">
-				<li ng-repeat="category in categories"><a href="" ng-click="loadCategoryProducts( category )"> {{category.name}} </a></li>
-			  </ul>
-			</div> 
+<loader></loader>
+<div class="product-listing-page" ng-hide="loading">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-3">
+				 <div class="btn-group">
+				  <button type="button" class="btn btn-primary"> {{ currentCategory.name || 'Look-up By Category' }} </button>
+				  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="caret"></span>
+					<span class="sr-only">Toggle Dropdown</span>
+				  </button>
+				  <ul class="dropdown-menu">
+					<li ng-repeat="category in categories"><a href="" ng-click="loadCategoryProducts( category )"> {{category.name}} </a></li>
+				  </ul>
+				</div> 
 
-			<a href="" ng-click="currentCategory = {}"> <i class="fa fa-refresh"></i> </a>
+				<a href="" ng-click="currentCategory = {}"> <i class="fa fa-refresh"></i> </a>
 
-		</div>
-		<div class="col-xs-6">
-			<form>
-			<div class="form-group">
-			  <div class="input-group">
-				<div class="input-group-addon"><i class="fa fa-search"></i></div>
-				<input type="text" class="form-control" placeholder="Look up by product name..." ng-model="searchProduct">
-			  </div>      
 			</div>
-		  </form>
-		</div>
-		<div class="col-xs-3">
-			<!-- <label for="search"> Records/Page </label> -->
-			<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+			<div class="col-xs-6">
+				<form>
+				<div class="form-group">
+				  <div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-search"></i></div>
+					<input type="text" class="form-control" placeholder="Look up by product name..." ng-model="searchProduct">
+				  </div>      
+				</div>
+			  </form>
+			</div>
+			<div class="col-xs-3">
+				<!-- <label for="search"> Records/Page </label> -->
+				<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+			</div>
 		</div>
 	</div>
-</div>
-
-<div class="dataset">
 	<div class="container">
 		<div class="alert alert-danger" ng-show="deletionSuccess">
 		  <strong>{{ deleteCount }} </strong> Product(s) deleted successfully!
 		</div>
-		<div class="spinner" ng-show="loading"> <img src="../assets/images/loding.gif"  border="0" alt=""></div>
+		
 		<div ng-show="productList.length > 0">
 			<table class="table table-striped" >
 				<thead>
@@ -133,12 +133,15 @@
 				<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/admin/templates/dirPagination.tpl.html"></dir-pagination-controls>
 			  </div>
 		</div>
-		</div>
-		
+	</div>	
+	<div class="container">
+		<a class="btn btn-primary" href="#/products/add-new"> <i class="fa fa-plus"></i> Add New </a>
+		<button class="btn btn-danger" ng-disabled="!showDelete" ng-click="deleteProducts()"> <i class="fa fa-trash"></i> Delete </button>
+	</div>
+
 </div>
-<div class="container">
-	<a class="btn btn-primary" href="#/products/add-new"> <i class="fa fa-plus"></i> Add New </a>
-	<button class="btn btn-danger" ng-disabled="!showDelete" ng-click="deleteProducts()"> <i class="fa fa-trash"></i> Delete </button>
-</div>
+
+
+
 
 

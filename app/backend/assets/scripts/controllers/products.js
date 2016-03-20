@@ -22,11 +22,11 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	if ( $routeParams.id )
 	{
 		productID = $routeParams.id; // check if in edit/view mode
-		$scope.loading = true;
+		//$scope.loading = true;
 		productService.getProductById( productID ).then( function( response ){
-			console.log('getProductById :',response);
+			//console.log('getProductById :',response);
 			$scope.product = response;
-			$scope.loading = false;
+			//$scope.loading = false;
 			$scope.product.valid_from = common.stringToDate( $scope.product.valid_from );
 			$scope.product.valid_till  = common.stringToDate( $scope.product.valid_till );
 		} , function(errorMessage ){ 
@@ -52,13 +52,15 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	}
 
 	$scope.updateProduct = function( product ){
-		console.log('updateProduct :',product);
+		//console.log('updateProduct :',product);
+		$scope.loading = true;
 		product.updated_at = new Date();
 		$scope.uploadFiles( product ).then( function( response ){
 			//console.log('uploaded all!');
 			productService.updateProduct( product ).then( function( response ){
 				//console.log('updated to DB!');
-				console.log('updateProduct response :',response);
+				//console.log('updateProduct response :',response);
+				$scope.loading = false;
 				$scope.product = response;
 				$scope.product.valid_from = common.stringToDate( $scope.product.valid_from );
 				$scope.product.valid_till  = common.stringToDate( $scope.product.valid_till );

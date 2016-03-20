@@ -3,10 +3,9 @@
 		<h1> <i class="fa fa-tags"></i> {{ activeCategory }} </h1>
 	</div>
 </div>
-
-<div id="main">
+<loader></loader>
+<div id="main" ng-hide="loading">
 	<div class="container">
-		<div class="spinner" ng-show="loading"> <img src="../assets/images/loding.gif"  border="0" alt=""></div>
 		<!-- <div class="row">
 			<div class="col-md-8"></div>
 			<div class="col-md-4">

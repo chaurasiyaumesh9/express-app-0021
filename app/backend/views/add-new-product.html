@@ -3,8 +3,8 @@
 		 <h1> <i class="fa fa-tags"></i> Add New Product </h1>
 	</div>
 </div>
-
-<div class="container" ng-init="loadDefaults();getProductCategories();">
+<loader></loader>
+<div class="container" ng-init="loadDefaults();getProductCategories();" ng-hide="loading">
 	 <div class="alert alert-success" ng-show="addSuccess">
 	  <strong>Success!</strong> New Product Added Successfully!
 	</div> 
