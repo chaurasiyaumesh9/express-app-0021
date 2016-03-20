@@ -7,7 +7,7 @@ cartApp.controller('productListingCtrl', function( $scope, $routeParams, product
 		var cId = $routeParams.categoryId;
 		$scope.activeCategory = $scope.$parent.activeCategory;;
 		categoryService.getCategoryById( cId ).then( function( response ){
-			console.log('getCategoryById response :', response);
+			//console.log('getCategoryById response :', response);
 			$scope.activeCategory = response.name;
 		} , function(errorMessage ){ 
 			console.warn( errorMessage );

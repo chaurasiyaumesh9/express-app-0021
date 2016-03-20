@@ -1,6 +1,6 @@
-<section class="thumbnail-product">
-	<div class="thumbnail-img-wrapper">
-		 <a href=""> <img src="{{ product.images | smallImg }}" class="thumbnail-img" /> </a>
+<section class="product-grid-view">
+	<div class="product-image-wrapper">
+		 <a href=""> <img src="{{ product.images | smallImg }}" class="product-image" /> </a>
 	</div>
 	<p class="product-name"> <b> <a href=""> {{ product.name }} </a> </b> </p>
 	<p class="price-block"> 
@@ -8,3 +8,4 @@
 		<span class="price special-price" ng-show="product.special_price > 0"><i class="fa fa-inr"></i>{{ product.special_price }}</span> 
 	</p>
 </section>
+
