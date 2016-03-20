@@ -9,4 +9,4 @@ CRITICAL
 14. admin - delete multiple products images @once.
 15. frontend - PDP in-stock/out of stock logic
 16. frontend - list view /grid view {{ DONE }}
-17. frontend - filter products by [popular, heigh price, low price, new ]
+17. frontend - filter products
