@@ -12,13 +12,23 @@
 				<div class="product-image-wrapper">
 					<a href="#/products/{{activeCategory._id}}/{{product._id}}" > <img src="{{ activeThumb.url || ( product.images | smallImg ) }}" class="product-image" /> </a> 	
 				</div>
-				<div class="thumbnail-view clearfix">
+
+				<div class="thumbnail-view clearfix" data="product.images" slick-slider="{dots: false, arrows: true, draggable: false, slidesToShow:4, infinite:false}">
+					<div class="col-md-3 col-sm-3 col-xs-3" ng-repeat="image in product.images">
+						<div class="thumbnail-box">
+							<a href="" ng-click="switchThumbView( image )"><img ng-src="{{ image.url }}"/></a>
+						</div>
+					</div>
+				</div>
+
+				<!-- <div class="thumbnail-view clearfix">
+					
 					<div class="col-md-3" ng-repeat="image in product.images">
 						<div class="thumbnail-box">
 							<a href="" ng-click="switchThumbView( image )"> <img src="{{ image.url }}" /> </a>	
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<div class="col-md-8 col-sm-8 col-xs-12">
 				<p class="product-name"> <b> <a href="#/products/{{activeCategory._id}}/{{product._id}}"> {{ product.name }} </a> </b> </p>		
