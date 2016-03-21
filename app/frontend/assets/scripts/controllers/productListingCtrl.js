@@ -8,7 +8,7 @@ cartApp.controller('productListingCtrl', function( $scope, $routeParams, product
 		//var cUrl = $routeParams.curl; // check if in edit/view mode
 		var cId = $routeParams.cid;
 		$scope.activeCategory = $scope.$parent.activeCategory;;
-		
+		$scope.loading = true;
 		categoryService.getCategoryById( cId ).then( function( response ){
 			//console.log('getCategoryById response :', response);
 			$scope.activeCategory = response;

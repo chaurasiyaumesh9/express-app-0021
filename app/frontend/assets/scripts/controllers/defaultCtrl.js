@@ -10,7 +10,7 @@ cartApp.controller('defaultCtrl', function( $scope, categoryService ){
 	$scope.setActiveCategory = function( category ){
 		//$scope.activeCategory = category.name;	
 		$scope.activeCategory = category;
-		//$scope.loading = true;
+		$scope.loading = true;
 	}
 	
 });
