@@ -8,6 +8,7 @@ cartApp.controller('productDetailsCtrl', function( $scope, $routeParams, product
 		var pId = $routeParams.pid;
 		$scope.loading = true;
 		productService.getProductById( pId ).then( function( response ){
+			//console.log('response :',response);
 			$scope.product = response;
 			$scope.loading = false;
 		} , function(errorMessage ){ 
@@ -22,5 +23,10 @@ cartApp.controller('productDetailsCtrl', function( $scope, $routeParams, product
 			console.warn( errorMessage );
 		});
 		
+	}
+
+	$scope.switchThumbView = function( image ){
+		$scope.activeThumb = image
+		//console.log('switchThumbView',image);
 	}
 });

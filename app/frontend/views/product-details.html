@@ -1,15 +1,24 @@
  <div class="container">
 	<div class="jumbotron text-center">
-		<h1> {{ message }} </h1>
+		<h1> {{ product.name }} </h1>
 	</div>
 </div>
 
 <loader></loader>
-<div class="product-details-page">
+<div class="product-details-page" ng-hide="loading">
 	<div class="container" ng-init="product = { images:[] }">
 		<div class="row">
 			<div class="col-md-4 col-sm-4 col-xs-12">
-				<a href="#/products/{{activeCategory._id}}/{{product._id}}"> <img src="{{ product.images | smallImg }}" class="product-image" /> </a> 
+				<div class="product-image-wrapper">
+					<a href="#/products/{{activeCategory._id}}/{{product._id}}" > <img src="{{ activeThumb.url || ( product.images | smallImg ) }}" class="product-image" /> </a> 	
+				</div>
+				<div class="thumbnail-view clearfix">
+					<div class="col-md-3" ng-repeat="image in product.images">
+						<div class="thumbnail-box">
+							<a href="" ng-click="switchThumbView( image )"> <img src="{{ image.url }}" /> </a>	
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="col-md-8 col-sm-8 col-xs-12">
 				<p class="product-name"> <b> <a href="#/products/{{activeCategory._id}}/{{product._id}}"> {{ product.name }} </a> </b> </p>		

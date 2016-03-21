@@ -64,7 +64,7 @@ var products = {
 		Product.find( { _id: pId , discontinued:{$ne: true} } , function(err, results) {
 			if (!err)
 			{
-				console.log('results :',results);
+				//console.log('results :',results);
 				res.json( results[0] );
 			}else{
 				console.log('Error while performing the query..check function products.getProductsByCategory() for more details..', err );
