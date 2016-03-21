@@ -27,7 +27,7 @@
 					<span class="price special-price" ng-show="product.special_price > 0"><i class="fa fa-inr"></i>{{ product.special_price }}</span> 
 				</p>
 				<div class="form-group"> 
-					Quantity : <input type="number" ng-model="product.quantity" style="width:80px;" class="form-control" />
+					Quantity : <input type="text" ng-model="product.quantity" style="width:80px;" class="form-control" />
 				</div>
 				<p class="descritpion">
 					{{ product.description }}
