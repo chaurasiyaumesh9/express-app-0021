@@ -14,7 +14,7 @@
 					<a href="#/products/{{activeCategory._id}}/{{product._id}}" > <img src="{{ activeThumb.url || ( product.images | smallImg ) }}" class="product-image" /> </a> 	
 				</div>	 -->	
 	
-				<div data="product.images" slick-slider="{dots: false, arrows: false, draggable: true, slidesToShow:1, infinite:false}">
+				<div data="product.images" slider-product-view slick-slider="{dots: false, arrows: false, draggable: true, slidesToShow:1, infinite:false}" >
 					<div class="product-image-wrapper" ng-repeat="image in product.images">
 						<a href=""> <img ng-src="{{ image.url }}" class="product-image" /> </a>
 					</div>
@@ -22,11 +22,11 @@
 
 				<!-- <h1>currentSlide : {{ currentSlide }}</h1> -->
 
-				 <div class="thumbnail-view clearfix" data="product.images" slick-slider="{dots: false, arrows: true, draggable: false, slidesToShow:4, infinite:false}">
+				 <div class="thumbnail-view clearfix" slider-thumb-view data="product.images" slick-slider="{dots: false, arrows: true, draggable: false, slidesToShow:4, infinite:false}">
 					<div style="height:85px;"  ng-repeat="image in product.images">
 						<div class="thumbnail-box">
 							<!-- <a style="" href="" ng-click="switchThumbView( image )"><img ng-src="{{ image.url }}"/></a> -->
-							<a href="" class="{{ currentSlide === $index?'active':'not-active'}}" ng-click="switchThumbView( $index )"><img ng-src="{{ image.url }}" /></a>
+							<a href="" class="{{ currentSlide === $index?'active':''}}" ng-click="switchThumbView( $index )"><img ng-src="{{ image.url }}" /></a>
 						</div>
 					</div>
 				</div> 

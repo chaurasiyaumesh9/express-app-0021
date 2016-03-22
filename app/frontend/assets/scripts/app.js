@@ -24,24 +24,9 @@ cartApp.directive('slickSlider', function ($timeout) {
         link: function (scope, element, attrs) {
             var isInitialized = false;
             scope.$watch('data', function(newVal, oldVal) {
-				//console.log('newVal :',newVal);
-				//console.log('oldVal :',oldVal	);
-				 //console.log('scope.slickCurrentSlide :',scope.slickCurrentSlide);
-                if ( newVal.length > 0 && !isInitialized) {
-					//console.log('true',scope.$eval(attrs.slickSlider));
+				 if ( newVal.length > 0 && !isInitialized) {
 					$timeout(function() {
-						var $ex = $(element).slick( scope.$eval(attrs.slickSlider));
-						if ( !scope.$parent.currentSlide)
-						{
-							//scope.$parent.currentSlide = 0;
-						}
-						$ex.on('beforeChange', function(event, slick, currentSlide, nextSlide){
-						  //console.log('beforeChange :',nextSlide);
-							//console.log('scope :',scope);
-							//scope.$apply(function() {
-								//scope.$parent.currentSlide = nextSlide;
-							//});
-						});
+						$(element).slick( scope.$eval(attrs.slickSlider));
 						isInitialized = true;
 					},0);
                     
@@ -49,5 +34,30 @@ cartApp.directive('slickSlider', function ($timeout) {
             });
         }
     }
+});
+
+
+
+cartApp.directive('sliderProductView',function(){
+	return {
+		restrict :'A',
+		link: function(scope, element, attrs){
+			scope.$watch('currentSlide',function(newVal, oldVal){
+				console.log(newVal,',', oldVal );
+				if ( !newVal)
+				{
+					//newVal = 0;
+				}
+				if ( newVal >= 0 )
+				{
+					$(element).slick('slickGoTo', newVal, true ).on('afterChange', function(event, slick, currentSlide, nextSlide){
+					  scope.$apply(function() {
+							scope.switchThumbView( currentSlide );
+						});
+					});
+				}
+			});
+		}
+	}
 });
 
