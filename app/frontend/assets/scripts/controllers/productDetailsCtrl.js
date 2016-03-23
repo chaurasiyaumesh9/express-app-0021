@@ -25,8 +25,9 @@ cartApp.controller('productDetailsCtrl', function( $scope, $routeParams, product
 		
 	}
 
-	$scope.switchThumbView = function( image ){
-		$scope.activeThumb = image
+	$scope.switchThumbView = function( index ){
+		$scope.currentSlide = index;
+		//$scope.activeThumb = image
 		//console.log('switchThumbView',image);
 	}
 });

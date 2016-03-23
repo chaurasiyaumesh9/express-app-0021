@@ -144,7 +144,10 @@ section, footer, header, aside, nav{
 .thumbnail-box{
 	height:100%;width:100%;padding:2px;
 }
-.thumbnail-box a{ display:block;width:100%;height:100%;border:1px solid #eaeaea;position:relative;}
+.thumbnail-box a{ display:block;width:100%;height:100%;border:1px solid #eaeaea;position:relative;outline:none;}
+.thumbnail-box a.active{
+	border:1px solid #ff6600;
+}
 .thumbnail-box a img{
 	width:auto;height:auto;max-width:90%;max-height:90%;position:absolute;left:5px;right:5px;top:5px;bottom:5px;margin: auto auto;
 }

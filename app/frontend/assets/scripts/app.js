@@ -26,10 +26,22 @@ cartApp.directive('slickSlider', function ($timeout) {
             scope.$watch('data', function(newVal, oldVal) {
 				//console.log('newVal :',newVal);
 				//console.log('oldVal :',oldVal	);
+				 //console.log('scope.slickCurrentSlide :',scope.slickCurrentSlide);
                 if ( newVal.length > 0 && !isInitialized) {
 					//console.log('true',scope.$eval(attrs.slickSlider));
 					$timeout(function() {
-						$(element).slick( scope.$eval(attrs.slickSlider));
+						var $ex = $(element).slick( scope.$eval(attrs.slickSlider));
+						if ( !scope.$parent.currentSlide)
+						{
+							//scope.$parent.currentSlide = 0;
+						}
+						$ex.on('beforeChange', function(event, slick, currentSlide, nextSlide){
+						  //console.log('beforeChange :',nextSlide);
+							//console.log('scope :',scope);
+							//scope.$apply(function() {
+								//scope.$parent.currentSlide = nextSlide;
+							//});
+						});
 						isInitialized = true;
 					},0);
                     
@@ -39,14 +51,3 @@ cartApp.directive('slickSlider', function ($timeout) {
     }
 });
 
-/*
-cartApp.directive('slickSlider',function($timeout){
- return {
-   restrict: 'A',
-   link: function(scope,element,attrs) {
-     $timeout(function() {
-         $(element).slick(scope.$eval(attrs.slickSlider));
-     });
-   }
- }
-}); */
