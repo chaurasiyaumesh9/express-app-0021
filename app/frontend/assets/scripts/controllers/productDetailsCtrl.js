@@ -27,6 +27,7 @@ cartApp.controller('productDetailsCtrl', function( $scope, $routeParams, product
 	}
 
 	$scope.switchThumbView = function( index ){
+		//console.log('switchThumbView :',index)
 		$scope.activeSlide = index;
 	}
 	/*$scope.$on('ngRepeatFinished', function (ngRepeatFinished) {

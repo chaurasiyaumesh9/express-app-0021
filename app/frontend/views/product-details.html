@@ -9,24 +9,19 @@
 	<div class="container" ng-init="product = { images:[] }">
 		<div class="row">
 			<div class="col-md-4 col-sm-4 col-xs-12">
-				
-				<!-- <div class="product-image-wrapper">
-					<a href="#/products/{{activeCategory._id}}/{{product._id}}" > <img src="{{ activeThumb.url || ( product.images | smallImg ) }}" class="product-image" /> </a> 	
-				</div>	 -->	
 	
-				<div data="product.images" slick-slider="{dots: false, arrows: false, draggable: true, slidesToShow:1, infinite:false}"  >
+				<div data="product.images" slick-slider="{dots: false, arrows: false, draggable: true, slidesToShow:1, infinite:false}" slider-product-view >
 					<div class="product-image-wrapper" ng-repeat="image in product.images" on-finish-render-filters>
 						<a href=""> <img ng-src="{{ image.url }}" class="product-image" /> </a>
 					</div>
 				</div>
 
-				<!-- <h1>activeSlide : {{ activeSlide }}</h1> -->
+				<!-- <h1>activeSlide : {{ activeSlide }}</h1>  -->
 
-				 <div class="thumbnail-view clearfix" slider-thumb-view data="product.images" slick-slider="{dots: false, arrows: true, draggable: false, slidesToShow:4, infinite:false}">
-					<div style="height:85px;"  ng-repeat="image in product.images">
+				 <div class="thumbnail-view clearfix" data="product.images" slick-slider="{dots: false, arrows: true, draggable: false, slidesToShow:4, infinite:false}" >
+					<div style="height:85px;"  ng-repeat="image in product.images" >
 						<div class="thumbnail-box">
-							<!-- <a style="" href="" ng-click="switchThumbView( image )"><img ng-src="{{ image.url }}"/></a> -->
-							<a href="" class="{{ activeSlide === $index?'active':''}}" ng-click="switchThumbView( $index )"><img ng-src="{{ image.url }}" /></a>
+							<a href="" class="{{ activeSlide === $index?'active':''}}" ng-click="switchThumbView( $index )" ><img ng-src="{{ image.url }}" /></a>
 						</div>
 					</div>
 				</div> 

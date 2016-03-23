@@ -37,16 +37,13 @@ cartApp.directive('slickSlider', function ($timeout) {
         restrict: 'A',
         scope: {'data': '='},
         link: function (scope, element, attrs) {
-            var isInitialized = false;
+            scope.$parent.isInitialized = false;
             scope.$watch('data', function(newVal, oldVal) {
-				 if ( newVal.length > 0 && !isInitialized) {
+				 if ( newVal.length > 0 && !scope.$parent.isInitialized) {
 					 scope.$parent.$on('ngRepeatFinished', function (ngRepeatFinished) {
-						$(element).slick( scope.$eval(attrs.slickSlider)).on('afterChange', function(event, slick, currentSlide, nextSlide){
-						  scope.$parent.$apply(function() {
-								scope.$parent.switchThumbView( currentSlide );
-							});
-						});;
-						isInitialized = true;
+						 //console.log('finished tr repeat 1');
+						$(element).slick( scope.$eval(attrs.slickSlider));
+						 scope.$parent.isInitialized = true;
 					});
                 }
             });
@@ -54,33 +51,27 @@ cartApp.directive('slickSlider', function ($timeout) {
     }
 });
 
-cartApp.directive('sliderProductView',function( $timeout ){
-	return {
-		restrict :'A',
-		link: function(scope, element, attrs){
-			scope.$watch('activeSlide',function(newVal, oldVal){
-				console.log(newVal,',', oldVal );
-				
-				if ( newVal >= 0 )
+cartApp.directive('sliderProductView', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            scope.$watch('isInitialized',function(newVal, oldVal){
+				//console.log(newVal,',', oldVal );
+				if ( newVal )
 				{
-					/*$timeout(function() {
-						$(element).slick('slickGoTo', newVal ).on('afterChange', function(event, slick, currentSlide, nextSlide){
-						  scope.$apply(function() {
+					//console.log('loading dir 2');
+					scope.$watch('activeSlide', function( newValueSlide, oldValueSlide ){
+						//console.log(newValueSlide,',', oldValueSlide );
+						$(element).slick('slickGoTo', newValueSlide ).on('afterChange', function(event, slick, currentSlide, nextSlide){
+							//console.log('got it 1 !', currentSlide);
+
+							scope.$apply(function() {
 								scope.switchThumbView( currentSlide );
 							});
-						});
-					},1000);
-					*/
-					//console.log(jQuery.slick );
-					//console.log($(element));
-					$(element).slick('slickGoTo', newVal ).on('afterChange', function(event, slick, currentSlide, nextSlide){
-					  scope.$apply(function() {
-							scope.switchThumbView( currentSlide );
-						});
+						});;;;
 					});
 				}
 			});
-		}
-	}
+        }
+    }
 });
-
