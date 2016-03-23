@@ -14,7 +14,7 @@
 					<a href="#/products/{{activeCategory._id}}/{{product._id}}" > <img src="{{ activeThumb.url || ( product.images | smallImg ) }}" class="product-image" /> </a> 	
 				</div>	 -->	
 	
-				<div data="product.images" slick-slider="{dots: false, arrows: false, draggable: true, slidesToShow:1, infinite:false}"  >
+				<div data="product.images" slick-slider="{dots: false, arrows: false, draggable: true, slidesToShow:1, infinite:false}" slider-product-view >
 					<div class="product-image-wrapper" ng-repeat="image in product.images" on-finish-render-filters>
 						<a href=""> <img ng-src="{{ image.url }}" class="product-image" /> </a>
 					</div>

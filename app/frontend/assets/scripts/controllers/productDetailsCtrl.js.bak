@@ -29,7 +29,7 @@ cartApp.controller('productDetailsCtrl', function( $scope, $routeParams, product
 	$scope.switchThumbView = function( index ){
 		$scope.activeSlide = index;
 	}
-	/*$scope.$on('ngRepeatFinished', function (ngRepeatFinished) {
+	$scope.$on('ngRepeatFinished', function (ngRepeatFinished) {
 		console.log('called');
-	});*/
+	});
 });

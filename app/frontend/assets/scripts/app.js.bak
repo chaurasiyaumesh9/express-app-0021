@@ -42,8 +42,8 @@ cartApp.directive('slickSlider', function ($timeout) {
 				 if ( newVal.length > 0 && !isInitialized) {
 					 scope.$parent.$on('ngRepeatFinished', function (ngRepeatFinished) {
 						$(element).slick( scope.$eval(attrs.slickSlider)).on('afterChange', function(event, slick, currentSlide, nextSlide){
-						  scope.$parent.$apply(function() {
-								scope.$parent.switchThumbView( currentSlide );
+						  scope.$apply(function() {
+								scope.switchThumbView( currentSlide );
 							});
 						});;
 						isInitialized = true;
