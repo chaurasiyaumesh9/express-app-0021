@@ -10,7 +10,7 @@ var backend =  require('./routes/backend/backend');
 var frontend =  require('./routes/frontend/frontend');
 var passport = require('passport');
 var flash = require('connect-flash');
-//require('./config/passport')(passport);
+require('./config/passport')(passport);
 
 
 var port = process.env.PORT || 8010;

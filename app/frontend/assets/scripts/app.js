@@ -13,10 +13,24 @@ cartApp.config(function( $routeProvider, $locationProvider ) {
 		.when('/products/:cid/:pid', {
 			templateUrl : 'views/product-details.html',
 			controller:'productDetailsCtrl'
+		})
+		.when('/login', {
+			templateUrl : 'views/login.html',
+			controller:'loginCtrl'
+		})
+		.when('/profile', {
+			templateUrl : 'views/profile.html',
+			controller:'profileCtrl'
 		});
 		
 });
 
+cartApp.controller('loginCtrl', function( $scope ){
+	$scope.message = "Login With ";
+});
+cartApp.controller('profileCtrl', function( $scope ){
+	$scope.message = "User Profile will be shown here ";
+});
 cartApp.directive('onFinishRenderFilters', function ($timeout) {
     return {
         restrict: 'A',
