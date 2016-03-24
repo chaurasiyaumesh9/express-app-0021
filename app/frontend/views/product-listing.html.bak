@@ -32,7 +32,7 @@
 							<li ng-repeat="filter in filters">  <a href="" ng-click="setActiveFilter( filter )" > {{ filter.caption }} </a> </li>
 						  </ul>
 						</div> 
-						<a href="" ng-click="resetFilter()" > <i class="fa fa-refresh"></i> </a>
+						<a href="" ng-click="resetFilter()" style="padding:0 10px 0 0;"> <i class="fa fa-refresh"></i> </a>
 					</div>
 					<a class="view list-icon" ng-class="{active: layout == 'list'}" ng-click="layout = 'list'"></a>
 					<a class="view grid-icon" ng-class="{active: layout == 'grid'}" ng-click="layout = 'grid'"></a>

@@ -1,4 +1,4 @@
-var cartApp = angular.module('sampleCartApp', ['ngRoute','ngAnimate']);
+var cartApp = angular.module('sampleCartApp', ['ngRoute']);
 
 cartApp.config(function( $routeProvider, $locationProvider ) {
 	$routeProvider

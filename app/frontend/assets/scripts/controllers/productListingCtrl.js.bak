@@ -9,12 +9,12 @@ cartApp.controller('productListingCtrl', function( $scope, $routeParams, product
 		},
 		{
 			caption: "Price: Heigh To Low",
-			field: "special_price || price",
+			field: "special_price",
 			reverse: true
 		},
 		{
 			caption: "Price: Low To Heigh",
-			field: "special_price || price",
+			field: "special_price",
 			reverse: false
 		}	
 	];
