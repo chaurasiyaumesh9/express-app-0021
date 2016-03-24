@@ -57,7 +57,7 @@
 					</div>
 					<div id="" class="col-sm-9">
 						<div data="product.images" slick-slider="{dots: false, arrows: false, draggable: true, slidesToShow:1, infinite:false}" slider-product-view >
-							<div class="product-image-wrapper" ng-repeat="image in product.images" >
+							<div class="product-image-wrapper" ng-repeat="image in product.images" on-finish-render-filters>
 								<a href="" ng-click="setFullPreviewMode()" > <img ng-src="{{ image.url }}" class="product-image" /> </a>
 							</div>
 						</div>

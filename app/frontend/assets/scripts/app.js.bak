@@ -79,6 +79,7 @@ cartApp.directive('autoSlideThumb', function ($timeout) {
         restrict: 'A',
         link: function (scope, element, attrs) {
             scope.$watch('isInitialized',function(newVal, oldVal){
+				//console.log(newVal,',', oldVal );
 				if ( newVal )
 				{
 					//console.log('loading dir 2');

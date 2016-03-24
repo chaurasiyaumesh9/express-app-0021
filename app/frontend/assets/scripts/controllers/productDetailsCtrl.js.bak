@@ -31,7 +31,7 @@ cartApp.controller('productDetailsCtrl', function( $scope, $routeParams, product
 	}
 
 	$scope.setFullPreviewMode =function(){
-		$scope.enableFullmode = true
+		$scope.enableFullMode = true
 	}
 
 	
