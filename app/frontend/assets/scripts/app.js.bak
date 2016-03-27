@@ -81,7 +81,7 @@ cartApp.controller('loginCtrl', function( $scope, $http, authenticationService, 
 			
 			if ( response.data.user )
 			{
-				//console.log('login success :',response.data.user );
+				console.log('login success :',response.data.user );
 				var url = "http://" + $window.location.host + "/#/profile";
 				$window.location.href = url;
 			}else{

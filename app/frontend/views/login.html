@@ -2,7 +2,10 @@
 	<div class="col-sm-6 col-sm-offset-3">
 
 		<h1><span class="fa fa-sign-in"></span> Login</h1>
-
+		<div class="alert alert-warning" ng-show="showMessage">
+			<strong>Warning!</strong> {{ loginMessage }}
+		  </div>
+		  
 		<!-- LOGIN FORM -->
 		<form ng-submit="login( user )" method="post">
 			<div class="form-group">

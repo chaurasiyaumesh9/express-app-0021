@@ -97,7 +97,7 @@ module.exports = function( passport ){
 		if (err) { return next(err); }
 		if (!user) { 
 			var message = req.flash('loginMessage')[0];
-			//console.log(message);
+			console.log(message);
 			res.json( {message: message } );
 			return false;
 		}
