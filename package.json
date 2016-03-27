@@ -9,6 +9,7 @@
     "body-parser": "~1.0.0",
     "cookie-parser": "~1.0.0",
     "express-session": "latest",
+    "bcrypt-nodejs" : "latest",
     "dateformat": "^1.0.12",
     "ejs": "^2.4.1",
     "express": "~4.0.0",

@@ -1,5 +1,4 @@
 var express    = require('express')   ;
-var app = express();
 var router= express.Router();
 var appconfig = require('../../config/appconfig');
 var CategorySchema = require('../../models/category');
@@ -73,34 +72,40 @@ var products = {
 	}
 			
 };
+module.exports = function( passport ){
+	router.get('/categories', function(req, res){
+		categories.getCategories( req, res );
+	});
 
+	router.get('/categories/:id', function(req, res){
+		categories.getCategoryById( req, res );
+	});
 
-router.get('/categories', function(req, res){
-	categories.getCategories( req, res );
-});
+	router.get('/products', function(req, res){
+		products.getProductList(req, res);
+	});
+	router.get('/products/:cid', function(req, res){
+		products.getProductsByCategory(req, res);
+	});
 
-router.get('/categories/:id', function(req, res){
-	categories.getCategoryById( req, res );
-});
+	router.get('/product/:pid', function(req, res){
+		products.getProductById(req, res);
+	});
 
-router.get('/products', function(req, res){
-	products.getProductList(req, res);
-});
-router.get('/products/:cid', function(req, res){
-	//console.log('wfwef');
-	products.getProductsByCategory(req, res);
-});
+	router.post('/login', function(req, res, next) {
+	  passport.authenticate('local-login', function(err, user, info) {
+		if (err) { return next(err); }
+		if (!user) { 
+			res.json( {message: req.flash('loginMessage')[0] } );
+			return false;
+		}
+		req.logIn(user, function(err) {
+		  if (err) { return next(err); }
+		  res.json( {user :user });
+		});
 
-router.get('/product/:pid', function(req, res){
-	//console.log('wfwef');
-	products.getProductById(req, res);
-});
+	  })(req, res, next);
+	});
 
-//app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
-
-//app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/profile', failureRedirect: '/' }));
-
-
-
-
-module.exports = router;
+	return router;
+}
