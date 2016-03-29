@@ -97,19 +97,26 @@ cartApp.controller('loginCtrl', function( $scope, $http, authenticationService, 
 		});
 	}
 });
-cartApp.controller('signupCtrl', function( $scope, authenticationService ){
+cartApp.controller('signupCtrl', function( $scope, $http, authenticationService ){
 	$scope.message = "signup With ";
 	$scope.signUp = function( user ){
 		//console.log('signupCtrl :',user);;
-		authenticationService.signUp( user ).then( function( response ){
-			console.log('authenticationService.signUp :',response);
+		$http.post('/signup', user ).then( function( response ){
+			$scope.user = {};
 		}, function( errorMessage ){
 			console.warn( errorMessage );
-		})
+		});
 	}
 });
-cartApp.controller('profileCtrl', function( $scope ){
+cartApp.controller('profileCtrl', function( $scope, $http ){
 	$scope.message = "User Profile will be shown here ";
+
+	$http.get('/profile').then( function( response ){
+		console.log('profile :',response.data);
+		$scope.user = response.data;
+	}, function( errorMessage ){
+		console.warn( errorMessage );
+	})
 });
 
 cartApp.directive('onFinishRenderFilters', function ($timeout) {

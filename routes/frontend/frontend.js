@@ -97,7 +97,6 @@ module.exports = function( passport ){
 		if (err) { return next(err); }
 		if (!user) { 
 			var message = req.flash('loginMessage')[0];
-			//console.log(message);
 			res.json( {message: message } );
 			return false;
 		}
@@ -108,6 +107,32 @@ module.exports = function( passport ){
 
 	  })(req, res, next);
 	});
+
+	router.post('/signup', function(req, res, next) {
+	  passport.authenticate('local-signup', function(err, user, info) {
+		if (err) { return next(err); }
+		if (user) { 
+			res.json( user.local );
+		}
+	  })(req, res, next);
+	});
+
+
+
+	router.get('/profile', isLoggedIn, function(req, res) {
+		console.log('myuser :',req.user);
+		res.json( req.user );
+    });
+
+	function isLoggedIn(req, res, next) {
+
+		// if user is authenticated in the session, carry on 
+		if (req.isAuthenticated())
+			return next();
+
+		// if they aren't redirect them to the home page
+		res.redirect('/');
+	}
 
 	return router;
 }
