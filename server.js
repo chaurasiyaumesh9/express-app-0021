@@ -23,7 +23,7 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()) // parse application/json
 app.use(bodyParser.urlencoded({ extended: true })) // parse application/x-www-form-urlencoded
 
-app.use(session({ secret: 'meanstack passport app' })); // session secret
+app.use(session({ secret: 'meanstack402' })); // session secret
 app.use(express.static( path.join(__dirname + '/app')));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
@@ -43,12 +43,12 @@ app.set('view engine','ejs');
 app.set('view cache', false);
 
 
-
+/*
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
-});
+});*/
 
 
 app.listen(port, function(){

@@ -73,6 +73,16 @@ var products = {
 			
 };
 module.exports = function( passport ){
+	router.use( function(req, res, next ){
+		//console.log('executing route:');
+		if ( req.user )
+		{
+			//console.log('user found :',req.user );
+			// got the user
+		}
+		next();
+	});
+	
 	router.get('/categories', function(req, res){
 		categories.getCategories( req, res );
 	});
@@ -120,7 +130,7 @@ module.exports = function( passport ){
 
 
 	router.get('/profile', isLoggedIn, function(req, res) {
-		console.log('myuser :',req.user);
+		//console.log('myuser :',req.user);
 		res.json( req.user );
     });
 

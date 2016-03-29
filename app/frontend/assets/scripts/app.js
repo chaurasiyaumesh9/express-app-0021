@@ -29,6 +29,15 @@ cartApp.config(function( $routeProvider, $locationProvider ) {
 		
 });
 
+
+cartApp.controller('defaultCtrl', function( $scope, $http ){
+	console.log('called!');
+});
+cartApp.controller('hompageCtrl', function( $scope, $http ){
+	//console.log('called!');
+});
+
+
 cartApp.service('authenticationService', function( $http, $q){
 	return({
 		signUp: signUp,
