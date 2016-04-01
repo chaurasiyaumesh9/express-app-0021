@@ -52,7 +52,7 @@
 		</div>
 		<div class="row list" ng-show="layout == 'list'" >
 			<div class="col-md-12"  >
-				<div ng-repeat="product in productList | orderBy:sortType:sortReverse" class="anim-grid-check">
+				<div ng-repeat="product in productList | orderBy:sortType:sortReverse" >
 					<product-list-view></product-list-view>
 				</div>
 			</div>
