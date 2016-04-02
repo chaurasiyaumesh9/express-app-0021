@@ -118,19 +118,33 @@ module.exports = function( passport ){
 	  })(req, res, next);
 	});
 
+	router.post('/logout', function( req, res ){
+		req.logOut();
+		res.send( 200 );
+	});
+
 	router.post('/signup', function(req, res, next) {
 	  passport.authenticate('local-signup', function(err, user, info) {
 		if (err) { return next(err); }
+		if ( !user ) { 
+			var message = req.flash('signupMessage')[0];
+			res.json( {message: message } );
+			return false;
+		}
 		if (user) { 
-			res.json( user.local );
+			req.logIn(user, function(err) {
+			  if (err) { return next(err); }
+			  res.json( {user :user });
+			});
 		}
 	  })(req, res, next);
 	});
 
+	router.get('/loggedin', function( req, res ){
+		res.send( req.isAuthenticated()?req.user: '0')
+	});
 
-
-	router.get('/profile', isLoggedIn, function(req, res) {
-		//console.log('myuser :',req.user);
+	/*router.get('/profile', isLoggedIn, function(req, res) {
 		res.json( req.user );
     });
 
@@ -142,7 +156,7 @@ module.exports = function( passport ){
 
 		// if they aren't redirect them to the home page
 		res.redirect('/');
-	}
+	}*/
 
 	return router;
 }

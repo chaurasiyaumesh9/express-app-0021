@@ -3,7 +3,7 @@
 
 		<h1><span class="fa fa-sign-in"></span> Login</h1>
 		<div class="alert alert-warning" ng-show="showMessage">
-			<strong>Warning!</strong> {{ message }}
+			<strong>Warning!</strong> {{ loginMessage }}
 		  </div>
 		  
 		<!-- LOGIN FORM -->

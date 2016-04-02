@@ -24,19 +24,44 @@ cartApp.config(function( $routeProvider, $locationProvider ) {
 		})
 		.when('/profile', {
 			templateUrl : 'views/profile.html',
-			controller:'profileCtrl'
+			controller:'profileCtrl',
+			resolve: { logincheck: checkLogin }
 		});
 		
 });
 
+cartApp.run(getActiveUser);
 
-cartApp.controller('defaultCtrl', function( $scope, $http ){
-	console.log('called!');
-});
+function checkLogin( $q, $timeout, $http, $location, $rootScope ){
+	var deferred = $q.defer();
+
+	$http.get('/loggedin').success( function( user ){
+		$rootScope.errorMessage = null;
+		if ( user !== '0' )
+		{
+			$rootScope.activeUser = user;
+			deferred.resolve();
+		}else{
+			$rootScope.errorMessage = 'You need to login first to access this page';
+			deferred.reject();
+			$location.url('/login');
+		}
+	});
+	return deferred.promise;
+}
+
+function getActiveUser( $http, $rootScope ){
+	$http.get('/loggedin').success( function( user ){
+		if ( user !== '0' )
+		{
+			$rootScope.activeUser = user;
+		}
+	});
+}
+
 cartApp.controller('hompageCtrl', function( $scope, $http ){
 	//console.log('called!');
 });
-
 
 cartApp.service('authenticationService', function( $http, $q){
 	return({
@@ -77,55 +102,59 @@ cartApp.service('authenticationService', function( $http, $q){
 	}
 });
 
-cartApp.controller('loginCtrl', function( $scope, $http, authenticationService, $window, $timeout ){
+cartApp.controller('loginCtrl', function( $scope, $rootScope, $http, authenticationService, $location, $timeout ){
 	$scope.message = "Login With ";
 	$scope.showMessage = false;
-	/*$scope.closeMessage = function(){
-		showMessage = false;
-	  }*/
 	$scope.login = function( user ){
-		//console.log('loginCtrl :',user);;
-		
 		$http.post('/login', user).then( function( response ){
-			
+			console.log('login response :',response);;
 			if ( response.data.user )
 			{
-				//console.log('login success :',response.data.user );
-				var url = "http://" + $window.location.host + "/#/profile";
-				$window.location.href = url;
+				$rootScope.activeUser = response.data.user ;
+				$location.url('/');
 			}else{
-				$scope.loginMessage = response.data.message;
+				$scope.message = response.data.message;
 				$scope.showMessage = true;
 				$timeout( function(){
 					$scope.showMessage = false;
 				},3000)
-				//console.log('login failed :',response.data );
 			}
 		}, function( errorMessage ){
 			console.warn( errorMessage );
 		});
 	}
 });
-cartApp.controller('signupCtrl', function( $scope, $http, authenticationService ){
+cartApp.controller('signupCtrl', function( $scope, $rootScope, $http, authenticationService, $location, $timeout ){
 	$scope.message = "signup With ";
 	$scope.signUp = function( user ){
-		//console.log('signupCtrl :',user);;
+		
 		$http.post('/signup', user ).then( function( response ){
-			$scope.user = {};
+			console.log('signup response :',response);;
+			if ( response.data.user )
+			{
+				$rootScope.activeUser = response.data.user ;
+				$location.url('/profile');
+			}else{
+				$scope.message = response.data.message;
+				$scope.showMessage = true;
+				$timeout( function(){
+					$scope.showMessage = false;
+				},3000)
+				//console.log('login failed :',response.data );
+			}
+			
+			//$scope.user = {};
+			//$rootScope.activeUser = response.data.user ;
+			//$location.url('/profile');
 		}, function( errorMessage ){
 			console.warn( errorMessage );
 		});
 	}
 });
-cartApp.controller('profileCtrl', function( $scope, $http ){
+cartApp.controller('profileCtrl', function( $scope, $http, $rootScope ){
 	$scope.message = "User Profile will be shown here ";
-
-	$http.get('/profile').then( function( response ){
-		console.log('profile :',response.data);
-		$scope.user = response.data;
-	}, function( errorMessage ){
-		console.warn( errorMessage );
-	})
+	console.log('$rootScope :',$rootScope);	
+	$scope.user = $rootScope.activeUser || {};
 });
 
 cartApp.directive('onFinishRenderFilters', function ($timeout) {

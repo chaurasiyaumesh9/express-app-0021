@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="assets/stylesheets/style.css">	
 	
 </head>
-<body ng-controller="defaultCtrl">
+<body>
 	<!-- HEADER AND NAVBAR -->
 	<nav class="navbar navbar-default">
 		<div class="container">
@@ -24,15 +24,23 @@
 				<a class="navbar-brand" href="#/"><i class="fa fa-shield"></i> MEAN is awesome!</a>
 			</div>
 			
-			<div id="navbar" class="navbar-collapse collapse">
+			<div id="navbar" class="navbar-collapse collapse" ng-controller="navCtrl">
 				<ul class="nav navbar-nav navbar-right">
 					<li> <a href="#/"><i class="fa fa-home"></i>Home</a> </li>
-					<!-- <li> <a href="#/login"><i class="fa fa-user"></i> My Account </a> </li> 
- -->					<li ng-repeat="category in categories"><a href="#/products/{{ category._id }}" > {{category.name}} </a></li>
+					<li> <a href="#/login" ng-hide="activeUser"> Login </a> </li>
+					<li> <a href="#/signup" ng-hide="activeUser"> Register </a> </li>
+					<li> <a href="#/logout" ng-click="logout()" ng-show="activeUser"> Logout </a> </li>
+					<li> <a href="#/profile" ng-show="activeUser" > My Profile </a> </li>
+					<li ng-repeat="category in categories"><a href="#/products/{{ category._id }}" > {{category.name}} </a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
+	<!-- <div id="" class="container">
+		<div id="" class="jumbotron text-center">
+			<h3> {{ activeUser }}</h3>
+		</div>
+	</div> -->
 		<div class="view-container">
 		  <div ng-view class="view-frame"></div>
 		</div>
@@ -49,7 +57,7 @@
  <script src="assets/scripts/services/products.js"> </script>
  <script src="assets/scripts/services/categories.js"> </script>
  <script src="assets/scripts/filters/filters.js"> </script>
- <script src="assets/scripts/controllers/defaultCtrl.js"> </script>
+ <script src="assets/scripts/controllers/navCtrl.js"> </script>
  <script src="assets/scripts/controllers/hompageCtrl.js"> </script>
  <script src="assets/scripts/controllers/productListingCtrl.js"> </script>
  <script src="assets/scripts/controllers/productDetailsCtrl.js"> </script>

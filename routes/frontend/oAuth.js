@@ -6,6 +6,7 @@ var User = appconfig.db.conn.model('User', UserSchema);
 
 
 module.exports = function( passport ){
+	
 	passport.use('local-login', new LocalStrategy({
         usernameField : 'email',
         passwordField : 'password',
@@ -36,6 +37,8 @@ module.exports = function( passport ){
     function(req, email, password, done) {
         process.nextTick(function() {
         User.findOne({ 'local.email' :  email }, function(err, user) {
+			console.log('signup server - err :', err );
+			console.log('signup server - user :', user );
             if (err){
                 return done(err);
 			}
