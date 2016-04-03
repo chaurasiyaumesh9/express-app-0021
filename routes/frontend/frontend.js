@@ -144,5 +144,14 @@ module.exports = function( passport ){
 		res.send( req.isAuthenticated()?req.user: '0')
 	});
 
+	router.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
+	router.get('/auth/facebook/callback',
+		passport.authenticate('facebook', {
+			successRedirect : '/profile',
+			failureRedirect : '/'
+		})
+	);
+
 	return router;
 }

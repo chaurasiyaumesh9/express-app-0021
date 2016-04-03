@@ -80,6 +80,27 @@ cartApp.controller('loginCtrl', function( $scope, $rootScope, $http, $location, 
 			console.warn( errorMessage );
 		});
 	}
+
+	$scope.loginWithFB = function( user ){
+		$http.get('/auth/facebook').then( function( response ){
+			console.log('login response facebook :',response);;
+			/*if ( response.data.user )
+			{
+				$rootScope.activeUser = response.data.user ;
+				$location.url('/');
+			}else{
+				$scope.message = response.data.message;
+				$scope.showMessage = true;
+				$timeout( function(){
+					$scope.showMessage = false;
+				},3000)
+			}*/
+		}, function( errorMessage ){
+			console.warn( errorMessage );
+		});
+	}
+
+	
 });
 cartApp.controller('signupCtrl', function( $scope, $rootScope, $http, $location, $timeout ){
 	$scope.message = "signup With ";
