@@ -144,19 +144,5 @@ module.exports = function( passport ){
 		res.send( req.isAuthenticated()?req.user: '0')
 	});
 
-	/*router.get('/profile', isLoggedIn, function(req, res) {
-		res.json( req.user );
-    });
-
-	function isLoggedIn(req, res, next) {
-
-		// if user is authenticated in the session, carry on 
-		if (req.isAuthenticated())
-			return next();
-
-		// if they aren't redirect them to the home page
-		res.redirect('/');
-	}*/
-
 	return router;
 }
