@@ -63,6 +63,7 @@ module.exports = function( passport ){
 	passport.use(new FacebookStrategy({
 		clientID        : appconfig.social.facebook.appID,
 		clientSecret    : appconfig.social.facebook.appSecret,
+		passReqToCallback : true,
 		profileFields: ["emails", "displayName"],
 		callbackURL     : appconfig.social.facebook.callbackURL
 	}, function(token, refreshToken, profile, done) {

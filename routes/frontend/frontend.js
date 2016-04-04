@@ -82,6 +82,8 @@ module.exports = function( passport ){
 		}
 		next();
 	});
+
+
 	
 	router.get('/categories', function(req, res){
 		categories.getCategories( req, res );
@@ -144,7 +146,25 @@ module.exports = function( passport ){
 		res.send( req.isAuthenticated()?req.user: '0')
 	});
 
-	router.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+	router.get('/auth/facebook', function(req, res, next) {
+	  passport.authenticate('facebook', { scope : 'email' }, function(err, user, info) {
+		/*if (err) { return next(err); }
+		if ( !user ) { 
+			var message = req.flash('signupMessage')[0];
+			res.json( {message: message } );
+			return false;
+		}
+		if (user) { 
+			req.logIn(user, function(err) {
+			  if (err) { return next(err); }
+			  res.json( {user :user });
+			});
+		}*/
+		console.log('get request recieved!');
+	  })(req, res, next);
+	});
+
+	//router.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 
 	router.get('/auth/facebook/callback',
 		passport.authenticate('facebook', {
