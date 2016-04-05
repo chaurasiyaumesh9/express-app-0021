@@ -64,11 +64,11 @@ module.exports = function( passport ){
 		clientID        : process.env.NODE_ENV=="production"? appconfig.social.prod.facebook.appID : appconfig.social.dev.facebook.appID,
 		clientSecret    : process.env.NODE_ENV=="production"? appconfig.social.prod.facebook.appSecret : appconfig.social.dev.facebook.appSecret,
 		//passReqToCallback : true,
-		//profileFields: ["emails", "displayName"],
+		profileFields: ['id', 'displayName', 'name', 'gender', 'picture.type(large)','email'],
 		callbackURL     : process.env.NODE_ENV=="production"? appconfig.social.prod.facebook.callbackURL: appconfig.social.dev.facebook.callbackURL
 	}, function(accessToken, refreshToken, profile, done) {
 		process.nextTick(function() {
-			//console.log('profile :',profile);
+			console.log('profile :',profile);
 			User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
 				if (err){
 					//console.log("err :",err);
@@ -85,7 +85,9 @@ module.exports = function( passport ){
 					// set all of the facebook information in our user model
 					newUser.facebook.id    = profile.id; // set the users facebook id  
 					newUser.facebook.name = profile.displayName;
-					newUser.facebook.token = token; // we will save the token that facebook provides to the user                    
+					newUser.facebook.gender = profile.gender;
+					newUser.facebook.profilePic = profile.photos ? profile.photos[0].value : '../assets/images/unknown-user-pic.jpg';
+					newUser.facebook.token = accessToken; // we will save the token that facebook provides to the user                    
 					//newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName; // look at the passport user profile to see how names are returned
 					newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
 					newUser.save(function(err) {
