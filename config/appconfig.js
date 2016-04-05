@@ -17,7 +17,7 @@ config.social = {
 	facebook:{
 		'appID' : '186717428358345',
 		'appSecret' : '944c1475e78d85d4a3c8537dcb96d442',
-		'callbackURL' : 'http://localhost:8010/auth/facebook/callback'
+		'callbackURL' : '/auth/facebook/callback'
 	}
 }
 
@@ -31,3 +31,4 @@ config.db.conn = mongoose.createConnection( config.db.prod.url , {server:{poolSi
 });
 
 module.exports = config;
+

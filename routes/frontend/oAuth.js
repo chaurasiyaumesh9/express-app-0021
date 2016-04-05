@@ -63,18 +63,22 @@ module.exports = function( passport ){
 	passport.use(new FacebookStrategy({
 		clientID        : appconfig.social.facebook.appID,
 		clientSecret    : appconfig.social.facebook.appSecret,
-		passReqToCallback : true,
-		profileFields: ["emails", "displayName"],
+		//passReqToCallback : true,
+		//profileFields: ["emails", "displayName"],
 		callbackURL     : appconfig.social.facebook.callbackURL
-	}, function(token, refreshToken, profile, done) {
+	}, function(accessToken, refreshToken, profile, done) {
 		process.nextTick(function() {
+			console.log('profile :',profile);
 			User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
-				if (err)
+				if (err){
+					//console.log("err :",err);
 					return done(err);
-
+				}
 				if (user) {
+					//console.log("user alredy exist! :",user);
 					return done(null, user); // user found, return that user
 				} else {
+					
 					// if there is no user found with that facebook id, create them
 					var newUser            = new User();
 
@@ -85,13 +89,15 @@ module.exports = function( passport ){
 					//newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName; // look at the passport user profile to see how names are returned
 					newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
 					newUser.save(function(err) {
-						if (err)
+						if (err){
+							//console.log("Error in saving :",err);
 							throw err;
+						}
 						return done(null, newUser);
 					});
 				}
 
-			});
+			}); 
 		});
 	 }));
 

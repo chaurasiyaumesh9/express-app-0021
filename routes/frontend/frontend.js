@@ -148,28 +148,26 @@ module.exports = function( passport ){
 
 	router.get('/auth/facebook', function(req, res, next) {
 	  passport.authenticate('facebook', { scope : 'email' }, function(err, user, info) {
-		/*if (err) { return next(err); }
-		if ( !user ) { 
-			var message = req.flash('signupMessage')[0];
-			res.json( {message: message } );
-			return false;
-		}
+		if (err) { return next(err); }
+		
 		if (user) { 
 			req.logIn(user, function(err) {
 			  if (err) { return next(err); }
 			  res.json( {user :user });
 			});
-		}*/
-		console.log('get request recieved!');
+		}
+		//console.log('get request recieved!');
 	  })(req, res, next);
 	});
 
 	//router.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+	//router.get('/auth/facebook', passport.authenticate('facebook', { scope : ['publish_actions','email'] }));
+
 
 	router.get('/auth/facebook/callback',
 		passport.authenticate('facebook', {
-			successRedirect : '/profile',
-			failureRedirect : '/'
+			successRedirect : '/#/',
+			failureRedirect : '/login'
 		})
 	);
 

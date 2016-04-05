@@ -81,10 +81,11 @@ cartApp.controller('loginCtrl', function( $scope, $rootScope, $http, $location, 
 		});
 	}
 
-	$scope.loginWithFB = function( user ){
-		/*$http.get('/auth/facebook').then( function( response ){
+	$scope.loginFB = function( ){
+		//$location.url('/auth/facebook');
+		$http.get('/auth/facebook').then( function( response ){
 			console.log('login response facebook :',response);;
-			if ( response.data.user )
+			/*if ( response.data.user )
 			{
 				$rootScope.activeUser = response.data.user ;
 				$location.url('/');
@@ -94,10 +95,10 @@ cartApp.controller('loginCtrl', function( $scope, $rootScope, $http, $location, 
 				$timeout( function(){
 					$scope.showMessage = false;
 				},3000)
-			}
+			}*/
 		}, function( errorMessage ){
 			console.warn( errorMessage );
-		});*/
+		});
 	}
 
 	
