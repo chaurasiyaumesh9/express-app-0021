@@ -10,13 +10,23 @@ config.social = {
 			'appID' : '241587526185299',
 			'appSecret' : '18a3f5127a5b531895954881979eaa70',
 			'callbackURL' : 'https://meanstack-ecommerce.herokuapp.com/auth/facebook/callback'
-		}	
+		},
+		google : {
+			'clientID'      : '526393992694-sg6r84d43ug69pgom7nc3dji63gu8828.apps.googleusercontent.com',
+			'clientSecret'  : 'CT2IQl5-28IEuPgJvp2c5CSo',
+			'callbackURL'   : 'https://meanstack-ecommerce.herokuapp.com/auth/google/callback'
+		}
 	},
 	dev:{
 		facebook:{
 			'appID' : '186717428358345',
 			'appSecret' : '944c1475e78d85d4a3c8537dcb96d442',
 			'callbackURL' : 'http://localhost:8010/auth/facebook/callback'
+		},
+		google : {
+			'clientID'      : '526393992694-dvisp8huvamp90frpduj8fpc5g8vteat.apps.googleusercontent.com',
+			'clientSecret'  : 'tCYwHquzLPlHxmjTHbxKWKi4',
+			'callbackURL'   : 'http://localhost:8010/auth/google/callback'
 		}
 	}
 }

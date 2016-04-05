@@ -1,6 +1,8 @@
 <div class="container">
     <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Welcome {{ user.local.displayName ||  user.facebook.name }} - {{ user.local.email || user.facebook.email }}</h1>
+        <h1><span class="fa fa-anchor"></span> Welcome {{ user.local.displayName ||  user.facebook.name || user.google.name }} 
+		
+		<!-- - {{ user.local.email || user.facebook.email || user.google.email }} --></h1>
         <!-- <a href="/logout" class="btn btn-default btn-sm">Logout</a> -->
     </div>
 
@@ -28,11 +30,25 @@
 
                     <p>
 						<img ng-src="{{ user.facebook.profilePic }}" /> <br/>
-						<!-- <strong> image </strong>: {{ user.facebook.profilePic }}<br> -->
                         <strong>id</strong>: {{ user.facebook.id }}<br>
                         <strong>token</strong>: <span style="display:block;overflow:hidden;">{{ user.facebook.token }}</span><br>
                         <strong>email</strong>: {{ user.facebook.email }}<br>
                         <strong>name</strong>: {{ user.facebook.name }}
+                    </p>
+
+            </div>
+        </div>
+
+		<div class="col-sm-12" ng-show="user.google">
+            <div class="well">
+                <h3 class="text-danger"><span class="fa fa-google-plus"></span> Google</h3>
+
+                    <p>
+						<img ng-src="{{ user.google.profilePic }}" /> <br/>
+                        <strong>id</strong>: {{ user.google.id }}<br>
+                        <strong>token</strong>: <span style="display:block;overflow:hidden;">{{ user.google.token }}</span><br>
+                        <strong>email</strong>: {{ user.google.email }}<br>
+                        <strong>name</strong>: {{ user.google.name }}
                     </p>
 
             </div>

@@ -1,6 +1,7 @@
 var cartApp = angular.module('sampleCartApp', ['ngRoute','ngAnimate']);
 
-cartApp.config(function( $routeProvider, $locationProvider ) {
+cartApp.config(function( $routeProvider, $locationProvider, $httpProvider ) {
+	
 	$routeProvider
 		.when('/', {
 			templateUrl : 'views/homepage.html',
@@ -27,6 +28,23 @@ cartApp.config(function( $routeProvider, $locationProvider ) {
 			controller:'profileCtrl',
 			resolve: { logincheck: checkLogin }
 		});
+
+	 //================================================
+    // Add an interceptor for AJAX errors
+    //================================================
+    $httpProvider.interceptors.push(function($q, $location) {
+      return {
+        response: function(response) {
+          // do something on success
+          return response;
+        },
+        responseError: function(response) {
+          if (response.status === 401)
+            $location.url('/login');
+          return $q.reject(response);
+        }
+      };
+    });
 		
 });
 

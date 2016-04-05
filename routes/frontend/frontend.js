@@ -164,12 +164,16 @@ module.exports = function( passport ){
 	//router.get('/auth/facebook', passport.authenticate('facebook', { scope : ['publish_actions','email'] }));
 
 
-	router.get('/auth/facebook/callback',
-		passport.authenticate('facebook', {
-			successRedirect : '/#/',
-			failureRedirect : '/login'
-		})
-	);
+	router.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect : '/#/', failureRedirect : '/login' }), successRedirect );
+
+	function successRedirect(){
+		console.log('successRedirect');
+		res.send('<html><head><script type="text/javascript">window.close();</script></head></html>');   
+	}
+
+	router.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+    router.get('/auth/google/callback',	passport.authenticate('google', {successRedirect : '/#/',failureRedirect : '/login'}));
+
 
 	return router;
 }

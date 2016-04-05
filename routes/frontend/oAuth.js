@@ -2,6 +2,8 @@ var appconfig = require('../../config/appconfig');
 var UserSchema            = require('../../models/user');
 var LocalStrategy   = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
 var User = appconfig.db.conn.model('User', UserSchema);
 
 
@@ -68,7 +70,7 @@ module.exports = function( passport ){
 		callbackURL     : process.env.NODE_ENV=="production"? appconfig.social.prod.facebook.callbackURL: appconfig.social.dev.facebook.callbackURL
 	}, function(accessToken, refreshToken, profile, done) {
 		process.nextTick(function() {
-			console.log('profile :',profile);
+			//console.log('profile :',profile);
 			User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
 				if (err){
 					//console.log("err :",err);
@@ -88,7 +90,6 @@ module.exports = function( passport ){
 					newUser.facebook.gender = profile.gender;
 					newUser.facebook.profilePic = profile.photos ? profile.photos[0].value : '../assets/images/unknown-user-pic.jpg';
 					newUser.facebook.token = accessToken; // we will save the token that facebook provides to the user                    
-					//newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName; // look at the passport user profile to see how names are returned
 					newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
 					newUser.save(function(err) {
 						if (err){
@@ -102,6 +103,53 @@ module.exports = function( passport ){
 			}); 
 		});
 	 }));
+
+	 passport.use(new GoogleStrategy({
+		profileFields: ['id', 'displayName', 'name', 'gender', 'picture.type(large)','email'],
+        clientID        : process.env.NODE_ENV=="production"? appconfig.social.prod.google.clientID : appconfig.social.dev.google.clientID,
+        clientSecret    : process.env.NODE_ENV=="production"? appconfig.social.prod.google.clientSecret : appconfig.social.dev.google.clientSecret,
+        callbackURL     : process.env.NODE_ENV=="production"? appconfig.social.prod.google.callbackURL : appconfig.social.dev.google.callbackURL,
+		
+    },
+    function(accessToken, refreshToken, profile, done) {
+
+        // make the code asynchronous
+        // User.findOne won't fire until we have all our data back from Google
+        process.nextTick(function() {
+			//console.log('profile :',profile);
+            // try to find the user based on their google id
+            User.findOne({ 'google.id' : profile.id }, function(err, user) {
+                if (err)
+                    return done(err);
+
+                if (user) {
+
+                    // if a user is found, log them in
+                    return done(null, user);
+                } else {
+                    // if the user isnt in our database, create a new user
+                    var newUser          = new User();
+
+                    // set all of the relevant information
+					newUser.google.id    = profile.id; // set the users google id  
+					newUser.google.name = profile.displayName;
+					newUser.google.gender = profile.gender;
+					newUser.google.profilePic = profile.photos ? profile.photos[0].value : '../assets/images/unknown-user-pic.jpg';
+					newUser.google.token = accessToken; // we will save the token that facebook provides to the user                    
+					newUser.google.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
+
+					//return done(null, newUser);
+                    // save the user
+                    newUser.save(function(err) {
+                        if (err)
+                            throw err;
+                        return done(null, newUser);
+                    });
+                }
+            });
+        });
+
+    }));
 
 	passport.serializeUser( function( user, done ){
 		done(null, user);	
