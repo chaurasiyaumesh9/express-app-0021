@@ -15,6 +15,9 @@ var UserSchema   = require('./models/user');
 var User = appConfig.db.conn.model('User', UserSchema);
 var port = process.env.PORT || 8010;
 
+process.env.NODE_ENV = 'production';
+
+
 process.env.NODE_PATH =  path.join( __dirname + "/") ;
 process.env.UPLOAD_PATH =  path.join( __dirname + "/uploads/") ;
 

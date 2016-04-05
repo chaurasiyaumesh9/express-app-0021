@@ -61,14 +61,14 @@ module.exports = function( passport ){
     }));
 
 	passport.use(new FacebookStrategy({
-		clientID        : appconfig.social.facebook.appID,
-		clientSecret    : appconfig.social.facebook.appSecret,
+		clientID        : process.env.NODE_ENV=="production"? appconfig.social.prod.facebook.appID : appconfig.social.dev.facebook.appID,
+		clientSecret    : process.env.NODE_ENV=="production"? appconfig.social.prod.facebook.appSecret : appconfig.social.dev.facebook.appSecret,
 		//passReqToCallback : true,
 		//profileFields: ["emails", "displayName"],
-		callbackURL     : appconfig.social.facebook.callbackURL
+		callbackURL     : process.env.NODE_ENV=="production"? appconfig.social.prod.facebook.callbackURL: appconfig.social.dev.facebook.callbackURL
 	}, function(accessToken, refreshToken, profile, done) {
 		process.nextTick(function() {
-			console.log('profile :',profile);
+			//console.log('profile :',profile);
 			User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
 				if (err){
 					//console.log("err :",err);
@@ -80,7 +80,7 @@ module.exports = function( passport ){
 				} else {
 					
 					// if there is no user found with that facebook id, create them
-					var newUser            = new User();
+					var newUser  = new User();
 
 					// set all of the facebook information in our user model
 					newUser.facebook.id    = profile.id; // set the users facebook id  
