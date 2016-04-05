@@ -7,7 +7,7 @@ cartApp.controller('loginCtrl', function( $scope, $rootScope, $http, $location, 
 			if ( response.data.user )
 			{
 				$rootScope.activeUser = response.data.user ;
-				$location.url('/');
+				$location.url('/profile');
 			}else{
 				$scope.message = response.data.message;
 				$scope.showMessage = true;
@@ -35,9 +35,8 @@ cartApp.controller('loginCtrl', function( $scope, $rootScope, $http, $location, 
 				if ( user !== '0' )
 				{
 					$rootScope.activeUser = user;
-					
 					$interval.cancel(x);
-					$location.url('/');
+					$location.url('/profile');
 				}
 			});
 		}, 200);
@@ -49,9 +48,8 @@ cartApp.controller('loginCtrl', function( $scope, $rootScope, $http, $location, 
 				if ( user !== '0' )
 				{
 					$rootScope.activeUser = user;
-					
 					$interval.cancel(x);
-					$location.url('/');
+					$location.url('/profile');
 				}
 			});
 		}, 200);
