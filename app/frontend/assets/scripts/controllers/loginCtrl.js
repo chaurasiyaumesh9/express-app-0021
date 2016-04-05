@@ -35,8 +35,9 @@ cartApp.controller('loginCtrl', function( $scope, $rootScope, $http, $location, 
 				if ( user !== '0' )
 				{
 					$rootScope.activeUser = user;
-					$location.url('/');
+					
 					$interval.cancel(x);
+					$location.url('/');
 				}
 			});
 		}, 200);
@@ -48,8 +49,9 @@ cartApp.controller('loginCtrl', function( $scope, $rootScope, $http, $location, 
 				if ( user !== '0' )
 				{
 					$rootScope.activeUser = user;
-					$location.url('/');
+					
 					$interval.cancel(x);
+					$location.url('/');
 				}
 			});
 		}, 200);
