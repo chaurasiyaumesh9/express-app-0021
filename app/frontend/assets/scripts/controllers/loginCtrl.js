@@ -3,7 +3,7 @@ cartApp.controller('loginCtrl', function( $scope, $rootScope, $http, $location, 
 	$scope.showMessage = false;
 	$scope.login = function( user ){
 		$http.post('/login', user).then( function( response ){
-			console.log('login response :',response);;
+			//console.log('login response :',response);;
 			if ( response.data.user )
 			{
 				$rootScope.activeUser = response.data.user ;
