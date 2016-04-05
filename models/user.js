@@ -6,14 +6,14 @@ var Schema = mongoose.Schema;
 var UserSchema = mongoose.Schema({
 
     local            : {
-        email        : String,
+        email        : { type : String  },
         password     : String,
 		displayName: String
     },
     facebook         : {
         id           : String,
         token        : String,
-        email        : String,
+        email        : { type : String  },
         name         : String,
 		gender: String,
 		profilePic: String
@@ -27,7 +27,7 @@ var UserSchema = mongoose.Schema({
     google           : {
         id           : String,
         token        : String,
-        email        : String,
+        email        : { type : String  },
         name         : String,
 		gender: String,
 		profilePic: String

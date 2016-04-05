@@ -77,76 +77,9 @@ function getActiveUser( $http, $rootScope ){
 	});
 }
 
-cartApp.controller('loginCtrl', function( $scope, $rootScope, $http, $location, $timeout ){
-	$scope.message = "Login With ";
-	$scope.showMessage = false;
-	$scope.login = function( user ){
-		$http.post('/login', user).then( function( response ){
-			console.log('login response :',response);;
-			if ( response.data.user )
-			{
-				$rootScope.activeUser = response.data.user ;
-				$location.url('/');
-			}else{
-				$scope.message = response.data.message;
-				$scope.showMessage = true;
-				$timeout( function(){
-					$scope.showMessage = false;
-				},3000)
-			}
-		}, function( errorMessage ){
-			console.warn( errorMessage );
-		});
-	}
-
-	$scope.loginFB = function( ){
-		//$location.url('/auth/facebook');
-		$http.get('/auth/facebook').then( function( response ){
-			console.log('login response facebook :',response);;
-			/*if ( response.data.user )
-			{
-				$rootScope.activeUser = response.data.user ;
-				$location.url('/');
-			}else{
-				$scope.message = response.data.message;
-				$scope.showMessage = true;
-				$timeout( function(){
-					$scope.showMessage = false;
-				},3000)
-			}*/
-		}, function( errorMessage ){
-			console.warn( errorMessage );
-		});
-	}
-
-	
-});
-cartApp.controller('signupCtrl', function( $scope, $rootScope, $http, $location, $timeout ){
-	$scope.message = "signup With ";
-	$scope.signUp = function( user ){
-		
-		$http.post('/signup', user ).then( function( response ){
-			console.log('signup response :',response);;
-			if ( response.data.user )
-			{
-				$rootScope.activeUser = response.data.user ;
-				$location.url('/profile');
-			}else{
-				$scope.message = response.data.message;
-				$scope.showMessage = true;
-				$timeout( function(){
-					$scope.showMessage = false;
-				},3000)
-				//console.log('login failed :',response.data );
-			}
-		}, function( errorMessage ){
-			console.warn( errorMessage );
-		});
-	}
-});
 cartApp.controller('profileCtrl', function( $scope, $http, $rootScope ){
 	$scope.message = "User Profile will be shown here ";
-	console.log('$rootScope :',$rootScope);	
+	//console.log('$rootScope :',$rootScope);	
 	$scope.user = $rootScope.activeUser || {};
 });
 

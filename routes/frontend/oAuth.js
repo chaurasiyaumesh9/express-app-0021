@@ -93,7 +93,7 @@ module.exports = function( passport ){
 					newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
 					newUser.save(function(err) {
 						if (err){
-							//console.log("Error in saving :",err);
+							console.log("Error in saving :",err);
 							throw err;
 						}
 						return done(null, newUser);
