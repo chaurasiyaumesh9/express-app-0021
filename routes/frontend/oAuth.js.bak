@@ -119,7 +119,7 @@ module.exports = function( passport ){
         process.nextTick(function() {
 			//console.log('profile :',profile);
             // try to find the user based on their google id
-            User.findOne({ 'google.email' : profile.emails[0].value }, function(err, user) {
+            User.findOne({ 'google.email' : profile.email }, function(err, user) {
                 if (err)
                     return done(err);
 
