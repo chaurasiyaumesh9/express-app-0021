@@ -23,9 +23,9 @@
 		<hr>
 		        <p>Login or Register with:</p>
 
-			  <button ng-click="fbLogin()" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook </button> 
-			  <button ng-click="googleLogin()" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</button>
-			  <button ng-click="twitterLogin()" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter </button>
+			  <button ng-click="fbLogin()" ng-disabled="disablePopup" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook </button> 
+			  <button ng-click="googleLogin()" ng-disabled="disablePopup" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</button>
+			  <button ng-click="twitterLogin()" ng-disabled="disablePopup" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter </button>
 
 		<p>Need an account? <a href="/#/signup">Signup</a></p>
 		<p>Or go <a href="/">home</a>.</p>
