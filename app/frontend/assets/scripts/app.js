@@ -15,6 +15,10 @@ cartApp.config(function( $routeProvider, $locationProvider, $httpProvider ) {
 			templateUrl : 'views/product-details.html',
 			controller:'productDetailsCtrl'
 		})
+		.when('/products/:cid/:pid/fullmode', {
+			templateUrl : 'views/product-full-mode.html',
+			controller:'productFullmodeCtrl'
+		})
 		.when('/login', {
 			templateUrl : 'views/login.html',
 			controller:'loginCtrl',
@@ -47,10 +51,20 @@ cartApp.config(function( $routeProvider, $locationProvider, $httpProvider ) {
         }
       };
     });
-		
+	
 });
 
 cartApp.run(getActiveUser);
+
+cartApp.run(function($rootScope) {
+    $rootScope.$on('$routeChangeSuccess', function () {
+       $rootScope.fullmode = false;
+    })
+})
+
+cartApp.controller('productFullmodeCtrl', function($scope, $rootScope){
+	$rootScope.fullmode = true;
+});
 
 function checkLogin( $q, $timeout, $http, $location, $rootScope ){
 	var deferred = $q.defer();

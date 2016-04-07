@@ -12,35 +12,33 @@
 </head>
 <body>
 	<!-- HEADER AND NAVBAR -->
-	<nav class="navbar navbar-default">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-			  </button>
-				<a class="navbar-brand" href="#/"><i class="fa fa-shield"></i> MEAN is awesome!</a>
+	<div id="" class="top-menu" ng-show="!fullmode">
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+				  </button>
+					<a class="navbar-brand" href="#/"><i class="fa fa-shield"></i> MEAN is awesome!</a>
+				</div>
+				
+				<div id="navbar" class="navbar-collapse collapse" ng-controller="navCtrl">
+					<ul class="nav navbar-nav navbar-right">
+						<li> <a href="#/"><i class="fa fa-home"></i>Home</a> </li>
+						<li> <a href="#/login" ng-hide="activeUser"> <span class="fa fa-lock"></span> Login </a> </li>
+						<li> <a href="#/signup" ng-hide="activeUser"> <span class="fa fa-user-plus"></span>Register </a> </li>
+						<li> <a href="#/logout" ng-click="logout()" ng-show="activeUser"> <span class="fa fa-sign-out"></span>Logout </a> </li>
+						<li> <a href="#/profile" ng-show="activeUser" > <span class="fa fa-user-plus"> My Profile </a> </li>
+						<li ng-repeat="category in categories"><a href="#/products/{{ category._id }}" > {{category.name}} </a></li>
+					</ul>
+				</div>
 			</div>
-			
-			<div id="navbar" class="navbar-collapse collapse" ng-controller="navCtrl">
-				<ul class="nav navbar-nav navbar-right">
-					<li> <a href="#/"><i class="fa fa-home"></i>Home</a> </li>
-					<li> <a href="#/login" ng-hide="activeUser"> <span class="fa fa-lock"></span> Login </a> </li>
-					<li> <a href="#/signup" ng-hide="activeUser"> <span class="fa fa-user-plus"></span>Register </a> </li>
-					<li> <a href="#/logout" ng-click="logout()" ng-show="activeUser"> <span class="fa fa-sign-out"></span>Logout </a> </li>
-					<li> <a href="#/profile" ng-show="activeUser" > <span class="fa fa-user-plus"> My Profile </a> </li>
-					<li ng-repeat="category in categories"><a href="#/products/{{ category._id }}" > {{category.name}} </a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<!-- <div id="" class="container">
-		<div id="" class="jumbotron text-center">
-			<h3> {{ activeUser }}</h3>
-		</div>
-	</div> -->
+		</nav>
+	</div>
+	
 		<div class="view-container">
 		  <div ng-view class="view-frame"></div>
 		</div>

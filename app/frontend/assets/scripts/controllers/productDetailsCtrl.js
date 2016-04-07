@@ -30,9 +30,9 @@ cartApp.controller('productDetailsCtrl', function( $scope, $routeParams, product
 		$scope.activeSlide = index;
 	}
 
-	$scope.setFullPreviewMode =function(){
+	/*$scope.setFullPreviewMode =function( ){
 		$scope.enableFullmode = true
-	}
+	}*/
 
 	
 });
