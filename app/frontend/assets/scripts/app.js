@@ -17,11 +17,13 @@ cartApp.config(function( $routeProvider, $locationProvider, $httpProvider ) {
 		})
 		.when('/login', {
 			templateUrl : 'views/login.html',
-			controller:'loginCtrl'
+			controller:'loginCtrl',
+			resolve: { profilecheck1: checkLogin2 }
 		})
 		.when('/signup', {
 			templateUrl : 'views/signup.html',
-			controller:'signupCtrl'
+			controller:'signupCtrl',
+			resolve: { profilecheck2: checkLogin2 }
 		})
 		.when('/profile', {
 			templateUrl : 'views/profile.html',
@@ -67,6 +69,23 @@ function checkLogin( $q, $timeout, $http, $location, $rootScope ){
 	});
 	return deferred.promise;
 }
+
+function checkLogin2( $q, $timeout, $http, $location, $rootScope ){
+	var deferred = $q.defer();
+
+	$http.get('/loggedin').success( function( user ){
+		$rootScope.errorMessage = null;
+		if ( user !== '0' )
+		{
+			deferred.reject();
+			$location.url('/profile');
+		}else{
+			deferred.resolve();
+		}
+	});
+	return deferred.promise;
+}
+
 
 function getActiveUser( $http, $rootScope ){
 	$http.get('/loggedin').success( function( user ){

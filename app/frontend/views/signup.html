@@ -25,13 +25,16 @@
 		</form>
 
 		<hr>
-
-		<button ng-click="fbSignUp()" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook </button> 
-		<button ng-click="googleSignUp()" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</button>
-		<button ng-click="twitterSignUp()" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter </button>
+		        <p> Register with:</p>
+				
+			<div ng-controller="socialConnectCtrl">
+				<button ng-click="facebookConnect()" ng-disabled="disablePopup" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook </button> 
+				  <button ng-click="googleConnect()" ng-disabled="disablePopup" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</button>
+				  <button ng-click="twitterConnect()" ng-disabled="disablePopup" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter </button>
+			</div>
 
 		<p>Already have an account? <a href="/#/login">Login</a></p>
-		<p>Or go <a href="/">home</a>.</p>
+		<p>Or go <a href="/#/">home</a>.</p>
 
 	</div>
 </div>
