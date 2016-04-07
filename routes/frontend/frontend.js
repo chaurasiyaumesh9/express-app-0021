@@ -163,11 +163,11 @@ module.exports = function( passport ){
 	
 	//router.get('/auth/facebook', passport.authenticate('facebook', { scope : ['publish_actions','email'] }));
 	router.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-	router.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect : '/#/', failureRedirect : '/login' }) );
+	router.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect : '/#/profile', failureRedirect : '/login' }) );
 	router.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-    router.get('/auth/google/callback',	passport.authenticate('google', {successRedirect : '/#/',failureRedirect : '/login'}));
+    router.get('/auth/google/callback',	passport.authenticate('google', {successRedirect : '/#/profile',failureRedirect : '/login'}));
 	router.get('/auth/twitter', passport.authenticate('twitter'));
-    router.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedirect : '/#/',failureRedirect : '/login' }));
+    router.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedirect : '/#/profile',failureRedirect : '/login' }));
 
 
 	return router;
