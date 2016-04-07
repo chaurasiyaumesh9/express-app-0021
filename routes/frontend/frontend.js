@@ -146,7 +146,7 @@ module.exports = function( passport ){
 		res.send( req.isAuthenticated()?req.user: '0')
 	});
 
-	router.get('/auth/facebook', function(req, res, next) {
+	/*router.get('/auth/facebook', function(req, res, next) {
 	  passport.authenticate('facebook', { scope : 'email' }, function(err, user, info) {
 		if (err) { return next(err); }
 		
@@ -158,15 +158,16 @@ module.exports = function( passport ){
 		}
 		//console.log('get request recieved!');
 	  })(req, res, next);
-	});
+	});*/
 
-	//router.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+	
 	//router.get('/auth/facebook', passport.authenticate('facebook', { scope : ['publish_actions','email'] }));
-
-
+	router.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 	router.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect : '/#/', failureRedirect : '/login' }) );
 	router.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
     router.get('/auth/google/callback',	passport.authenticate('google', {successRedirect : '/#/',failureRedirect : '/login'}));
+	router.get('/auth/twitter', passport.authenticate('twitter'));
+    router.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedirect : '/#/',failureRedirect : '/login' }));
 
 
 	return router;

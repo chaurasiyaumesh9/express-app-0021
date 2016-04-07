@@ -15,6 +15,11 @@ config.social = {
 			'clientID'      : '526393992694-sg6r84d43ug69pgom7nc3dji63gu8828.apps.googleusercontent.com',
 			'clientSecret'  : 'CT2IQl5-28IEuPgJvp2c5CSo',
 			'callbackURL'   : 'https://meanstack-ecommerce.herokuapp.com/auth/google/callback'
+		},
+		twitter: {
+			'consumerKey'       : 'qWqN90CmFVHeRUe4Gce3DpKJC',
+			'consumerSecret'    : 's6hoMkRaJLS4xwwT0CDqUCaD5iJNgUOrbLfyZkPfUJPZXMUdIP',
+			'callbackURL'       : 'https://meanstack-ecommerce.herokuapp.com/auth/twitter/callback'
 		}
 	},
 	dev:{
@@ -27,6 +32,11 @@ config.social = {
 			'clientID'      : '526393992694-dvisp8huvamp90frpduj8fpc5g8vteat.apps.googleusercontent.com',
 			'clientSecret'  : 'tCYwHquzLPlHxmjTHbxKWKi4',
 			'callbackURL'   : 'http://localhost:8010/auth/google/callback'
+		},
+		twitter: {
+			'consumerKey'       : 'jy94kPWqRJYsJ9O7zV23zYE3A',
+			'consumerSecret'    : 'MgXdxjaWTxhHBleBhi67AXtmMTSf2X2d1lXJ60j7oHwb7B9LYM',
+			'callbackURL'       : 'http://localhost:8010/auth/twitter/callback'
 		}
 	}
 }

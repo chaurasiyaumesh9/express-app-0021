@@ -55,4 +55,18 @@ cartApp.controller('signupCtrl', function( $scope, $rootScope, $http, $location,
 			});
 		}, 200);
 	}
+
+	$scope.twitterSignUp = function( ){
+		$rootScope.popup = $window.open('/auth/twitter', 'Sign in with your Twitter account', 'width=500,height=400');
+		var x = $interval( function(){
+			$http.get('/loggedin').success( function( user ){
+				if ( user !== '0' )
+				{
+					$rootScope.activeUser = user;
+					$interval.cancel(x);
+					$location.url('/profile');
+				}
+			});
+		}, 200);
+	}
 });

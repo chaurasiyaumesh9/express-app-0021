@@ -3,6 +3,8 @@ var UserSchema            = require('../../models/user');
 var LocalStrategy   = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var TwitterStrategy  = require('passport-twitter').Strategy;
+
 
 var User = appconfig.db.conn.model('User', UserSchema);
 
@@ -108,8 +110,7 @@ module.exports = function( passport ){
 		profileFields: ['id', 'displayName', 'name', 'gender', 'picture.type(large)','email'],
         clientID        : process.env.NODE_ENV=="production"? appconfig.social.prod.google.clientID : appconfig.social.dev.google.clientID,
         clientSecret    : process.env.NODE_ENV=="production"? appconfig.social.prod.google.clientSecret : appconfig.social.dev.google.clientSecret,
-        callbackURL     : process.env.NODE_ENV=="production"? appconfig.social.prod.google.callbackURL : appconfig.social.dev.google.callbackURL,
-		
+        callbackURL     : process.env.NODE_ENV=="production"? appconfig.social.prod.google.callbackURL : appconfig.social.dev.google.callbackURL
     },
     function(accessToken, refreshToken, profile, done) {
 
@@ -148,7 +149,56 @@ module.exports = function( passport ){
                 }
             });
         });
+    }));
 
+
+	passport.use(new TwitterStrategy({
+		profileFields: ['id', 'displayName', 'name', 'gender', 'picture.type(large)'],
+        consumerKey     : process.env.NODE_ENV=="production"? appconfig.social.prod.twitter.consumerKey : appconfig.social.dev.twitter.consumerKey,
+        consumerSecret  : process.env.NODE_ENV=="production"? appconfig.social.prod.twitter.consumerSecret : appconfig.social.dev.twitter.consumerSecret,
+        callbackURL     : process.env.NODE_ENV=="production"? appconfig.social.prod.twitter.callbackURL : appconfig.social.dev.twitter.callbackURL
+    },
+    function(accessToken, tokenSecret, profile, done) {
+        process.nextTick(function() {
+			console.log('twitter profile :',profile);
+            User.findOne({ 'twitter.id' : profile.id }, function(err, user) {
+
+                // if there is an error, stop everything and return that
+                // ie an error connecting to the database
+                if (err)
+                    return done(err);
+
+                // if the user is found then log them in
+                if (user) {
+                    return done(null, user); // user found, return that user
+                } else {
+                    // if there is no user, create them
+                    var newUser                 = new User();
+
+                    // set all of the user data that we need
+                   /* newUser.twitter.id          = profile.id;
+                    newUser.twitter.token       = token;
+                    newUser.twitter.username    = profile.username;
+                    newUser.twitter.name = profile.displayName; */
+
+					newUser.twitter.id    = profile.id; // set the users google id  
+					newUser.twitter.name = profile.displayName;
+					newUser.twitter.gender = profile.gender;
+					newUser.twitter.username    = profile.username;
+					newUser.twitter.profilePic = profile.photos ? profile.photos[0].value : '../assets/images/unknown-user-pic.jpg';
+					newUser.twitter.token = accessToken; 
+					//newUser.twitter.email = profile.emails[0].value; 
+					
+					//return done(null, newUser);
+                    // save our user into the database
+                    newUser.save(function(err) {
+                        if (err)
+                            throw err;
+                        return done(null, newUser);
+                    });
+                }
+            });
+		});
     }));
 
 	passport.serializeUser( function( user, done ){

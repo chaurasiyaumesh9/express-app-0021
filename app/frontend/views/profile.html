@@ -35,7 +35,6 @@
                         <strong>email</strong>: {{ user.facebook.email }}<br>
                         <strong>name</strong>: {{ user.facebook.name }}
                     </p>
-
             </div>
         </div>
 
@@ -50,7 +49,19 @@
                         <strong>email</strong>: {{ user.google.email }}<br>
                         <strong>name</strong>: {{ user.google.name }}
                     </p>
+            </div>
+        </div>
 
+		<div class="col-sm-12" ng-show="user.twitter">
+            <div class="well">
+                <h3 class="text-info"><span class="fa fa-twitter"></span> Twitter</h3>
+                    <p>
+						<img ng-src="{{ user.twitter.profilePic }}" /> <br/>
+                        <strong>id</strong>: {{ user.twitter.id }}<br>
+                        <strong>token</strong>: <span style="display:block;overflow:hidden;">{{ user.twitter.token }}</span><br>
+                        <strong>username</strong>: {{ user.twitter.username }}<br>
+                        <strong>name</strong>: {{ user.twitter.name }}
+                    </p>
             </div>
         </div>
 
