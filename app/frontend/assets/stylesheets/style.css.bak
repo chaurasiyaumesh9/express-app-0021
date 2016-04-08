@@ -212,7 +212,7 @@ section, footer, header, aside, nav{
 }
 @media screen and (max-width: 768px ){
 	.full-mode-preview .product-image-wrapper{
-		height:700px;
+		height:1000px;
 	}
 }
 
