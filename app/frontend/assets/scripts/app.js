@@ -62,10 +62,6 @@ cartApp.run(function($rootScope) {
     })
 })
 
-cartApp.controller('productFullmodeCtrl', function($scope, $rootScope){
-	$rootScope.fullmode = true;
-});
-
 function checkLogin( $q, $timeout, $http, $location, $rootScope ){
 	var deferred = $q.defer();
 

@@ -18,14 +18,17 @@ cartApp.directive('slickSlider', function ($timeout) {
         link: function (scope, element, attrs) {
             scope.$parent.isInitialized = false;
             scope.$watch('data', function(newVal, oldVal) {
-				 if ( newVal.length > 0 && !scope.$parent.isInitialized) {
-					 scope.$parent.$on('ngRepeatFinished', function (ngRepeatFinished) {
-						 //console.log('finished tr repeat 1');
-						$(element).slick( scope.$eval(attrs.slickSlider));
-						 scope.$parent.isInitialized = true;
-					});
-                }
-            });
+				if ( newVal )
+				{
+					if ( newVal.length > 0 && !scope.$parent.isInitialized) {
+						 scope.$parent.$on('ngRepeatFinished', function (ngRepeatFinished) {
+							 //console.log('finished tr repeat 1');
+							$(element).slick( scope.$eval(attrs.slickSlider));
+							 scope.$parent.isInitialized = true;
+						});
+					}
+				}
+		    });
         }
     }
 });

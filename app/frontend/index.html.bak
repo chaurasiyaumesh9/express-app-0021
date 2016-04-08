@@ -66,6 +66,9 @@
  <script src="assets/scripts/controllers/socialConnectCtrl.js"> </script>
  <script src="assets/scripts/controllers/productFullmodeCtrl.js"> </script>
 
+ 
+
+
  <!-- <script>
   window.fbAsyncInit = function() {
     FB.init({
