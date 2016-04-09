@@ -229,11 +229,14 @@ section, footer, header, aside, nav{
     display: inline-block;
     cursor: pointer;
 }
+.star-rating.readonly .star{
+	cursor: default;
+}
 .star-rating .star.filled{
 	color: #fd0;
 }
 .star-rating.readonly .star.filled{
-	 color: #666;
+	 /*color: #666;*/ /* different star color for readonly mode */
 }
 
 /*

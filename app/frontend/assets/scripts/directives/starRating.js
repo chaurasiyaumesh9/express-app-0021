@@ -1,12 +1,7 @@
 cartApp.directive('starRating', function () {
     return {
       restrict: 'EA',
-      template:
-        '<ul class="star-rating" ng-class="{readonly: readonly}">' +
-        '  <li ng-repeat="star in stars" class="star" ng-class="{filled: star.filled}" ng-click="toggle($index)">' +
-        '    <i class="fa fa-star"></i>' + // or &#9733
-        '  </li>' +
-        '</ul>',
+		templateUrl:"./templates/star-rating.html",
       scope: {
         ratingValue: '=ngModel',
         max: '=?', // optional (default is 5)
@@ -14,6 +9,12 @@ cartApp.directive('starRating', function () {
         readonly: '=?'
       },
       link: function(scope, element, attributes) {
+		  if ( typeof scope.onRatingSelect !== "function" )
+		  //if( !scope.onRatingSelect )
+		  {
+			//console.log('calling undefined');
+			scope.onRatingSelect = function( rating ){};
+		  }
         if (scope.max == undefined) {
           scope.max = 5;
         }
