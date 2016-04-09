@@ -37,7 +37,7 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	$scope.addNewProduct = function( product ){	
 		$scope.loading = true;
 		$scope.uploadFiles( product ).then( function( response ){
-			//console.log('uploaded all!',product);
+			console.log('uploaded all!',product);
 			productService.addNewProduct( product ).then( function( response ){
 				//console.log('added to DB!');
 				$scope.addSuccess = true;		
@@ -52,7 +52,7 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	}
 
 	$scope.updateProduct = function( product ){
-		//console.log('updateProduct :',product);
+		console.log('updateProduct :',product);
 		$scope.loading = true;
 		product.updated_at = new Date();
 		$scope.uploadFiles( product ).then( function( response ){

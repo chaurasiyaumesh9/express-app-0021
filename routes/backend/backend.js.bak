@@ -291,7 +291,8 @@ router.post('/products', function(req, res){
 	products.addNewProduct( req, res );
 });
 router.post('/uploads', function(req, res){
-	products.uploadImages( req, res );
+	//products.uploadImages( req, res );
+	products.uploadImages2( req, res );
 });
 router.delete('/products/:id', function(req, res){
 	products.deleteProduct( req, res );
