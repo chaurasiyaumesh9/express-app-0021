@@ -51,4 +51,5 @@ cartApp.controller('productListingCtrl', function( $scope, $routeParams, product
 		$scope.sortType = "";
 		$scope.sortReverse = "";
 	}
+	//$scope.setActiveFilter( $scope.filters[0] ); //setting up default filter
 });
