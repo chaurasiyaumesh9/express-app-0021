@@ -215,7 +215,26 @@ section, footer, header, aside, nav{
 		height:700px;
 	}
 }
-
+.star-rating {
+	margin: 0;
+  padding: 0;
+  display: inline-block;	
+}
+.star-rating .star{
+	 padding: 1px;
+    color: #ddd;
+    font-size: 20px;
+    text-shadow: .05em .05em #aaa;
+    list-style-type: none;
+    display: inline-block;
+    cursor: pointer;
+}
+.star-rating .star.filled{
+	color: #fd0;
+}
+.star-rating.readonly .star.filled{
+	 color: #666;
+}
 
 /*
 @media screen and (min-width: 480px ){
@@ -238,3 +257,4 @@ section, footer, header, aside, nav{
 		height:992px;
 	}
 }*/
+
