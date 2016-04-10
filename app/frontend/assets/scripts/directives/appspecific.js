@@ -75,3 +75,44 @@ cartApp.directive('autoSlideThumb', function ($timeout) {
         }
     }
 });
+/*
+
+cartApp.directive('elheightresize', ['$window', function($window) {
+    return {
+        link: function(scope, elem, attrs) {
+            scope.onResize = function() {
+                elem.windowWidth = $window.innerWidth ;//- header.clientHeight;
+				//console.log( elem.windowHeight );
+                $(elem).width(elem.windowWidth);
+		    }
+            scope.onResize();
+
+            angular.element($window).bind('resize', function() {
+				scope.onResize();
+            })
+        }
+    }
+}]);
+
+
+cartApp.directive('imageResize', ['$window', function($window) {
+    return {
+        link: function(scope, elem, attrs) {
+            scope.onResize = function() {
+               // var header = document.getElementsByTagName('header')[0];
+                elem.windowHeight = $window.innerHeight ;//- header.clientHeight;
+				//console.log( elem.windowHeight );
+                //$(elem).height(elem.windowHeight);
+				$(elem).css({
+					maxHeight:  elem.windowHeight + "px"
+				});
+            }
+            scope.onResize();
+
+            angular.element($window).bind('resize', function() {
+				//console.log('resize caalin');
+                scope.onResize();
+            })
+        }
+    }
+}]);*/

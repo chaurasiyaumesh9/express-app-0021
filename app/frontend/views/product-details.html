@@ -29,40 +29,48 @@
 			</div>
 			<div class="col-md-6 col-sm-6 col-xs-12">
 				<p class="product-name"> <b> <a href="#/products/{{activeCategory._id}}/{{product._id}}"> {{ product.name }} </a> </b> </p>		
+				<HR class="divider" />
 				<p>
-					<div class="average-rating" ng-controller="ratingController as rating">
-							 <!--<div star-rating ng-model="rating.rating1" max="10" on-rating-select="rating.rateFunction(rating)"></div> 
-							 <div star-rating ng-model="rating.rating2" readonly="rating.isReadonly" ></div>
-							 <label>
-								<input type="checkbox" ng-model="rating.isReadonly"/>
-								Is Readonly
-							</label>
-
-							<div><strong>Rating 1:</strong> {{rating.rating1}}</div>
-							<div><strong>Rating 2:</strong> {{rating.rating2}}</div> -->
-							 <div star-rating ng-model="rating.rating2" readonly="true" max="5"></div> 
+					<div class="row">
+						<div class="col-lg-3">
+							<div class="average-rating" ng-controller="ratingController as rating">
+								 <div star-rating ng-model="rating.averageRating" readonly="true" max="5" on-rating-select="rating.rateFunction(rating)"></div> 
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<a href="" style="line-height:28px;"> 0 Reviews </a>
+						</div>
+						<div  class="col-lg-3">
+							<a href="" style="line-height:28px;"> Write a Review </a>
+						</div>	
 					</div>
 				</p>
-				<p class="price-block"> 
-					<span class="price regular-price {{ product.special_price > 0? 'strickeout':'' }}"><i class="fa fa-inr"></i>{{ product.price }}</span> 
-					<span class="price special-price" ng-show="product.special_price > 0"><i class="fa fa-inr"></i>{{ product.special_price }}</span> 
+
+				<p>
+					<div class="price-block"> 
+						<span class="price regular-price {{ product.special_price > 0? 'strickeout':'' }}"><i class="fa fa-inr"></i>{{ product.price }}</span> 
+						<span class="price special-price" ng-show="product.special_price > 0"><i class="fa fa-inr"></i>{{ product.special_price }}</span> 
+					</div>
 				</p>
-				<div class="form-group"> 
-					Quantity : <input type="number" style="width:72px;" class="form-control" value="1" />
-				</div>
+				<p >
+					<div >
+						<span > Quantity :</span>
+						<input type="text" style="width:41px;text-align:center;border-radius:4px;border:1px solid #eaeaea;padding:5px;" value="1" name="qty" />
+					</div>	
+				</p>
 				<p class="descritpion">
 					{{ product.description }}
 				</p>
 
 				<p>
 					<button class="btn btn-primary"> <i class="fa fa-shopping-cart"></i> Add To Cart </button> 
-					<button class="btn btn-primary"><i class="fa fa-heart"></i> Add To Wishlist </button>
-					<p>
-						<button class="btn btn-primary"><i class="fa fa-signal"></i> Add To Compare </button>
-					</p>
 				</p>
-				
-				
+				<p>
+					<button class="btn btn-primary"><i class="fa fa-heart"></i> Add To Wishlist </button>
+				</p>
+				<p>
+					<button class="btn btn-primary"><i class="fa fa-signal"></i> Add To Compare </button>
+				</p>
 			</div>
 		</div>
 	</div>

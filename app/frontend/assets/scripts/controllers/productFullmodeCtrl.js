@@ -1,4 +1,4 @@
-cartApp.controller('productFullmodeCtrl', function($scope, $routeParams, $rootScope, productService, categoryService){
+cartApp.controller('productFullmodeCtrl', function($scope, $routeParams, $rootScope, productService, categoryService, $window ){
 	$rootScope.fullmode = true;
 	if ( $rootScope.activeSlide )
 	{
@@ -36,4 +36,6 @@ cartApp.controller('productFullmodeCtrl', function($scope, $routeParams, $rootSc
 		$scope.activeSlide = index;
 		$rootScope.activeSlide = index; //setting up the root scope to access full mode
 	}
+	
 });
+
