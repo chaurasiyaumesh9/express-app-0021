@@ -13,11 +13,11 @@
 </head>
 <body>
 	<!-- HEADER AND NAVBAR -->
-	<div id="" class="top-menu" ng-show="!fullmode">
-		<nav class="navbar navbar-default">
+	<div id="" class="top-menu" ng-show="!fullmode" ng-controller="navCtrl">
+		<!-- <nav class="navbar navbar-default">
 			<div class="container">
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" ng-click="expanded = !expanded" aria-expanded="expanded" aria-controls="navbar">
 						<span class="sr-only">Toggle navigation</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -26,16 +26,43 @@
 					<a class="navbar-brand" href="#/"><i class="fa fa-shield"></i> MEAN is awesome!</a>
 				</div>
 				
-				<div id="navbar" class="navbar-collapse collapse" ng-controller="navCtrl">
+				<div id="navbar" class="navbar-collapse collapse" >
 					<ul class="nav navbar-nav navbar-right">
-						<li> <a href="#/"><i class="fa fa-home"></i>Home</a> </li>
+						<li> <a href="#/" ng-click="expanded = false"><i class="fa fa-home"></i>Home</a> </li>
 						<li> <a href="#/login" ng-hide="activeUser"> <span class="fa fa-lock"></span> Login </a> </li>
 						<li> <a href="#/signup" ng-hide="activeUser"> <span class="fa fa-user-plus"></span>Register </a> </li>
 						<li> <a href="#/logout" ng-click="logout()" ng-show="activeUser"> <span class="fa fa-sign-out"></span>Logout </a> </li>
 						<li> <a href="#/profile" ng-show="activeUser" > <span class="fa fa-user-plus"> My Profile </a> </li>
-						<li ng-repeat="category in categories"><a href="#/products/{{ category._id }}" > {{category.name}} </a></li>
+						<li ng-repeat="category in categories"><a href="#/products/{{ category._id }}" ng-click="expanded = false"> {{category.name}} </a></li>
 					</ul>
 				</div>
+			</div>
+		</nav> -->
+		
+			
+		
+		<nav class="navbar navbar-default" >
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" href="#/" ng-click="hideNav()"><i class="fa fa-shield"></i> MEAN is awesome!</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" uib-collapse="navbarCollapsed">
+			  <ul class="nav navbar-nav navbar-right">
+					<li> <a href="#/" ng-click="hideNav()"><span class="fa fa-home"></span> Home</a> </li>
+					<li> <a href="#/login" ng-hide="activeUser" ng-click="hideNav()"> <span class="fa fa-lock"></span> Sign In </a> </li>
+					<li> <a href="#/signup" ng-hide="activeUser" ng-click="hideNav()"> <span class="fa fa-user-plus"></span> Sign Up </a> </li>
+					<li> <a href="#/logout" ng-click="hideNav();logout()" ng-show="activeUser"> <span class="fa fa-sign-out"></span> Logout </a> </li>
+					<li> <a href="#/profile" ng-show="activeUser" ng-click="hideNav()"> <span class="fa fa-user-plus"> My Profile </a> </li>
+					<li ng-repeat="category in categories" ><a href="#/products/{{ category._id }}" ng-click="hideNav()"> {{category.name}} </a></li>
+				</ul>
 			</div>
 		</nav>
 	</div>
@@ -46,6 +73,7 @@
  <script src="../bower_components/angular/angular.min.js"> </script>
  <script src="../bower_components/angular-route/angular-route.min.js"> </script>
  <script src="../bower_components/angular-animate/angular-animate.min.js"> </script>
+ <script src="../bower_components/angular-bootstrap/ui-bootstrap.min.js"> </script>
  <script src="../bower_components/jquery/dist/jquery.min.js"> </script>
  <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"> </script>
  <script src="../bower_components/slick-carousel/slick/slick.min.js"> </script>

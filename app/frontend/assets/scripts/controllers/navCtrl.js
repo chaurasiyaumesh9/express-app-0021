@@ -1,4 +1,5 @@
 cartApp.controller('navCtrl', function( $scope, $http, $location, $rootScope, categoryService ){
+	$scope.navbarCollapsed = true;
 	getCategories();
 	function getCategories(){
 		categoryService.getActiveCategories().then( function( response ){
@@ -16,6 +17,9 @@ cartApp.controller('navCtrl', function( $scope, $http, $location, $rootScope, ca
 			$rootScope.activeUser = null;
 			$location.url('/');
 		});
+	}
+	$scope.hideNav = function(){
+		$scope.navbarCollapsed = true;
 	}
 	
 });
