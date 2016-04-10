@@ -8,15 +8,6 @@ var multer  =   require('multer');
 var fs = require('fs');  
 var path = require('path');
 var mongoose = require('mongoose');
-var cloudinary = require('cloudinary');
-
-cloudinary.config({ 
-  cloud_name: 'drieypcyz', 
-  api_key: '131957787152229', 
-  api_secret: 'sBObmg6MjtjkcMy3tzEU1ZJOd0g' 
-});
-
-
 
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
