@@ -51,7 +51,7 @@
 			<div class="col-md-12 col-sm-12 col-xs-12"  >
 				<div class="container_fluid" >
 					<div class="row">
-						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 anim-grid-check" ng-repeat="product in productList | orderBy:sortType:sortReverse">
+						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 anim-grid-check" ng-repeat="product in productList | orderBy:sortType:sortReverse:defaultFilter">
 							<product-grid-view></product-grid-view>
 						</div>
 					</div>
@@ -60,7 +60,7 @@
 		</div>
 		<div class="row list" ng-show="layout == 'list'" >
 			<div class="col-md-12"  >
-				<div ng-repeat="product in productList | orderBy:sortType:sortReverse" class="anim-grid-check">
+				<div ng-repeat="product in productList | orderBy:sortType:sortReverse:defaultFilter" class="anim-grid-check">
 					<product-list-view></product-list-view>
 				</div>
 			</div>

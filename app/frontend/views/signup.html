@@ -2,9 +2,10 @@
 	<div class="col-sm-6 col-sm-offset-3">
 		<h1><span class="fa fa-sign-in"></span> Signup</h1>
 
-		<div class="alert alert-warning" ng-show="showMessage">
+		<!-- <div class="alert alert-warning" ng-show="showMessage">
 			<strong>Warning!</strong> {{ message }}
-		  </div>
+		  </div> -->
+		  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 
 		<!-- SIGN UP FORM -->
 		<form ng-submit="signUp( user )" method="POST" role="form">

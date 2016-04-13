@@ -53,17 +53,25 @@
 					</div>
 				</p>
 				<p >
-					<div >
-						<span > Quantity :</span>
-						<input type="text" style="width:41px;text-align:center;border-radius:4px;border:1px solid #eaeaea;padding:5px;" value="1" name="qty" />
-					</div>	
+					<div class="row">
+						<div class="col-lg-4">
+							<div >
+								<span > Quantity :</span>
+								<input type="text" style="width:41px;text-align:center;border-radius:4px;border:1px solid #eaeaea;padding:5px;" value="1" name="qty" />
+							</div>			
+						</div>
+						<!-- <div class="col-lg-4">
+							<label style="line-height:31px;" ng-show="!product.in_stock" > Out of Stock </label>
+						</div> -->
+					</div>
+					
 				</p>
 				<p class="descritpion">
 					{{ product.description }}
 				</p>
-
 				<p>
-					<button class="btn btn-primary"> <i class="fa fa-shopping-cart"></i> Add To Cart </button> 
+					<button class="btn btn-primary" ng-hide="!product.in_stock"> <i class="fa fa-shopping-cart"></i>  Add To Cart </button>
+					<button class="btn btn-warning" ng-show="!product.in_stock" ng-disabled="true"> <i class="fa fa-shopping-cart" ></i>  Out of Stock </button>
 				</p>
 				<p>
 					<button class="btn btn-primary"><i class="fa fa-heart"></i> Add To Wishlist </button>

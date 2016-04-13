@@ -2,9 +2,17 @@
 	<div class="col-sm-6 col-sm-offset-3">
 
 		<h1><span class="fa fa-sign-in"></span> Login</h1>
-		<div class="alert alert-warning" ng-show="showMessage">
+		<!-- <script type="text/ng-template" id="./templates/alert-message.html">
+			<div class="alert" style="background-color:#fa39c3;color:white" role="alert">
+			  <div ng-transclude></div>
+			</div>
+		</script>
+		<uib-alert type="warning" template-url="./templates/alert-message.html"> Happy aletr </uib-alert> -->
+		<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+
+		<!-- <div class="alert alert-warning" ng-show="showMessage">
 			<strong>Warning!</strong> {{ message }}
-		  </div>
+		</div> -->
 		  
 		<!-- LOGIN FORM -->
 		<form ng-submit="login( user )" method="post">

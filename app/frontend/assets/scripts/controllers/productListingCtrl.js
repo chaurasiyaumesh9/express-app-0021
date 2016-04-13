@@ -18,8 +18,15 @@ cartApp.controller('productListingCtrl', function( $scope, $routeParams, product
 			reverse: false
 		}	
 	];
+
+
 	
 	$scope.loading = true;
+	$scope.defaultFilter = {
+		caption: "Sort By",
+		field: "SKU",
+		reverse: false
+	};
 	if ( $routeParams.cid )
 	{
 		//var cUrl = $routeParams.curl; // check if in edit/view mode
@@ -50,6 +57,7 @@ cartApp.controller('productListingCtrl', function( $scope, $routeParams, product
 		$scope.activeFilter = {};
 		$scope.sortType = "";
 		$scope.sortReverse = "";
+		$scope.setActiveFilter( $scope.defaultFilter );
 	}
-	//$scope.setActiveFilter( $scope.filters[0] ); //setting up default filter
+	$scope.setActiveFilter( $scope.defaultFilter ); //setting up default filter
 });

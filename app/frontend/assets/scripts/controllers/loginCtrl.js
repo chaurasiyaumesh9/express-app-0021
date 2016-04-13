@@ -1,6 +1,7 @@
 cartApp.controller('loginCtrl', function( $scope, $rootScope, $http, $location, $timeout, $interval, $window ){
 	$scope.message = "Login With ";
 	$scope.showMessage = false;
+	$scope.alerts = [];
 	var catchInterval;
 	$scope.login = function( user ){
 		$http.post('/login', user).then( function( response ){
@@ -10,14 +11,19 @@ cartApp.controller('loginCtrl', function( $scope, $rootScope, $http, $location, 
 				$rootScope.activeUser = response.data.user ;
 				$location.url('/profile');
 			}else{
-				$scope.message = response.data.message;
+				
+				$scope.alerts.push({type:"warning", msg:  response.data.message });
+				/*$scope.message = response.data.message;
 				$scope.showMessage = true;
 				$timeout( function(){
 					$scope.showMessage = false;
-				},3000)
+				},3000);*/
 			}
 		}, function( errorMessage ){
 			console.warn( errorMessage );
 		});
 	}
+	 $scope.closeAlert = function(index) {
+		$scope.alerts.splice(index, 1);
+	  };
 });
