@@ -48,3 +48,7 @@ a.theader:visited{
       background: white; }
   .tabsdemoDynamicHeight md-content h1:first-child {
     margin-top: 0; }
+
+	.small-image{
+		max-width:75px;max-height:75px;height:auto;width:auto;display:block;margin:0 auto;
+	}

@@ -4,6 +4,19 @@ adminApp.filter('yesNo', function() {
     }
 });
 
+adminApp.filter('smallImg', function( ){
+	return function( arr ){
+		for (var i=0;i<arr.length ;i++ )
+		{
+			//console.log('arr :',arr[i]);
+			if ( arr[i].role['small'])
+			{
+				return arr[i]['url'];
+			}
+		}
+	}
+});
+
 adminApp.filter('removeDeleted', function( ){
 	return function( arr ){
 		if ( !arr)
