@@ -6,41 +6,16 @@
 	<title> An Ecommerce website using MEAN stack </title>
 	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">	
+	<link rel="stylesheet" href="../bower_components/angular-material/angular-material.min.css" >
 	<link rel="stylesheet" href="../bower_components/slick-carousel/slick/slick.css">
 	<link rel="stylesheet" href="../bower_components/slick-carousel/slick/slick-theme.css">
 	<link rel="stylesheet" href="assets/stylesheets/style.css">	
 	
 </head>
-<body>
+<body ng-cloak>
 	<!-- HEADER AND NAVBAR -->
 	<div id="" class="top-menu" ng-show="!fullmode" ng-controller="navCtrl">
-		<!-- <nav class="navbar navbar-default">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" ng-click="expanded = !expanded" aria-expanded="expanded" aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-				  </button>
-					<a class="navbar-brand" href="#/"><i class="fa fa-shield"></i> MEAN is awesome!</a>
-				</div>
 				
-				<div id="navbar" class="navbar-collapse collapse" >
-					<ul class="nav navbar-nav navbar-right">
-						<li> <a href="#/" ng-click="expanded = false"><i class="fa fa-home"></i>Home</a> </li>
-						<li> <a href="#/login" ng-hide="activeUser"> <span class="fa fa-lock"></span> Login </a> </li>
-						<li> <a href="#/signup" ng-hide="activeUser"> <span class="fa fa-user-plus"></span>Register </a> </li>
-						<li> <a href="#/logout" ng-click="logout()" ng-show="activeUser"> <span class="fa fa-sign-out"></span>Logout </a> </li>
-						<li> <a href="#/profile" ng-show="activeUser" > <span class="fa fa-user-plus"> My Profile </a> </li>
-						<li ng-repeat="category in categories"><a href="#/products/{{ category._id }}" ng-click="expanded = false"> {{category.name}} </a></li>
-					</ul>
-				</div>
-			</div>
-		</nav> -->
-		
-			
-		
 		<nav class="navbar navbar-default" >
 			<div class="container">
 				<div class="navbar-header">
@@ -67,7 +42,8 @@
 			</div>
 		</nav>
 	</div>
-	
+		
+     
 		<div class="view-container">
 		  <div ng-view class="view-frame"></div>
 		</div>
@@ -76,6 +52,8 @@
  <script src="../bower_components/angular-animate/angular-animate.min.js"> </script>
  <script src="../bower_components/angular-bootstrap/ui-bootstrap.min.js"> </script>
  <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"> </script>
+ <script src="../bower_components/angular-aria/angular-aria.min.js"> </script>
+ <script src="../bower_components/angular-material/angular-material.min.js"> </script>
  <script src="../bower_components/jquery/dist/jquery.min.js"> </script>
  <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"> </script>
  <script src="../bower_components/slick-carousel/slick/slick.min.js"> </script>
