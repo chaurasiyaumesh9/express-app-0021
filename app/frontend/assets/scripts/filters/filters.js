@@ -39,3 +39,5 @@ cartApp.filter('filterProductsByCategory', function( ){
 		return out;
 	  }
 });
+
+
