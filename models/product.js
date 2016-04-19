@@ -18,7 +18,8 @@ var ProductSchema = new Schema({
 	discontinued: Boolean,
 	updated_at: Date,
 	categories:{ type : Array , "default" : [] },
-	images:{ type : Array , "default" : [] }
+	images:{ type : Array , "default" : [] },
+	attributes:{ type : Array , "default" : [] }
 });
 
 

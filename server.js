@@ -15,6 +15,7 @@ var UserSchema   = require('./models/user');
 var User = appConfig.db.conn.model('User', UserSchema);
 var port = process.env.PORT || 8010;
 
+
 process.env.NODE_ENV = 'production';
 process.env.NODE_PATH =  path.join( __dirname + "/") ;
 process.env.UPLOAD_PATH =  path.join( __dirname + "/uploads/") ;
@@ -29,6 +30,7 @@ app.use(express.static( path.join(__dirname + '/app')));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
+
 
 app.use('/bower_components',  express.static(path.join(__dirname + '/bower_components')));
 app.use("/uploads", express.static(__dirname + '/uploads'));

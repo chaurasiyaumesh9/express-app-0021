@@ -17,6 +17,18 @@ adminApp.config(function($routeProvider, $locationProvider) {
 			templateUrl : 'views/edit-view-product.html',
 			controller: "productsCtrl"
 		})
+		.when('/attributes', {
+			templateUrl : 'views/attributes.html',
+			controller: "attributesCtrl"
+		})
+		.when('/attributes/add-new', {
+			templateUrl : 'views/add-new-attribute.html',
+			controller: "attributesCtrl"
+		})
+		.when('/attributes/:id', {
+			templateUrl : 'views/edit-view-attribute.html',
+			controller: "attributesCtrl"
+		})
 		.when('/categories', {
 			templateUrl : 'views/categories.html',
 			controller: "categoriesCtrl"

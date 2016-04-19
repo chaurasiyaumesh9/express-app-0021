@@ -2,7 +2,7 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	$scope.message = "Manage Your Products";
 	$scope.addSuccess = false, $scope.updateSuccess = false;
 	$scope.currentPage = 1;
-	$scope.pageSize = 10;
+	$scope.pageSize = 5;
 
 	$scope.showDelete = false;
 	$scope.deletionSuccess = false;
