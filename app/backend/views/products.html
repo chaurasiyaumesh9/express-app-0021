@@ -21,8 +21,8 @@
 				</div>  -->
 
 				<div class="btn-group" uib-dropdown >
-				  <button type="button" class="btn btn-primary" uib-dropdown-toggle >
-					{{ activeFilter.caption || 'Look-up By Category'}}  <span class="caret"></span>
+				  <button type="button" class="btn btn-default" uib-dropdown-toggle >
+					{{ currentCategory.name || 'Look-up By Category'}}  <span class="caret"></span>
 				  </button>
 				  <ul class="dropdown-menu" uib-dropdown-menu role="menu" >
 					<li ng-repeat="category in categories" role="menuitem">  <a href="" ng-click="loadCategoryProducts( category )" > {{category.name}} </a> </li>
@@ -43,8 +43,20 @@
 			  </form>
 			</div>
 			<div class="col-xs-3">
+				<div class="btn-group" uib-dropdown >
+				  <button type="button" class="btn btn-default" uib-dropdown-toggle >
+					{{ pageSize || 'View'}} /Page <span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu" uib-dropdown-menu role="menu" >
+					<li role="menuitem">  <a href="" ng-click="pageSize = 5" > 5 </a> </li>
+					<li role="menuitem">  <a href="" ng-click="pageSize = 10" > 10 </a> </li>
+					<li role="menuitem">  <a href="" ng-click="pageSize = 15" > 15 </a> </li>
+					<li role="menuitem">  <a href="" ng-click="pageSize = 25" > 25 </a> </li>
+					</ul>
+				</div>
+				<span style="line-height:34px;" class="pull-right"> ({{ productList.length }}) Products </span>
 				<!-- <label for="search"> Records/Page </label> -->
-				<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+				<!-- <input type="number" min="1" max="100" class="form-control" ng-model="pageSize"> -->
 			</div>
 		</div>
 	</div>
