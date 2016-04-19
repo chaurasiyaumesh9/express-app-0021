@@ -42,7 +42,7 @@ config.social = {
 }
 
 
-config.db.conn = mongoose.createConnection( config.db.prod.url , {server:{poolSize:2}}, function(err){
+config.db.conn = mongoose.createConnection( config.db.prod.url , { server:{ poolSize:2 } }, function(err){
 	if (err) {
         console.log(err);
     }else{
