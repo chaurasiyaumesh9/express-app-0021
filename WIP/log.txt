@@ -18,3 +18,4 @@ CRITICAL
 23. frontend + Backend - recently viewed
 24. frontend + Backend - filters on listing page
 25. backend - product expiry logic. product should get deleted/discountinues after being expired.
+26. frontend - updated profile pic of user once logged in.
