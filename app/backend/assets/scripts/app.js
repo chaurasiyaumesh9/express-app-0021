@@ -29,8 +29,13 @@ adminApp.config(function($routeProvider, $locationProvider) {
 			templateUrl : 'views/edit-view-attribute.html',
 			controller: "attributesCtrl"
 		})
-		.when('/attribute-set', {
-			templateUrl : 'views/attribute-sets.html'
+		.when('/attribute-sets', {
+			templateUrl : 'views/attribute-sets.html',
+			controller: "attributeSetsCtrl"
+		})
+		.when('/attribute-sets/add-new', {
+			templateUrl : 'views/add-new-set.html',
+			controller: "attributeSetsCtrl"
 		})
 		.when('/categories', {
 			templateUrl : 'views/categories.html',

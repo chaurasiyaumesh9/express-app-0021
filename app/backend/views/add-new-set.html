@@ -1,0 +1,24 @@
+<div class="container">
+	<div class="jumbotron text-center">
+		 <h1> <i class="fa fa-tags"></i> Add New Attribute Set </h1>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<h4> Available Attributes </h4>
+			<ul style="margin:0;padding:0;list-style:none;">
+				<li ng-repeat="at in attributes" > <a href="" style="padding:10px 15px;text-decoration:none;display:block;" > {{ at.label }}</a> </li>
+			</ul>
+		</div>
+		<div class="col-md-6">
+			<h4> Selected Attributes </h4>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<a class="btn btn-primary" href="#/attributes/">  Manage Attributes </a> 
+	<a class="btn btn-primary" href="#/attributes/add-new">  Add New Attribute </a> 
+	<a class="pull-right" href="#/attribute-sets/">  Go back </a> 
+</div>
