@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var attributeSchema = new Schema({
 	code: String,
 	label:String,
+	type: String, // to detect wheather text field or selection field to be provided 
 	created_at: Date
 });
 

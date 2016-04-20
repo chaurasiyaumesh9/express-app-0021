@@ -6,19 +6,26 @@
 
 <loader></loader>
 <div class="attribute-page" ng-hide="loading">
-	<div class="container" ng-show="attributes.length>0">
-		<table class="table table-striped">
+	<div class="container" >
+		<div class="alert alert-danger" ng-show="deletionSuccess">
+		  <strong>{{ deleteCount }} </strong> Attribute(s) deleted successfully!
+		</div>
+		<table class="table table-striped" ng-show="attributes.length>0">
 			<thead>
 				<tr>
+					<th> <input type="checkbox" ng-model="selectAll" ng-click="checkAll()"  /> </th>
 					<th > Attribute Name </th>
 					<th > Attribute Code </th>
+					<th > Component Type </th>
 					<th> </th>
 				</tr>
 			</thead> 
 			<tbody>
 				<tr ng-repeat="at in attributes">
+					<td> <input type="checkbox" ng-model="at.selected" ng-click="checkIndividual()" /> </td>
 					<td> {{ at.label }} </td>
 					<td> {{ at.code }} </td>
+					<td> {{ at.type }} </td>
 					<td> <a href="#/attributes/{{at._id}}"> View </a></td>
 				</tr>
 			</tbody>
@@ -26,5 +33,6 @@
 	</div>
 	<div class="container">
 		<a class="btn btn-primary" href="#/attributes/add-new"> <i class="fa fa-plus"></i> Add New </a>
+		<button class="btn btn-danger" ng-disabled="!showDelete" ng-click="deleteAttributes()"> <i class="fa fa-trash"></i> Delete </button>
 	</div>
 </div>

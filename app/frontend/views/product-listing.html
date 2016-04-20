@@ -34,7 +34,7 @@
 						</div>  -->
 						<div class="btn-group" uib-dropdown >
 						  <button type="button" class="btn btn-default" uib-dropdown-toggle >
-							{{ activeFilter.caption || 'Sort By'}}  <span class="caret"></span>
+							{{ activeFilter.caption || 'Look-up By'}}  <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" uib-dropdown-menu role="menu" >
 							<li ng-repeat="filter in filters" role="menuitem">  <a href="" ng-click="setActiveFilter( filter )" > {{ filter.caption }} </a> </li>

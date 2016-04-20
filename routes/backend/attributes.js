@@ -42,6 +42,31 @@ var attributes = {
 				console.log('Error while performing the query..check function attributes.addNewAttribute() for more details..', err );
 			}
 		});
+	},
+	deleteAttribute: function(req, res){
+		Attribute.findByIdAndRemove( req.params.id, function(err) {
+			if (!err)
+			{
+				res.json({});
+			}else{
+				console.log('Error while performing the query..check function attributes.deleteAttribute() for more details..', err );
+			}
+		});
+	},
+	updateAttribute: function(req, res){
+		if ( !req.body.attribute )
+		{
+			return;
+		}
+		var updatedAttribute = req.body.attribute;
+		Attribute.findByIdAndUpdate( updatedAttribute._id, updatedAttribute, function(err, attribute) {
+		  if (!err)
+			{
+				res.json( attribute );
+			}else{
+				console.log('Error while performing the query..check function attributes.updateAttribute() for more details..', err );
+			}
+		});
 	}
 };
 
@@ -63,4 +88,12 @@ module.exports = function(router){
 		attributes.addNewAttribute( req, res );
 	});
 
+	router.put('/attributes/:id', function(req, res){
+		attributes.updateAttribute( req, res );
+	});
+
+	router.delete('/attributes/:id', function(req, res){
+		attributes.deleteAttribute( req, res );
+	});
+	
 };
