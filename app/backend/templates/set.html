@@ -1,0 +1,32 @@
+<div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+				<label for="name"> Set Name : </label>
+				<input type="text" name="name" id="name" class="form-control" ng-model="set.name">
+			</div>	
+		</div>	
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">  Attributes Available </div>
+				<div class="panel-body">
+					<ul style="margin:0;padding:0;list-style:none;">
+						<li ng-repeat="at in attributesAvailable | orderBy:'label' " > <label class="input"> <input type="checkbox" ng-model="at.selected" ng-click="updateAttributesSelection( at )"> <span class="">{{ at.label }}</span> </label>  </li>
+					</ul>
+				</div>
+			  </div>
+		</div>
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">  Attributes Selected </div>
+				<div class="panel-body"> 
+					<ul style="margin:0;padding:0;list-style:none;">
+						<li ng-repeat="at in set.attributes | orderBy:'label'" > <label class="input"> <span class="">{{ at.label }}</span> </label>  </li>
+					</ul>
+				</div>
+			  </div>				
+		</div>
+	</div>
+</div>

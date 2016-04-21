@@ -1,18 +1,12 @@
 adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, attributeService, attributeSetsService, $timeout ){
 	$scope.message = "Make New Attribute Set";
 	
-	//$scope.loadDefaults();
-	
-
 	$scope.loadDefaults = function(){
 		$scope.set = { name:null, attributes:[] };// we'll be posting updated set of this data via submit form //attributeSet = {}
 		$scope.attributesAvailable = [];
 		getAllAttributes();
 	}
 
-	
-
-	
 	function getAllAttributes(){
 		attributeService.getAllAttributes().then( function( response ){
 			$scope.attributesAvailable = response;
@@ -68,14 +62,45 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 	function getAllSets(){
 		$scope.getAll();
 	}
-	$scope.getOneById = function( ){
-		
+
+	function updateAvailableAttrSet(){
+		for ( var x = 0; x<$scope.set.attributes.length ;x++ )
+		{
+			//console.log( $scope.attributesAvailable.indexOf( $scope.set.attributes[x] ) );
+			if ( $scope.attributesAvailable.indexOf( $scope.set.attributes[x] ) >= 0 )
+			{
+				var m = $scope.attributesAvailable.indexOf( $scope.set.attributes[x] );
+				$scope.attributesAvailable[m].selected = true;
+			}
+		}
 	}
-	$scope.updateOneById = function( ){
-		
+
+	
+	$scope.getOneById = function( id ){
+		attributeSetsService.getOneById( id ).then( function( response ){
+			$scope.set = response;
+			//updateAvailableAttrSet();
+		} , function(errorMessage ){ 
+			console.warn( errorMessage );
+		});
+	}
+	$scope.updateOneById = function( set ){
+		set.updated_at = new Date();
+		attributeSetsService.updateOneById( set ).then( function( response ){
+			$scope.success = true;
+		}, function( errorMessage ){
+			console.warn( errorMessage );
+		});
+
 	}
 	$scope.deleteOneById = function( ){
 		
 	}
 	getAllSets();
+	if ( $routeParams.id )
+	{
+		var setId = $routeParams.id; // check if in edit mode
+		$scope.getOneById( setId );
+		
+	}
 });

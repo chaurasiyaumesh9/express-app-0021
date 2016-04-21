@@ -37,6 +37,10 @@ adminApp.config(function($routeProvider, $locationProvider) {
 			templateUrl : 'views/add-new-set.html',
 			controller: "attributeSetsCtrl"
 		})
+		.when('/attribute-sets/:id', {
+			templateUrl : 'views/edit-view-set.html',
+			controller: "attributeSetsCtrl"
+		})
 		.when('/categories', {
 			templateUrl : 'views/categories.html',
 			controller: "categoriesCtrl"
@@ -55,13 +59,6 @@ adminApp.config(function($routeProvider, $locationProvider) {
 adminApp.controller('adminCtrl', function($scope){
 	$scope.message = "Welcome to Dashboard!"; //just to check if controller is working fine..print the message!
 });
-
-
-
-	
-
-
-
 
 var lib = {
 	getCurrentDate: function(){
