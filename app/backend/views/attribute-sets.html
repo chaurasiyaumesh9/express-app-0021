@@ -4,32 +4,25 @@
 	</div>
 </div>
 
-<div class="container">
-	<a class="btn btn-primary" href="#/attribute-sets/add-new"> <i class="fa fa-plus"></i> Add New Set </a>
-	
-</div>
-
-<!-- <loader></loader>
-<div class="attribute-page" ng-hide="loading">
-	<div class="container" ng-show="attributes.length>0">
+ <loader></loader>
+<div class="attribute-sets-page" ng-hide="loading">
+	<div class="container" ng-show="attributeSets.length>0">
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th > Attribute Name </th>
-					<th > Attribute Code </th>
+					<th > Set Name </th>
 					<th> </th>
 				</tr>
 			</thead> 
 			<tbody>
-				<tr ng-repeat="at in attributes">
-					<td> {{ at.label }} </td>
-					<td> {{ at.code }} </td>
-					<td> <a href="#/attributes/{{at._id}}"> View </a></td>
+				<tr ng-repeat="at in attributeSets">
+					<td> {{ at.name }} </td>
+					<td> <a href="#/attribute-sets/{{at._id}}"> View </a></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	<div class="container">
-		<a class="btn btn-primary" href="#/attributes/add-new"> <i class="fa fa-plus"></i> Add New </a>
+		<a class="btn btn-primary" href="#/attribute-sets/add-new"> <i class="fa fa-plus"></i> Add New Set </a>
 	</div>
 </div>

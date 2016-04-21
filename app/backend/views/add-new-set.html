@@ -6,11 +6,11 @@
 
 <loader></loader>
 <div class="container" ng-hide="loading">
-	 <div class="alert alert-success" ng-show="addSuccess">
+	 <div class="alert alert-success" ng-show="success">
 	  <strong>Success!</strong> New Attribute Set Added Successfully!
 	</div> 
 	
-	<form ng-submit="addNewAttributeSet( set )" method="POST" role="form">
+	<form ng-submit="addNew( set )" ng-init="loadDefaults()" method="POST" role="form">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="form-group">
@@ -25,7 +25,7 @@
 					<div class="panel-heading">  Attributes Available </div>
 					<div class="panel-body">
 						<ul style="margin:0;padding:0;list-style:none;">
-							<li ng-repeat="at in set.attributesAvailable | orderBy:'label' " > <label class="input"> <input type="checkbox" ng-model="at.selected" ng-click="updateAttributesSelection( at )"> <span class="">{{ at.label }}</span> </label>  </li>
+							<li ng-repeat="at in attributesAvailable | orderBy:'label' " > <label class="input"> <input type="checkbox" ng-model="at.selected" ng-click="updateAttributesSelection( at )"> <span class="">{{ at.label }}</span> </label>  </li>
 						</ul>
 					</div>
 				  </div>
@@ -35,15 +35,15 @@
 					<div class="panel-heading">  Attributes Selected </div>
 					<div class="panel-body"> 
 						<ul style="margin:0;padding:0;list-style:none;">
-							<li ng-repeat="at in set.attributesChosen | orderBy:'label'" > <label class="input"> <span class="">{{ at.label }}</span> </label>  </li>
+							<li ng-repeat="at in set.attributes | orderBy:'label'" > <label class="input"> <span class="">{{ at.label }}</span> </label>  </li>
 						</ul>
 					</div>
 				  </div>				
 			</div>
 		</div>
 		<button class="btn btn-default" ng-click="selectAll()" > Select All </button>
-		<button class="btn btn-default" ng-click="deSelectAll()" ng-disabled="set.attributesChosen.length==0"> Clear All </button>
-		<button type="submit" class="btn btn-primary" ng-disabled="set.attributesChosen.length==0"> Save Attribute Set</button>
+		<button class="btn btn-default" ng-click="deSelectAll()" ng-disabled="set.attributes.length==0"> Clear All </button>
+		<button type="submit" class="btn btn-primary" ng-disabled="set.attributes.length==0"> Save Attribute Set</button>
 	</form>
 </div>
 <div class="container">
