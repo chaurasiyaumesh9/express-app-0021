@@ -15,7 +15,31 @@
 <body>
 	<div class="wrapper">
 		<div class="top-menu" ng-show="!fullmode" ng-controller="navCtrl">
-			<nav class="navbar navbar-default" >
+			<nav class="navbar navbar-default">
+			  <div class="container">
+				<div class="navbar-header">
+				  <button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>                        
+				  </button>
+				  <a class="navbar-brand" href="#/" ng-click="hideNav()"><i class="fa fa-shield"></i> MEAN is awesome!</a>
+				</div>
+				<div class="collapse navbar-collapse" uib-collapse="navbarCollapsed">
+				  <ul class="nav navbar-nav">
+					<li> <a href="#/" ng-click="hideNav()"><span class="fa fa-home"></span> Home</a> </li>
+					<li ng-repeat="category in categories" ><a href="#/products/{{ category._id }}" ng-click="hideNav()"> {{category.name}} </a></li>
+				  </ul>
+				  <ul class="nav navbar-nav navbar-right">
+					<li> <a href="#/login" ng-hide="activeUser" ng-click="hideNav()"> <span class="glyphicon glyphicon-log-in"></span> Login </a> </li>
+					<li> <a href="#/signup" ng-hide="activeUser" ng-click="hideNav()"> <span class="glyphicon glyphicon-user"></span> Sign Up </a> </li>
+					<li> <a href="#/logout" ng-click="hideNav();logout()" ng-show="activeUser"> <span class="fa fa-sign-out"></span> Logout </a> </li>
+					<li> <a href="#/profile" ng-show="activeUser" ng-click="hideNav()"> <span class="fa fa-user-plus"> My Profile </a> </li>
+				  </ul>
+				</div>
+			  </div>
+			</nav>
+			<!-- <nav class="navbar navbar-default" >
 				<div class="container">
 					<div class="navbar-header">
 					  <button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
@@ -27,7 +51,6 @@
 					  <a class="navbar-brand" href="#/" ng-click="hideNav()"><i class="fa fa-shield"></i> MEAN is awesome!</a>
 					</div>
 
-					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" uib-collapse="navbarCollapsed">
 					  <ul class="nav navbar-nav navbar-right">
 							<li> <a href="#/" ng-click="hideNav()"><span class="fa fa-home"></span> Home</a> </li>
@@ -39,7 +62,7 @@
 						</ul>
 					</div>
 				</div>
-			</nav>
+			</nav> -->
 		</div>
 		<div class="view-container">
 			<div ng-view class="view-frame"></div>
