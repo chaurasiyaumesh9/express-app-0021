@@ -1,3 +1,15 @@
+body, html{
+	height:100%;min-height:100%;
+}
+
+.wrapper{
+	min-height:100%;
+	position:relative;
+	padding: 0 0 60px;
+	overflow:auto;
+}
+
+
 .messages{
 	margin:0;padding:0;list-style:none;
 }
@@ -52,3 +64,11 @@ a.theader:visited{
 	.small-image{
 		max-width:75px;max-height:75px;height:auto;width:auto;display:block;margin:0 auto;
 	}
+
+	label.input{
+		font-weight:normal;
+	}
+
+.wrapper button, .wrapper a, .wrapper a:hover, .wrapper a:visited{
+	outline:none;
+}
