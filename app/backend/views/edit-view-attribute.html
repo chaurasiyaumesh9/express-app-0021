@@ -4,10 +4,9 @@
 	</div>
 </div>
 
-<div class="container">
-	<div class="alert alert-success" ng-show="updationSuccess">
-	  <strong>Success!</strong> Attribute updated successfully!
-	</div>
+<loader></loader>
+<div class="container" ng-hide="loading">
+	<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 	<form ng-submit="updateAttribute( attribute )" method="POST" role="form">
 		<attribute></attribute>
 		<button type="submit" class="btn btn-primary"> <i class="fa fa-floppy-o"></i> Update </button> 

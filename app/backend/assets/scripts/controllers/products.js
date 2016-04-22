@@ -1,11 +1,10 @@
 adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, productService, categoryService, $timeout, common,Upload, $q){
 	$scope.message = "Manage Your Products";
-	$scope.addSuccess = false, $scope.updateSuccess = false;
+	$rootScope.alerts = [];
 	$scope.currentPage = 1;
 	$scope.pageSize = 5;
 
 	$scope.showDelete = false;
-	$scope.deletionSuccess = false;
 	$scope.deleteCount = 0;
 
 	$scope.sortType     = 'date_added'; // set the default sort type
@@ -22,11 +21,11 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	if ( $routeParams.id )
 	{
 		productID = $routeParams.id; // check if in edit/view mode
-		//$scope.loading = true;
+		$scope.loading = true;
 		productService.getProductById( productID ).then( function( response ){
 			//console.log('getProductById :',response);
 			$scope.product = response;
-			//$scope.loading = false;
+			$scope.loading = false;
 			$scope.product.valid_from = common.stringToDate( $scope.product.valid_from );
 			$scope.product.valid_till  = common.stringToDate( $scope.product.valid_till );
 		} , function(errorMessage ){ 
@@ -37,12 +36,12 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	$scope.addNewProduct = function( product ){	
 		$scope.loading = true;
 		$scope.uploadFiles( product ).then( function( response ){
-			console.log('uploaded all!',product);
+			//console.log('uploaded all!',product);
 			productService.addNewProduct( product ).then( function( response ){
 				//console.log('added to DB!');
-				$scope.addSuccess = true;		
 				$scope.loading = false;
-				$timeout(function() { $scope.addSuccess = false;}, 3000); //need to make it generic for all the messages
+				$rootScope.alerts.push({type:"success", msg:  "New Product Added Successfully!" });
+				//$timeout(function() { $scope.addSuccess = false;}, 3000); //need to make it generic for all the messages
 				$scope.loadDefaults(); //re-initalize my page by loading defaults
 				$scope.getProductCategories(); //re-initalize all the empty categories
 			}, function( errorMessage ){
@@ -52,7 +51,7 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	}
 
 	$scope.updateProduct = function( product ){
-		console.log('updateProduct :',product);
+		//console.log('updateProduct :',product);
 		$scope.loading = true;
 		product.updated_at = new Date();
 		$scope.uploadFiles( product ).then( function( response ){
@@ -64,8 +63,9 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 				$scope.product = response;
 				$scope.product.valid_from = common.stringToDate( $scope.product.valid_from );
 				$scope.product.valid_till  = common.stringToDate( $scope.product.valid_till );
-				$scope.updateSuccess = true;
-				$timeout(function() { $scope.updateSuccess = false;}, 3000); //need to make it generic for all the messages
+				//$scope.updateSuccess = true;
+				$rootScope.alerts.push({type:"success", msg:  "Product Updated Successfully!" });
+				//$timeout(function() { $scope.updateSuccess = false;}, 3000); //need to make it generic for all the messages
 			}, function( errorMessage ){
 				console.warn( errorMessage );
 			});
@@ -74,9 +74,11 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	}
 
 	$scope.deleteProduct = function( product ){
+		$scope.loading = true;
 		productService.deleteProduct( product._id ).then( function( response ){
-			$scope.deletionSuccess = true;
-			$timeout(function() { $scope.deletionSuccess = false;}, 3000); //need to make it generic for all the messages
+			$scope.loading = true;
+			$rootScope.alerts.push({type:"danger", msg:  "Product Deleted Successfully!" });
+			//$timeout(function() { $scope.deletionSuccess = false;}, 3000); //need to make it generic for all the messages
 		}, function( errorMessage ){
 			console.warn( errorMessage );
 		});
@@ -181,17 +183,18 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
     }
 	$scope.deleteProducts = function(){
 		var checked = getCheckedProducts();
-		
+		var multipleReq = [];
 		for ( var i=0; i<checked.length ;i++ )
 		{ 
-			productService.deleteProduct( checked[i]._id ).then( function( response ){
-				getProductList();
-				$scope.deleteCount++;
-			}, function( errorMessage ){
-				console.warn( errorMessage );
-			});
+			multipleReq.push( productService.deleteProduct( checked[i]._id ) );
 		}
-		$scope.deletionSuccess = true;
+		$scope.deleteCount = multipleReq.length;
+		$q.all( multipleReq ).then( function( response ){
+			getProductList();
+			$rootScope.alerts.push({type:"danger", msg:  "Product(s) Deleted Successfully!" });
+		}, function( errorMessage ){
+			console.warn( errorMessage );
+		});
 	}
 
 	 $scope.checkAll = function () {

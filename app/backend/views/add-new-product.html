@@ -5,9 +5,10 @@
 </div>
 <loader></loader>
 <div class="container" ng-init="loadDefaults();getProductCategories();" ng-hide="loading">
-	 <div class="alert alert-success" ng-show="addSuccess">
+	 <!-- <div class="alert alert-success" ng-show="addSuccess">
 	  <strong>Success!</strong> New Product Added Successfully!
-	</div> 
+	</div>  -->
+	<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 	
 	<form ng-submit="addNewProduct( product )" method="POST" role="form">
 		<product></product>

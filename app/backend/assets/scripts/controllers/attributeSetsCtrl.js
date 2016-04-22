@@ -1,6 +1,6 @@
-adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, attributeService, attributeSetsService, $timeout ){
+adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, attributeService, attributeSetsService, $timeout, $rootScope ){
 	$scope.message = "Make New Attribute Set";
-	
+	$rootScope.alerts = [];
 	$scope.loadDefaults = function(){
 		$scope.set = { name:null, attributes:[] };// we'll be posting updated set of this data via submit form //attributeSet = {}
 		$scope.attributesAvailable = [];
@@ -19,7 +19,7 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 	$scope.addNew = function( set ){
 		$scope.loading = true;
 		attributeSetsService.addNew( set ).then( function( response ){
-			$scope.success = true;
+			$rootScope.alerts.push({type:"success", msg:  "Attribute Set Added Successfully" });
 			$scope.loading = false;
 			$scope.loadDefaults();
 		}, function( errorMessage ){
@@ -53,7 +53,7 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 		set.updated_at = new Date();
 		$scope.loading = true;
 		attributeSetsService.updateOneById( set ).then( function( response ){
-			$scope.success = true;
+			$rootScope.alerts.push({type:"success", msg:  "Attribute Set Updated Successfully" });
 			$scope.loading = false;
 		}, function( errorMessage ){
 			console.warn( errorMessage );

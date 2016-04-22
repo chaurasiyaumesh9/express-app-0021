@@ -7,19 +7,12 @@
 <loader></loader>
 <div class="product-listing-page" ng-hide="loading">
 	<div class="container">
+		<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{ deleteCount }} {{alert.msg}}</uib-alert>
+	</div>
+	<div class="container">
+		
 		<div class="row">
 			<div class="col-xs-3">
-				 <!-- <div class="btn-group">
-				  <button type="button" class="btn btn-primary"> {{ currentCategory.name || 'Look-up By Category' }} </button>
-				  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<span class="caret"></span>
-					<span class="sr-only">Toggle Dropdown</span>
-				  </button>
-				  <ul class="dropdown-menu">
-					<li ng-repeat="category in categories"><a href="" ng-click="loadCategoryProducts( category )"> {{category.name}} </a></li>
-				  </ul>
-				</div>  -->
-
 				<div class="btn-group" uib-dropdown >
 				  <button type="button" class="btn btn-default" uib-dropdown-toggle >
 					{{ currentCategory.name || 'Look-up By Category'}}  <span class="caret"></span>
@@ -59,9 +52,10 @@
 		</div>
 	</div>
 	<div class="container">
-		<div class="alert alert-danger" ng-show="deletionSuccess">
+		<!-- <div class="alert alert-danger" ng-show="deletionSuccess">
 		  <strong>{{ deleteCount }} </strong> Product(s) deleted successfully!
-		</div>
+		</div> -->
+		
 		
 		<div ng-show="productList.length > 0">
 			<table class="table table-striped" >

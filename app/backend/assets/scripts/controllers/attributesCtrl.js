@@ -1,19 +1,18 @@
-adminApp.controller('attributesCtrl', function($scope, $http, $routeParams, attributeService, $timeout ){
+adminApp.controller('attributesCtrl', function($scope, $http, $routeParams, attributeService, $timeout, $rootScope, $q ){
 	$scope.message = "Manage Attributes";
-	$scope.success = false;
 	$scope.showDelete = false;
-	$scope.deletionSuccess = false;
-	$scope.updationSuccess = false;
 	$scope.deleteCount = 0;
-	var categoryId = -1;
+	var attributeId = -1;
+	$rootScope.alerts = [];
 	$scope.loadDefaults = function(){
 		$scope.attribute = { };
 	}
 	getAllAttributes();
 	$scope.addNewAttribute = function( attribute ){
-		//console.log('addNewAttribute :',attribute);
+		$scope.loading = true;
 		attributeService.addNewAttribute( attribute ).then( function( response ){
-			$scope.success = true;
+			$rootScope.alerts.push({type:"success", msg:  "Attribute Added Successfully!" });
+			$scope.loading = false;
 			$scope.loadDefaults();
 		}, function( errorMessage ){
 			console.warn( errorMessage );
@@ -21,9 +20,10 @@ adminApp.controller('attributesCtrl', function($scope, $http, $routeParams, attr
 	}
 
 	$scope.updateAttribute = function( attribute ){
-		//console.log('updateAttribute :',attribute);
+		$scope.loading = true;
 		attributeService.updateAttribute( attribute ).then( function( response ){
-			$scope.updationSuccess = true;
+			$scope.loading = false;
+			$rootScope.alerts.push({type:"success", msg:  "Attribute Updated Successfully!" });
 		}, function( errorMessage ){
 			console.warn( errorMessage );
 		});
@@ -42,26 +42,31 @@ adminApp.controller('attributesCtrl', function($scope, $http, $routeParams, attr
 	if ( $routeParams.id )
 	{
 		attributeId = $routeParams.id; // check if in edit mode
+		$scope.loading = true;
 		attributeService.getAttributeById( attributeId ).then( function( response ){
 			$scope.attribute = response;
+			$scope.loading = false;
 		} , function(errorMessage ){ 
 			console.warn( errorMessage );
 		});
 	}
 
 	$scope.deleteAttributes = function(){
+		$scope.loading = true;
 		var checked = getCheckedAttributes();
-		
+		var multipleReq = [];
 		for ( var i=0; i<checked.length ;i++ )
 		{ 
-			attributeService.deleteAttribute( checked[i]._id ).then( function( response ){
-				getAllAttributes();
-				$scope.deleteCount++;
-			}, function( errorMessage ){
-				console.warn( errorMessage );
-			});
+			multipleReq.push( attributeService.deleteAttribute( checked[i]._id ) );
 		}
-		$scope.deletionSuccess = true;
+		$scope.deleteCount = multipleReq.length;
+		$q.all( multipleReq ).then( function( response ){
+			$scope.loading = true;
+			getAllAttributes();
+			$rootScope.alerts.push({type:"danger", msg:  "Attribute(s) deleted successfully!" });
+		}, function( errorMessage ){
+			console.warn( errorMessage );
+		});
 	}
 	
 	$scope.checkAll = function () {

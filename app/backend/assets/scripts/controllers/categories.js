@@ -1,9 +1,7 @@
-adminApp.controller('categoriesCtrl', function($scope, $http, $routeParams, categoryService, $timeout ){
+adminApp.controller('categoriesCtrl', function($scope, $http, $routeParams, categoryService, $timeout, $rootScope, $q ){
 	$scope.message = "Manage Categories";
-	
+	$rootScope.alerts = [];
 	$scope.showDelete = false;
-	$scope.deletionSuccess = false;
-	$scope.updationSuccess = false;
 	$scope.deleteCount = 0;
 	var categoryId = -1;
 
@@ -11,8 +9,10 @@ adminApp.controller('categoriesCtrl', function($scope, $http, $routeParams, cate
 	{
 		categoryId = $routeParams.id; // check if in edit mode
 		//console.log('categoryId:',categoryId);
+		$scope.loading = true;
 		categoryService.getCategoryById( categoryId ).then( function( response ){
 			$scope.category = response;
+			$scope.loading = false;
 		} , function(errorMessage ){ 
 			console.warn( errorMessage );
 		});
@@ -34,18 +34,21 @@ adminApp.controller('categoriesCtrl', function($scope, $http, $routeParams, cate
 	}
 
 	$scope.updateCategory = function( category ){
-		//console.log('category:',category);
+		$scope.loading = true;
 		category.updated_at = new Date();
 		categoryService.updateCategory( category ).then( function( response ){
-			$scope.updationSuccess = true;
+			$scope.loading = false;
+			$rootScope.alerts.push({type:"success", msg:  "Category Updated Successfully!" });
 		}, function( errorMessage ){
 			console.warn( errorMessage );
 		});
 	}
 
 	$scope.addNewCategory = function( category ){
+		$scope.loading = true;
 		categoryService.addNewCategory( category ).then( function( response ){
-			$scope.success = true;
+			$scope.loading = false;
+			$rootScope.alerts.push({type:"success", msg:  "Category Added Successfully!" });
 			$scope.loadDefaults();
 		}, function( errorMessage ){
 			console.warn( errorMessage );
@@ -53,18 +56,22 @@ adminApp.controller('categoriesCtrl', function($scope, $http, $routeParams, cate
 	}
 
 	$scope.deleteCategories = function(){
+		$scope.loading = true;
 		var checked = getCheckedCategories();
-		
+		var multipleReq = [];
 		for ( var i=0; i<checked.length ;i++ )
 		{ 
-			categoryService.deleteCategory( checked[i]._id ).then( function( response ){
-				getAllCategories();
-				$scope.deleteCount++;
-			}, function( errorMessage ){
-				console.warn( errorMessage );
-			});
+			multipleReq.push( categoryService.deleteCategory( checked[i]._id ) );
 		}
-		$scope.deletionSuccess = true;
+		$scope.deleteCount = multipleReq.length;
+		
+		$q.all( multipleReq ).then( function( response ){
+			getAllCategories();
+			$scope.loading = false;
+			$rootScope.alerts.push({type:"danger", msg:  "Category(s) Deleted Successfully!" });
+		}, function( errorMessage ){
+			console.warn( errorMessage );
+		});
 	}
 
 	 $scope.checkAll = function () {

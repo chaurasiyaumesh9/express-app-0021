@@ -4,8 +4,10 @@
 	</div>
 </div>
 
-<div class="container" ng-init="loadDefaults()">
-	<ul class="messages" >
+<loader></loader>
+<div class="container" ng-init="loadDefaults()" ng-hide="loading">
+	<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+	<!-- <ul class="messages" >
 		<li> 
 			<div class="message alert alert-success" ng-show="updateSuccess">
 			  <strong>Success!</strong> Product Updated Successfully!
@@ -16,7 +18,7 @@
 			  <strong>Success!</strong> Product Deleted Successfully!
 			</div>
 		</li>
-	</ul>
+	</ul> -->
 	<loader></loader>
 	<form ng-submit="updateProduct( product )" method="POST" role="form" ng-hide="loading">
 		<product ></product>

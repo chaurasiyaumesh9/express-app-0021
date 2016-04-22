@@ -4,10 +4,9 @@
 	</div>
 </div>
 
-<div class="container" ng-init="loadDefaults()">
-	<div class="alert alert-success" ng-show="success">
-	  <strong>Success!</strong> New Attribute Added Successfully!
-	</div>
+<loader></loader>
+<div class="container" ng-init="loadDefaults()" ng-hide="loading">
+	<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 	<form ng-submit="addNewAttribute( attribute )" method="POST" role="form">
 		<attribute></attribute>
 		<button type="submit" class="btn btn-primary"> <i class="fa fa-floppy-o"></i> Save </button>

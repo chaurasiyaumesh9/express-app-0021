@@ -7,9 +7,7 @@
 <loader></loader>
 <div ng-hide="loading">
 	<div class="container" >
-		 <div class="alert alert-success" ng-show="success">
-		  <strong>Success!</strong> New Attribute Set Added Successfully!
-		</div> 
+		 <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert( $index )"> {{ alert.msg }} </uib-alert>
 		
 		<form ng-submit="addNew( set )" ng-init="loadDefaults()" method="POST" role="form">
 			<attribute-set></attribute-set>

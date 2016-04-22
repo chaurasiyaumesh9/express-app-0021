@@ -56,8 +56,12 @@ adminApp.config(function($routeProvider, $locationProvider) {
 		});
 });
 
-adminApp.controller('adminCtrl', function($scope){
+adminApp.controller('adminCtrl', function($scope, $rootScope ){
 	$scope.message = "Welcome to Dashboard!"; //just to check if controller is working fine..print the message!
+	$rootScope.alerts = [];
+	$rootScope.closeAlert = function( index ) {
+		$rootScope.alerts.splice(index, 1);
+	};
 });
 
 var lib = {

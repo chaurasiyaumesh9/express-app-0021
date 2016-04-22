@@ -3,11 +3,9 @@
 		 <h1> <i class="fa fa-tags"></i> Edit Category {{ currentCategory }}  </h1>
 	</div>
 </div>
-
-<div class="container">
-	<div class="alert alert-success" ng-show="updationSuccess">
-	  <strong>Success!</strong> Category updated successfully!
-	</div>
+<loader></loader>
+<div class="container" ng-hide="loading">
+	<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 	<form ng-submit="updateCategory( category )" method="POST" role="form">
 		<category></category>
 		<button type="submit" class="btn btn-primary"> <i class="fa fa-floppy-o"></i> Update </button>

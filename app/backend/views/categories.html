@@ -7,9 +7,10 @@
 <loader></loader>
 <div class="category-listing-page" ng-hide="loading">
 	<div class="container">
-		<div class="alert alert-danger" ng-show="deletionSuccess">
+		<!-- <div class="alert alert-danger" ng-show="deletionSuccess">
 		  <strong>{{ deleteCount }} </strong> Categorie(s) deleted successfully!
-		</div>
+		</div> -->
+		<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)"> {{ deleteCount }} {{alert.msg}}</uib-alert>
 		<table class="table table-striped">
 			<thead>
 				<tr>
