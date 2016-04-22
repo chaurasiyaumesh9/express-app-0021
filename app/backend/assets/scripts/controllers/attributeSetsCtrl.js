@@ -4,7 +4,7 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 	$scope.loadDefaults = function(){
 		$scope.set = { name:null, attributes:[] };// we'll be posting updated set of this data via submit form //attributeSet = {}
 		$scope.attributesAvailable = [];
-		//$scope.data = []
+		$scope.bool = [];
 		getAllAttributes();
 	}
 
@@ -14,22 +14,6 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 		}, function( errorMessage ){
 			console.warn( errorMessage );
 		});
-	}
-
-	$scope.selectAll = function(){
-		for ( var x=0; x< $scope.attributesAvailable.length; x++ )
-		{
-			$scope.attributesAvailable[x].selected = true;
-		}
-		$scope.set.attributes = angular.copy( $scope.attributesAvailable );
-	}
-
-	$scope.deSelectAll = function(){
-		$scope.set.attributes = [];
-		for ( var x=0; x< $scope.attributesAvailable.length; x++ )
-		{
-			$scope.attributesAvailable[x].selected = false;
-		}
 	}
 
 	$scope.addNew = function( set ){
@@ -56,7 +40,6 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 		$scope.getAllSets();
 	}
 
-	
 	$scope.getOneById = function( id ){
 		$scope.loading = true;
 		attributeSetsService.getOneById( id ).then( function( response ){
@@ -75,7 +58,6 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 		}, function( errorMessage ){
 			console.warn( errorMessage );
 		});
-
 	}
 	$scope.deleteOneById = function( ){
 		
@@ -85,13 +67,12 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 	{
 		var setId = $routeParams.id; // check if in edit mode
 		$scope.getOneById( setId );
-		
 	}
 
-	$scope.isChecked = function(id){
+	$scope.isChecked = function( id ){
       var match = false;
       for(var i=0 ; i < $scope.set.attributes.length; i++) {
-        if($scope.set.attributes[i]._id == id){
+        if( $scope.set.attributes[i]._id == id ){
           match = true;
         }
       }
@@ -99,10 +80,8 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
   };
   $scope.sync = function(bool, item){
     if(bool){
-      // add item
       $scope.set.attributes.push(item);
     } else {
-      // remove item
       for(var i=0 ; i < $scope.set.attributes.length; i++) {
         if($scope.set.attributes[i]._id == item._id){
           $scope.set.attributes.splice(i,1);
@@ -110,5 +89,17 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
       }      
     }
   };
+  $scope.selectAll = function(){
+		$scope.set.attributes = angular.copy( $scope.attributesAvailable );
+		for ( var i=0;i<$scope.attributesAvailable.length ; i++ )
+		{
+			$scope.bool[i] = true;
+		}
+	}
+
+	$scope.deSelectAll = function(){
+		$scope.set.attributes = [];
+		$scope.bool = []
+	}
 
 });

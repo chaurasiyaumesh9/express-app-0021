@@ -13,8 +13,8 @@
 				<div class="panel-heading">  Attributes Available </div>
 				<div class="panel-body">
 					<ul style="margin:0;padding:0;list-style:none;">
-						<li ng-repeat="item in attributesAvailable | orderBy:'label' " > 
-							<label class="input"> <input type="checkbox" ng-change="sync(bool, item)" ng-model="bool" ng-checked="isChecked(item._id)"> <span class="">{{ item.label }}</span> </label>
+						<li ng-repeat="item in attributesAvailable | orderBy:'label' " ng-init="bool[$index] = isChecked( item._id )"  > 
+							<label class="input" > <input type="checkbox" ng-change="sync(bool[$index], item)" ng-model="bool[$index]" ng-checked="isChecked(item._id)"> <span class="">{{ item.label }}</span> </label>
 						</li>
 					</ul>
 				</div>

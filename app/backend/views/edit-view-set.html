@@ -13,9 +13,9 @@
 		
 		<form ng-submit="updateOneById( set )" ng-init="loadDefaults()" method="POST" role="form">
 			<attribute-set></attribute-set>
-			<!-- <a class="btn btn-default" ng-click="selectAll()" href=""> Select All </a>
-			<a class="btn btn-default" ng-click="deSelectAll()" ng-disabled="set.attributes.length==0" href=""> Clear All </a> -->
-			<button type="submit" class="btn btn-primary" ng-disabled="set.attributes.length==0"> Save Attribute Set</button>
+			<a class="btn btn-default" ng-click="selectAll()" href=""> Select All </a>
+			<a class="btn btn-default" ng-click="deSelectAll()" ng-disabled="set.attributes.length==0" href=""> Clear All </a> 
+			<button type="submit" class="btn btn-primary" ng-disabled="set.attributes.length==0"> Update Attribute Set</button>
 		</form>
 	</div>
 	<div class="container">
