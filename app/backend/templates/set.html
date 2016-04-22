@@ -13,7 +13,9 @@
 				<div class="panel-heading">  Attributes Available </div>
 				<div class="panel-body">
 					<ul style="margin:0;padding:0;list-style:none;">
-						<li ng-repeat="at in attributesAvailable | orderBy:'label' " > <label class="input"> <input type="checkbox" ng-model="at.selected" ng-click="updateAttributesSelection( at )"> <span class="">{{ at.label }}</span> </label>  </li>
+						<li ng-repeat="item in attributesAvailable | orderBy:'label' " > 
+							<label class="input"> <input type="checkbox" ng-change="sync(bool, item)" ng-model="bool" ng-checked="isChecked(item._id)"> <span class="">{{ item.label }}</span> </label>
+						</li>
 					</ul>
 				</div>
 			  </div>
@@ -23,10 +25,20 @@
 				<div class="panel-heading">  Attributes Selected </div>
 				<div class="panel-body"> 
 					<ul style="margin:0;padding:0;list-style:none;">
-						<li ng-repeat="at in set.attributes | orderBy:'label'" > <label class="input"> <span class="">{{ at.label }}</span> </label>  </li>
-					</ul>
+						<li ng-repeat="item in set.attributes | orderBy:'label'" > <label class="input"> <span class="">{{ item.label }}</span> </label>  </li>
+					</ul> 
 				</div>
 			  </div>				
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			  <h3>Final Data Array</h3>
+			  <pre>{{ set.attributes | json}}</pre>
+		</div>
+		<div class="col-md-6">
+			  <h3>All Checkboxes Array</h3>
+			  <pre>{{ attributesAvailable | json}}</pre>
 		</div>
 	</div>
 </div>

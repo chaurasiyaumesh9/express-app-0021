@@ -4,6 +4,7 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 	$scope.loadDefaults = function(){
 		$scope.set = { name:null, attributes:[] };// we'll be posting updated set of this data via submit form //attributeSet = {}
 		$scope.attributesAvailable = [];
+		//$scope.data = []
 		getAllAttributes();
 	}
 
@@ -13,16 +14,6 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 		}, function( errorMessage ){
 			console.warn( errorMessage );
 		});
-	}
-
-	$scope.updateAttributesSelection = function( at ) {
-		if ( $scope.set.attributes.indexOf( at ) == -1 && at.selected )
-		{
-			$scope.set.attributes.push( at );
-		}else {
-			var i = $scope.set.attributes.indexOf( at );
-			$scope.set.attributes.splice( i,1 );
-		}
 	}
 
 	$scope.selectAll = function(){
@@ -42,8 +33,10 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 	}
 
 	$scope.addNew = function( set ){
+		$scope.loading = true;
 		attributeSetsService.addNew( set ).then( function( response ){
 			$scope.success = true;
+			$scope.loading = false;
 			$scope.loadDefaults();
 		}, function( errorMessage ){
 			console.warn( errorMessage );
@@ -63,33 +56,22 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 		$scope.getAllSets();
 	}
 
-	function updateAvailableAttrSet(){
-		for ( var x = 0; x<$scope.set.attributes.length ;x++ )
-		{
-			//console.log( $scope.attributesAvailable.indexOf( $scope.set.attributes[x] ) );
-			if ( $scope.attributesAvailable.indexOf( $scope.set.attributes[x] ) >= 0 )
-			{
-				var m = $scope.attributesAvailable.indexOf( $scope.set.attributes[x] );
-				$scope.attributesAvailable[m].selected = true;
-			}
-		}
-	}
-
 	
 	$scope.getOneById = function( id ){
 		$scope.loading = true;
 		attributeSetsService.getOneById( id ).then( function( response ){
 			$scope.set = response;
 			$scope.loading = false;
-			//updateAvailableAttrSet();
 		} , function(errorMessage ){ 
 			console.warn( errorMessage );
 		});
 	}
 	$scope.updateOneById = function( set ){
 		set.updated_at = new Date();
+		$scope.loading = true;
 		attributeSetsService.updateOneById( set ).then( function( response ){
 			$scope.success = true;
+			$scope.loading = false;
 		}, function( errorMessage ){
 			console.warn( errorMessage );
 		});
@@ -105,4 +87,28 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 		$scope.getOneById( setId );
 		
 	}
+
+	$scope.isChecked = function(id){
+      var match = false;
+      for(var i=0 ; i < $scope.set.attributes.length; i++) {
+        if($scope.set.attributes[i]._id == id){
+          match = true;
+        }
+      }
+      return match;
+  };
+  $scope.sync = function(bool, item){
+    if(bool){
+      // add item
+      $scope.set.attributes.push(item);
+    } else {
+      // remove item
+      for(var i=0 ; i < $scope.set.attributes.length; i++) {
+        if($scope.set.attributes[i]._id == item._id){
+          $scope.set.attributes.splice(i,1);
+        }
+      }      
+    }
+  };
+
 });
