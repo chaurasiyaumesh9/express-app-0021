@@ -49,7 +49,7 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 			console.warn( errorMessage );
 		});
 	}
-	$scope.getAll = function( ){
+	$scope.getAllSets = function( ){
 		$scope.loading = true;
 		attributeSetsService.getAll( ).then( function( response ){
 			$scope.loading = false;
@@ -60,7 +60,7 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 	}
 
 	function getAllSets(){
-		$scope.getAll();
+		$scope.getAllSets();
 	}
 
 	function updateAvailableAttrSet(){
@@ -77,8 +77,10 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 
 	
 	$scope.getOneById = function( id ){
+		$scope.loading = true;
 		attributeSetsService.getOneById( id ).then( function( response ){
 			$scope.set = response;
+			$scope.loading = false;
 			//updateAvailableAttrSet();
 		} , function(errorMessage ){ 
 			console.warn( errorMessage );
