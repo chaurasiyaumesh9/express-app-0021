@@ -1,4 +1,4 @@
-adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, attributeService, attributeSetsService, $timeout, $rootScope ){
+adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, attributeService, attributeSetsService, $timeout, $rootScope, $q ){
 	$scope.message = "Make New Attribute Set";
 	$rootScope.alerts = [];
 	$scope.loadDefaults = function(){
@@ -8,12 +8,17 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 		getAllAttributes();
 	}
 
+	
 	function getAllAttributes(){
-		attributeService.getAllAttributes().then( function( response ){
-			$scope.attributesAvailable = response;
-		}, function( errorMessage ){
+		var request = attributeService.getAllAttributes();
+		function errorCallback( errorMessage ) {
 			console.warn( errorMessage );
-		});
+		}
+		function successCallback( response ) {
+			$scope.attributesAvailable = response;
+			return( response.data );
+		}
+		return( request.then( successCallback, errorCallback ) );
 	}
 
 	$scope.addNew = function( set ){
@@ -28,12 +33,16 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 	}
 	$scope.getAllSets = function( ){
 		$scope.loading = true;
-		attributeSetsService.getAll( ).then( function( response ){
+		var request = attributeSetsService.getAll( );
+		function errorCallback( errorMessage ) {
+			console.warn( errorMessage );
+		}
+		function successCallback( response ) {
 			$scope.loading = false;
 			$scope.attributeSets = response;
-		}, function( errorMessage ){
-			console.warn( errorMessage );
-		});
+			return( response.data );
+		}
+		return( request.then( successCallback, errorCallback ) );
 	}
 
 	function getAllSets(){
@@ -45,6 +54,11 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 		attributeSetsService.getOneById( id ).then( function( response ){
 			$scope.set = response;
 			$scope.loading = false;
+			getAllAttributes().then( function( response ){
+				removeDeletedAttributesFromSet( $scope.attributesAvailable, $scope.set.attributes, $scope.set );
+			}, function( errorMessage ){
+				console.warn( errorMessage );
+			});
 		} , function(errorMessage ){ 
 			console.warn( errorMessage );
 		});
@@ -52,12 +66,17 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 	$scope.updateOneById = function( set ){
 		set.updated_at = new Date();
 		$scope.loading = true;
-		attributeSetsService.updateOneById( set ).then( function( response ){
+		
+		var request = attributeSetsService.updateOneById( set );
+		function errorCallback( errorMessage ) {
+			console.warn( errorMessage );
+		}
+		function successCallback( response ) {
 			$rootScope.alerts.push({type:"success", msg:  "Attribute Set Updated Successfully" });
 			$scope.loading = false;
-		}, function( errorMessage ){
-			console.warn( errorMessage );
-		});
+			return( response.data );
+		}
+		return( request.then( successCallback, errorCallback ) );
 	}
 	$scope.deleteOneById = function( ){
 		
@@ -67,6 +86,29 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
 	{
 		var setId = $routeParams.id; // check if in edit mode
 		$scope.getOneById( setId );
+	}
+
+	function removeDeletedAttributesFromSet( setAvailable, setSelected, setToBeUpdatedInDB ){
+		for(var i=0 ; i < setSelected.length; i++) {
+			var cnt = 0;
+			for ( var j=0; j< setAvailable.length; j++ )
+			{
+				//console.log('setSelected[',i,']._id : ',setSelected[i]._id,', setAvailable[',j,']._id : ',setAvailable[j]._id);
+				if ( setSelected[i]._id != setAvailable[j]._id )
+				{
+					cnt++
+				}
+				if ( cnt == setAvailable.length )
+				{
+					setSelected.splice(i,1);
+					$scope.updateOneById( setToBeUpdatedInDB ).then( function( response){ 
+						$rootScope.alerts = [];
+						removeDeletedAttributesFromSet( setAvailable, setSelected );	
+					}, function( errorMessage){ });
+					
+				}
+			}
+		 }  
 	}
 
 	$scope.isChecked = function( id ){
@@ -83,7 +125,7 @@ adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, a
       $scope.set.attributes.push(item);
     } else {
       for(var i=0 ; i < $scope.set.attributes.length; i++) {
-        if($scope.set.attributes[i]._id == item._id){
+        if( $scope.set.attributes[i]._id == item._id){
           $scope.set.attributes.splice(i,1);
         }
       }      
