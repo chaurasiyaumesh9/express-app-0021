@@ -9,9 +9,10 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 
 	$scope.sortType     = 'date_added'; // set the default sort type
 	$scope.sortReverse  = true;  // set the default sort order
-	
+	$scope.bool = [], $scope.setChosen = [];
 	$scope.loadDefaults = function(){
 		$scope.product = { in_stock: false, categories:[] };
+		$scope.bool = [], $scope.setChosen=[];
 	}
 	$scope.getProductCategories = getProductCategories; //providing access to scope view
 	$scope.pageChangeHandler = function(num) {};
@@ -235,6 +236,37 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	$scope.loadCategoryProducts = function( category ){
 		$scope.currentCategory = category;
 		//console.log('$scope.productsCategory :',$scope.currentCategory);
+	}
+
+	$scope.getAllSets = function( ){
+		//$scope.loading = true;
+		var request = attributeSetsService.getAll( );
+		function errorCallback( errorMessage ) {
+			console.warn( errorMessage );
+		}
+		function successCallback( response ) {
+			//$scope.loading = false;
+			$scope.availableAttributeSets = response;
+			return( response.data );
+		}
+		return( request.then( successCallback, errorCallback ) );
+	}
+
+	getAllSets();
+
+	function getAllSets(){
+		$scope.getAllSets();
+	}
+
+	$scope.changeMethod = function( index, set ){
+		//console.log('changeMethod',$scope.bool[index]);
+		if ( $scope.bool[index] )
+		{
+			$scope.setChosen.push( set ) 
+		}else{
+			var i = $scope.setChosen.indexOf( set );
+			$scope.setChosen.splice(i,1 ) ;
+		}
 	}
 
 });

@@ -72,3 +72,18 @@ a.theader:visited{
 .wrapper button, .wrapper a, .wrapper a:hover, .wrapper a:visited{
 	outline:none;
 }
+
+.panel-body.mxh310{
+	max-height:310px; overflow:auto;
+}
+
+.lh34{
+	line-height:34px;
+}
+
+.lh44{
+	line-height:44px;
+}
+.fwb{
+	font-weight:bold;
+}

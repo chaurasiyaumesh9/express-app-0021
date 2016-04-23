@@ -191,7 +191,39 @@
 			</md-tab>
 			<md-tab label="Attributes">
 				<md-content class="md-padding">  
-					<h1> Assign Product Attributes </h1>
+					<div class="row">
+						<div class="col-md-3">
+							<div class="panel panel-default">
+								<div class="panel-heading clearfix">  
+									<span class="fwb"> Sets Available/ Chosen </span>
+								</div>
+								<div class="panel-body mxh310">
+									<ul style="margin:0;padding:0;list-style:none;">
+										<li ng-repeat="set in availableAttributeSets"  > 
+											<label class="input" > <input type="checkbox" ng-model="bool[$index]" ng-change="changeMethod($index, set)"> <span class="">{{ set.name }}</span> </label>
+										</li>
+									</ul>
+								</div>
+							  </div>
+						</div>
+						<div class="col-md-9">
+							<!-- <pre>{{ setChosen | json}}</pre>	 -->	
+							<div class="panel panel-default" ng-repeat="set in setChosen">
+								<div class="panel-heading"> {{ set.name }} </div>
+								<div class="panel-body"> 
+									<!-- <pre >{{ set | json }}</pre> -->
+									<div class="row" ng-repeat="at in set.attributes">
+										<div class="col-md-12" >
+											<div class="form-group">
+												<span class="fwb"> {{ at.label }} </span>
+												<input type="text" class="form-control" > 
+											</div>	
+										</div>	
+									</div>
+								</div>
+							 </div>				
+						</div>
+					</div>
 					<!-- <a href="#/attribute-set" class="btn btn-primary"> Manage Attribute Set </a> -->
 				</md-content>
 			</md-tab>

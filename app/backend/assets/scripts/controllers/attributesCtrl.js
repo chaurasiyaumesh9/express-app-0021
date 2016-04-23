@@ -2,7 +2,11 @@ adminApp.controller('attributesCtrl', function($scope, $http, $routeParams, attr
 	$scope.message = "Manage Attributes";
 	$scope.showDelete = false;
 	$scope.deleteCount = 0;
+	$scope.currentPage = 1;
+	$scope.pageSize = 5;
 	var attributeId = -1;
+
+	$scope.sortReverse  = true;
 	$rootScope.alerts = [];
 	$scope.loadDefaults = function(){
 		$scope.attribute = { };
