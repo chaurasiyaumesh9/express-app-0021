@@ -1,4 +1,4 @@
-adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, productService, categoryService, $timeout, common,Upload, $q){
+adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, productService, categoryService, attributeSetsService, $timeout, common,Upload, $q){
 	$scope.message = "Manage Your Products";
 	$rootScope.alerts = [];
 	$scope.currentPage = 1;
