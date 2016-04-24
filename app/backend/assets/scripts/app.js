@@ -13,7 +13,7 @@ adminApp.config(function($routeProvider, $locationProvider) {
 			templateUrl : 'views/add-new-product.html',
 			controller: "productsCtrl"
 		})
-		.when('/products/edit-view-product/:id', {
+		.when('/products/:id', {
 			templateUrl : 'views/edit-view-product.html',
 			controller: "productsCtrl"
 		})
