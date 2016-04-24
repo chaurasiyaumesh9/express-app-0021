@@ -223,30 +223,7 @@ section, footer, header, aside, nav{
 		height:700px;
 	}
 }
-.star-rating {
-	margin: 0;
-  padding: 0;
-  display: inline-block;	
-}
-.star-rating .star{
-	 padding: 1px;
-    color: #ddd;
-    font-size: 20px;
-    text-shadow: .05em .05em #aaa;
-    list-style-type: none;
-    display: inline-block;
-    cursor: pointer;
-	outline:none;
-}
-.star-rating.readonly .star{
-	cursor: default;
-}
-.star-rating .star.filled{
-	color: #fd0;
-}
-.star-rating.readonly .star.filled{
-	 /*color: #666;*/ /* different star color for readonly mode */
-}
+
 
 .footer{
 	 position: absolute;
@@ -265,3 +242,4 @@ section, footer, header, aside, nav{
 	padding: 0 0 60px;
 	overflow:auto;
 }
+
