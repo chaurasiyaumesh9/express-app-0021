@@ -7,7 +7,8 @@ cartApp.controller('ratingController', function( $scope ){
       //console.log('Rating selected: ' + rating);
     };
 	*/
-
+	
+	//$scope.averageRating = 3.6; //can be assigned any static value OR fetched from DB
 		$scope.user1 = {rating:5};
 	  $scope.user2 = {rating:2};
 	  $scope.user3 = {rating:1};  
