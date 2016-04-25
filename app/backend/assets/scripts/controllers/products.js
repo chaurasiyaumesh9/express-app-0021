@@ -9,10 +9,10 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 
 	$scope.sortType     = 'date_added'; // set the default sort type
 	$scope.sortReverse  = true;  // set the default sort order
-	$scope.bool = [], $scope.setChosen = [];
+	$scope.bool = [];
 	$scope.loadDefaults = function(){
-		$scope.product = { in_stock: false, categories:[] };
-		$scope.bool = [], $scope.setChosen=[];
+		$scope.product = { in_stock: false, categories:[], attribute_sets:[] };
+		$scope.bool = [];
 	}
 	$scope.getProductCategories = getProductCategories; //providing access to scope view
 	$scope.pageChangeHandler = function(num) {};
@@ -262,10 +262,10 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 		//console.log('changeMethod',$scope.bool[index]);
 		if ( $scope.bool[index] )
 		{
-			$scope.setChosen.push( set ) 
+			$scope.product.attribute_sets.push( set ) 
 		}else{
-			var i = $scope.setChosen.indexOf( set );
-			$scope.setChosen.splice(i,1 ) ;
+			var i = $scope.product.attribute_sets.indexOf( set );
+			$scope.product.attribute_sets.splice(i,1 ) ;
 		}
 	}
 

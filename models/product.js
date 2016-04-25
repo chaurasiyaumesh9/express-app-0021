@@ -20,7 +20,7 @@ var ProductSchema = new Schema({
 	updated_at: Date,
 	categories:{ type : Array , "default" : [] },
 	images:{ type : Array , "default" : [] },
-	attributes:{ type : Array , "default" : [] }
+	attribute_sets:{ type : Array , "default" : [] }
 });
 
 
@@ -31,7 +31,7 @@ ProductSchema.pre('save', function(next) {
   
   // change the updated_at field to current date
   this.updated_at = currentDate;
-
+ 	
   // if date_added doesn't exist, add to that field
   if (!this.date_added)
     this.date_added = currentDate;

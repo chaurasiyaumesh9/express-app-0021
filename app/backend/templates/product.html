@@ -197,7 +197,7 @@
 								<div class="panel-heading clearfix">  
 									<span class="fwb"> Sets Available/ Chosen </span>
 									<div  class="pull-right">
-										<span class=""> {{ setChosen.length }} </span> of <span class=""> {{ availableAttributeSets.length }} </span>
+										<span class=""> {{ product.attribute_sets.length }} </span> of <span class=""> {{ availableAttributeSets.length }} </span>
 									</div>
 								</div>
 								<div class="panel-body mxh310">
@@ -210,16 +210,16 @@
 							  </div>
 						</div>
 						<div class="col-md-9">
-							<!-- <pre>{{ setChosen | json}}</pre>	 -->	
-							<div class="jumbotron text-center" ng-hide="setChosen.length > 0">
+							<!-- <pre>{{ product.attribute_sets | json}}</pre>	 -->	
+							<div class="jumbotron text-center" ng-hide="product.attribute_sets.length > 0">
 								<h2> No attribute-set chosen so far! </h2>
 							</div>
-							<uib-accordion close-others="true" ng-show="setChosen.length > 0">
+							<uib-accordion close-others="true" ng-show="product.attribute_sets.length > 0">
 								<!-- <uib-accordion-group heading="Static Header, initially expanded" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
 								  This content is straight in the template.
 								</uib-accordion-group> -->
-								<!-- <uib-accordion-group heading="{{ set.name }}" ng-repeat="set in setChosen"> -->
-								<uib-accordion-group ng-repeat="set in setChosen">
+								<!-- <uib-accordion-group heading="{{ set.name }}" ng-repeat="set in product.attribute_sets"> -->
+								<uib-accordion-group ng-repeat="set in product.attribute_sets">
 									<uib-accordion-heading >
 										 {{ set.name }} <!-- <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status[$index].open, 'glyphicon-chevron-right': !status[$index].open}"></i> -->
 									  </uib-accordion-heading>
@@ -227,7 +227,7 @@
 										<div class="form-group clearfix" ng-repeat="at in set.attributes">
 										  <label class="control-label col-sm-4" for="{{ at.code }}"> {{ at.label }} </label>
 										  <div class="col-sm-8">
-											<input type="text" class="form-control" id="{{ at.code }}" ng-if="at.type === 'Open Text'" placeholder="Enter {{ at.label }}">
+											<input type="text" class="form-control" id="{{ at.code }}" ng-if="at.type === 'Open Text'" placeholder="Enter {{ at.label }}" >
 											<a class="btn btn-primary" href="" ng-if="at.type === 'Single Choice'"> Add New {{ at.label }} </a>
 										  </div>
 										</div>

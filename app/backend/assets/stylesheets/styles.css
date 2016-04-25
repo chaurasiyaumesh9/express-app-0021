@@ -87,3 +87,6 @@ a.theader:visited{
 .fwb{
 	font-weight:bold;
 }
+.group-divider{
+	margin: 5px;
+}

@@ -20,3 +20,4 @@ CRITICAL
 25. backend - product expiry logic. product should get deleted/discountinues after being expired.
 26. frontend - updated profile pic of user once logged in.
 27. Frontend - star rating template to be updated as per URL http://codepen.io/anon/pen/NqazVa {{ done }}
+28. backend - remove unwanted field from DB. i.e. product.attributes.
