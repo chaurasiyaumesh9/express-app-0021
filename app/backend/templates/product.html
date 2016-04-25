@@ -224,7 +224,7 @@
 										 {{ set.name }} <!-- <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status[$index].open, 'glyphicon-chevron-right': !status[$index].open}"></i> -->
 									  </uib-accordion-heading>
 								  <form class="form-horizontal" role="form">
-										<div class="form-group clearfix" ng-repeat="at in set.attributes" ng-init="at.values = [];">
+										<div class="form-group clearfix" ng-repeat="at in set.attributes" >
 										  <label class="control-label col-sm-4" for="{{ at.code }}"> {{ at.label }} </label>
 										  <div class="col-sm-8">
 											<input type="text" class="form-control" id="{{ at.code }}" ng-if="at.type === 'Open Text'" placeholder="Enter {{ at.label }}" >

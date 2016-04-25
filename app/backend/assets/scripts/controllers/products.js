@@ -11,6 +11,7 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	$scope.sortReverse  = true;  // set the default sort order
 	$scope.bool = [];
 	$scope.loadDefaults = function(){
+		//console.log('loadDefaults');
 		$scope.product = { in_stock: false, categories:[], attribute_sets:[] };
 		$scope.bool = [];
 	}
@@ -270,11 +271,75 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 	}
 
 	$scope.addToList = function( attribute ){
+		if ( !attribute.values )
+		{
+			attribute.values = [];
+		}
 		if ( attribute.newText )
 		{
 			attribute.values.push( { text: attribute.newText, disabled:false } );
 			attribute.newText = "";
 		}
 	}
+	
+	function matchId( id ){
+		if ( !$scope.availableAttributeSets )
+		{
+			return ;
+		}
+		for (var i=0; i< $scope.availableAttributeSets.length ;i++ )
+		{
+			if ( $scope.availableAttributeSets[i]._id == id )
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	function setSelectedSet(){
+		for (var i=0;i< $scope.product.attributes.length;i++ )
+		{
+			if ( matchId( $scope.product.attributes[i]._id ) != -1)
+			{
+				var index = matchId( $scope.product.attributes[i]._id );
+				$scope.bool[index] = true;
+			}
+		}
+	}
+
+
+	$scope.$watch('availableAttributeSets', function(newValue, oldValue ) {
+		//console.log('newValue :',newValue,',oldValue : ',oldValue);
+		if ( newValue && newValue.length > 0)
+		{
+			$scope.doneFetchingAvailableAttributeSets = true;
+			if(!$scope.$$phase) {
+			  $scope.$apply();
+			}
+		}
+	});
+	
+	$scope.$watch('doneFetchingAvailableAttributeSets', function(newValue, oldValue ) {
+		//console.log('newValue :',newValue,',oldValue : ',oldValue);
+		if ( newValue )
+		{
+				$scope.$watch('product.attribute_sets', function(newValue, oldValue ) {
+				//console.log('newValue :',newValue,',oldValue : ',oldValue);
+				
+				if ( newValue && newValue.length >0 )
+				{
+					for (var i=0;i< newValue.length;i++ )
+					{
+						if ( matchId( newValue[i]._id ) != -1)
+						{
+							var index = matchId( newValue[i]._id );
+							$scope.bool[index] = true;
+						}
+					}
+				}
+			});
+		}
+	});
 
 });
