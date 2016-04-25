@@ -84,9 +84,18 @@ a.theader:visited{
 .lh44{
 	line-height:44px;
 }
+
+.fwn{
+	font-weight:bold;
+}
 .fwb{
 	font-weight:bold;
 }
 .group-divider{
 	margin: 5px;
+}
+
+.disabled-true {
+  text-decoration: line-through;
+  color: grey;
 }

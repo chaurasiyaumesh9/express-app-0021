@@ -269,4 +269,12 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 		}
 	}
 
+	$scope.addToList = function( attribute ){
+		if ( attribute.newText )
+		{
+			attribute.values.push( { text: attribute.newText, disabled:false } );
+			attribute.newText = "";
+		}
+	}
+
 });
