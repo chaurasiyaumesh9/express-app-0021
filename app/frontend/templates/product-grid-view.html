@@ -1,9 +1,9 @@
 <section class="product-grid-view">
 	<div class="product-image-wrapper">
-		 <a href="#/products/{{activeCategory._id}}/{{product._id}}"> <img src="{{ product.images | smallImg }}" class="product-image" /> </a>  
+		 <a href="#!/products/{{activeCategory._id}}/{{product._id}}"> <img src="{{ product.images | smallImg }}" class="product-image" /> </a>  
 		 <!-- <a href=""> <img src="{{ product.images | smallImg }}" class="product-image" /> </a> -->
 	</div>
-	<p class="product-name">  <a href="#/products/{{activeCategory._id}}/{{product._id}}">  <span style="font-weight:bold;">{{ product.name }}</span>  <span class="title">{{ product.title }}</span></a>   		</p>
+	<p class="product-name">  <a href="#!/products/{{activeCategory._id}}/{{product._id}}">  <span style="font-weight:bold;">{{ product.name }}</span>  <span class="title">{{ product.title }}</span></a>   		</p>
 	<p class="price-block"> 
 		<span class="price regular-price {{ product.special_price > 0? 'strickeout':'' }}"><i class="fa fa-inr"></i>{{ product.price }}</span> 
 		<span class="price special-price" ng-show="product.special_price > 0"><i class="fa fa-inr"></i>{{ product.special_price }}</span> 
