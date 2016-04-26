@@ -54,6 +54,10 @@ adminApp.config(function($routeProvider, $locationProvider) {
 			templateUrl : 'views/edit-view-category.html',
 			controller: "categoriesCtrl"
 		});
+
+		//function($locationProvider) {
+			//$locationProvider.hashPrefix('!');
+		//}
 });
 
 adminApp.controller('adminCtrl', function($scope, $rootScope ){
