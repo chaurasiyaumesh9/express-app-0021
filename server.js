@@ -30,7 +30,8 @@ app.use(express.static( path.join(__dirname + '/app')));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
-app.use(require('prerender-node').set('prerenderToken', 'fnu9gwOPhdT0b30IXLI8'));
+//app.use(require('prerender-node').set('prerenderToken', 'fnu9gwOPhdT0b30IXLI8'));
+app.use(require('prerender-node').set('prerenderServiceUrl', 'https://prerender-test402.herokuapp.com/').set('prerenderToken', 'fnu9gwOPhdT0b30IXLI8'));
 
 app.use('/bower_components',  express.static(path.join(__dirname + '/bower_components')));
 app.use("/uploads", express.static(__dirname + '/uploads'));
