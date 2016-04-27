@@ -20,10 +20,10 @@ var port = process.env.PORT || 8010;
 process.env.NODE_ENV = 'production';
 process.env.NODE_PATH =  path.join( __dirname + "/") ;
 process.env.UPLOAD_PATH =  path.join( __dirname + "/uploads/") ;
-process.env.PRERENDER_SERVICE_URL = "https://prerender-test402.herokuapp.com";
+process.env.PRERENDER_SERVICE_URL = "http://service.prerender.io";
 
 
-app.use(preRendered.set('prerenderServiceUrl', 'http://service.prerender.io/').set('prerenderToken', 'fnu9gwOPhdT0b30IXLI8'));
+app.use(preRendered.set('prerenderServiceUrl', 'http://service.prerender.io').set('prerenderToken', 'fnu9gwOPhdT0b30IXLI8'));
 
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
