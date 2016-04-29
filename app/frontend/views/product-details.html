@@ -13,7 +13,7 @@
 	
 				<div data="product.images" slick-slider="{dots: false, arrows: false, draggable: true, slidesToShow:1, infinite:false}" slider-product-view >
 					<div class="product-image-wrapper" ng-repeat="image in product.images" on-finish-render-filters>
-						<a href="#/products/{{activeCategory._id}}/{{product._id}}/fullmode" > <img ng-src="{{ image.url }}" class="product-image"  /> </a>
+						<a href="#!/products/{{activeCategory._id}}/{{product._id}}/fullmode" > <img ng-src="{{ image.url }}" class="product-image"  /> </a>
 					</div>
 				</div>
 				 <div class="thumbnail-view clearfix" data="product.images" slick-slider="{dots: false, arrows: true, draggable: false, slidesToShow:4, slidesToScroll:4, infinite:false, responsive: [{ breakpoint: 1170, settings: { slidesToShow: 4, slidesToScroll: 4 } }, { breakpoint: 992, settings: { slidesToShow: 3, slidesToScroll: 3 } }, { breakpoint: 768,  settings: { slidesToShow: 3, slidesToScroll: 3 } }, { breakpoint: 480, settings: { slidesToShow: 1,  slidesToScroll: 1 } } ] }" auto-slide-thumb >
@@ -25,7 +25,7 @@
 				</div> 
 			</div>
 			<div class="col-md-6 col-sm-6 col-xs-12">
-				<p class="product-name">  <a href="#/products/{{activeCategory._id}}/{{product._id}}">  <span style="font-weight:bold;">{{ product.name }}</span>  <span class="title">{{ product.title }}</span></a></p>	
+				<p class="product-name">  <a href="#!/products/{{activeCategory._id}}/{{product._id}}">  <span style="font-weight:bold;">{{ product.name }}</span>  <span class="title">{{ product.title }}</span></a></p>	
 				<HR class="divider" />
 				<div ng-controller="ratingController" >
 					<div class="row">
@@ -95,6 +95,6 @@
 		</div>
 	</div>
 	<div class="container">
-		<a href="#/products/{{activeCategory._id}}/" class="pull-right"> Go Back </a>
+		<a href="#!/products/{{activeCategory._id}}/" class="pull-right"> Go Back </a>
 	</div>
 </div>
