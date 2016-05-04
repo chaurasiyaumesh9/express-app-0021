@@ -22,29 +22,6 @@ process.env.NODE_PATH =  path.join( __dirname + "/") ;
 process.env.UPLOAD_PATH =  path.join( __dirname + "/uploads/") ;
 //process.env.PRERENDER_SERVICE_URL = "http://service.prerender.io";
 
-preRendered.crawlerUserAgents = [
-   'googlebot',
-  // 'yahoo',
-  // 'bingbot',
-  'baiduspider',
-  'facebookexternalhit',
-  'twitterbot',
-  'rogerbot',
-  'linkedinbot',
-  'embedly',
-  'quora link preview',
-  'showyoubot',
-  'outbrain',
-  'pinterest/0.',
-  'developers.google.com/+/web/snippet',
-  'slackbot',
-  'vkShare',
-  'W3C_Validator',
-  'redditbot',
-  'Applebot',
-  'WhatsApp',
-  'flipboard'
-];
 
 //app.use(preRendered.set('prerenderServiceUrl', 'http://service.prerender.io'));//.set('prerenderToken', 'fnu9gwOPhdT0b30IXLI8'));
 //app.use(preRendered.set('prerenderServiceUrl', 'http://localhost:3000'));
