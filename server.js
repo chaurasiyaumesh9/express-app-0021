@@ -22,7 +22,7 @@ process.env.NODE_PATH =  path.join( __dirname + "/") ;
 process.env.UPLOAD_PATH =  path.join( __dirname + "/uploads/") ;
 //process.env.PRERENDER_SERVICE_URL = "http://service.prerender.io";
 
-preRendered.crawlerUserAgents = [
+var arr = [
    'googlebot',
   // 'yahoo',
   // 'bingbot',
@@ -46,9 +46,12 @@ preRendered.crawlerUserAgents = [
   'flipboard'
 ];
 
+
+
 //app.use(preRendered.set('prerenderServiceUrl', 'http://service.prerender.io'));//.set('prerenderToken', 'fnu9gwOPhdT0b30IXLI8'));
 //app.use(preRendered.set('prerenderServiceUrl', 'http://localhost:3000'));
 app.use(preRendered.set('prerenderServiceUrl', 'https://prerender-test402.herokuapp.com'));
+//app.use(require('prerender-node').set('crawlerUserAgents',arr));
 
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
