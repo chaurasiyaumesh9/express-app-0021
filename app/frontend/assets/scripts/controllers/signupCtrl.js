@@ -1,4 +1,4 @@
-cartApp.controller('signupCtrl', function( $scope, $rootScope, $http, $location, $timeout, $interval, $window ){
+angular.module('sampleCartApp.controller').controller('signupCtrl', function( $scope, $rootScope, $http, $location, $timeout, $interval, $window ){
 	$scope.message = "signup With ";
 	$scope.alerts = [];
 	$scope.signUp = function( user ){
@@ -25,3 +25,4 @@ cartApp.controller('signupCtrl', function( $scope, $rootScope, $http, $location,
 		$scope.alerts.splice(index, 1);
 	  };
 });
+

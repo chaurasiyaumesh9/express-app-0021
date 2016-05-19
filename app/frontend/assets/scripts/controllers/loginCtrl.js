@@ -1,4 +1,4 @@
-cartApp.controller('loginCtrl', function( $scope, $rootScope, $http, $location, $timeout, $interval, $window ){
+angular.module('sampleCartApp.controller').controller('loginCtrl', function( $scope, $rootScope, $http, $location, $timeout, $interval, $window ){
 	$scope.message = "Login With ";
 	$scope.showMessage = false;
 	$scope.alerts = [];
@@ -27,3 +27,4 @@ cartApp.controller('loginCtrl', function( $scope, $rootScope, $http, $location, 
 		$scope.alerts.splice(index, 1);
 	  };
 });
+

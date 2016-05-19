@@ -1,5 +1,4 @@
-var cartApp = angular.module('sampleCartApp', ['ngRoute','ngAnimate','ui.bootstrap','ngMaterial']);
-
+var cartApp = angular.module('sampleCartApp', ['ngRoute','ngAnimate','ui.bootstrap','ngMaterial','sampleCartApp.service','sampleCartApp.directive','sampleCartApp.filter','sampleCartApp.controller']);
 cartApp.config(function( $routeProvider, $locationProvider, $httpProvider ) {
 	
 	$routeProvider

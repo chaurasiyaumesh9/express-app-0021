@@ -1,4 +1,4 @@
-cartApp.controller('productFullmodeCtrl', function($scope, $routeParams, $rootScope, productService, categoryService, $window ){
+angular.module('sampleCartApp.controller').controller('productFullmodeCtrl', function($scope, $routeParams, $rootScope, productService, categoryService, $window ){
 	$rootScope.fullmode = true;
 	if ( $rootScope.activeSlide )
 	{

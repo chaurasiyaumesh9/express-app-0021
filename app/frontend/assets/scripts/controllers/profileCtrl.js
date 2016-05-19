@@ -1,4 +1,4 @@
-cartApp.controller('profileCtrl', function( $scope, $http, $rootScope ){
+angular.module('sampleCartApp.controller').controller('profileCtrl', function( $scope, $http, $rootScope ){
 	$scope.message = "User Profile will be shown here ";
 	$scope.loading = true;
 	
@@ -11,6 +11,3 @@ cartApp.controller('profileCtrl', function( $scope, $http, $rootScope ){
 		}
 	});
 });
-
-
-

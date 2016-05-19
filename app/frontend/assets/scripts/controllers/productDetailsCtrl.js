@@ -1,4 +1,5 @@
-cartApp.controller('productDetailsCtrl', function( $scope, $routeParams, productService, categoryService, $rootScope ){
+
+angular.module('sampleCartApp.controller').controller('productDetailsCtrl', function( $scope, $routeParams, productService, categoryService, $rootScope ){
 	
 	$scope.message = "Product Details Page!"; //just for testing purpose
 	$scope.activeSlide = 0;

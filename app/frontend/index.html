@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="sampleCartApp">
+<html lang="en" >
 <head>
 	<meta charset="UTF-8">
 	<!-- <base href="/"> -->
@@ -7,12 +7,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="google-site-verification" content="Z686TVbvd51-En3-YD9BOhFwcTr0ytN-EDDM03bh9hs" />
 	<meta name="description" content="An E-commerce Web App using MEAN Stack. Open source technologies by adapty solutions pvt ltd.">
-	<meta name="keywords" content="HTML,CSS,XML,JavaScript, ecommerce, mean, meanstack, angular, angularjs, mongoDB, mongo, nodejs, node, express, expressjs, HTML5, CSS3, js, JS, JSON, AJAX, json, ajax, bootstrap, twitter bootstrap, mean stack ecommerce heroku,mean stack ecommerce, mean stack, moltion, flipkart, snapdeal, amazon, flipkart ecommerce, flipkart e-commerce, e-commerce, ecommerce-websites, mean stack ecommerce heroku opensource, mean stack ecommerce heroku framework, social media, media, advertisement, advertising, practical ecommerce">
+	<meta name="keywords" content="ecommerce app development mean stack,HTML,CSS,XML,JavaScript, ecommerce, mean, meanstack, angular, angularjs, mongoDB, mongo, nodejs, node, express, expressjs, HTML5, CSS3, js, JS, JSON, AJAX, json, ajax, bootstrap, twitter bootstrap, mean stack ecommerce heroku,mean stack ecommerce, mean stack, moltion, flipkart, snapdeal, amazon, flipkart ecommerce, flipkart e-commerce, e-commerce, ecommerce-websites, mean stack ecommerce heroku opensource, mean stack ecommerce heroku framework, social media, media, advertisement, advertising, practical ecommerce">
 	<meta name="author" content="Umesh Chaurasiya / umesh.chaurasiya@adapty.com">
 
 	<meta name="fragment" content="!">
 
-	
 	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">	
 	<link rel="stylesheet" href="../bower_components/angular-material/angular-material.min.css" >
@@ -22,7 +21,7 @@
 	<link rel="stylesheet" href="assets/stylesheets/style.css">	
 
 </head>
-<body>
+<body ng-app="sampleCartApp">
 	<div class="wrapper">
 		<div class="top-menu" ng-show="!fullmode" ng-controller="navCtrl">
 			<nav class="navbar navbar-default">
@@ -60,7 +59,7 @@
 		</footer>
 	</div>
 	
- <script src="../bower_components/angular/angular.min.js"> </script>
+  <script src="../bower_components/angular/angular.min.js"> </script>
  <script src="../bower_components/angular-route/angular-route.min.js"> </script>
  <script src="../bower_components/angular-animate/angular-animate.min.js"> </script>
  <script src="../bower_components/angular-bootstrap/ui-bootstrap.min.js"> </script>
@@ -70,53 +69,22 @@
  <script src="../bower_components/jquery/dist/jquery.min.js"> </script>
  <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"> </script>
  <script src="../bower_components/slick-carousel/slick/slick.min.js"> </script>
- <script src="assets/scripts/app.js"> </script>
- <script src="assets/scripts/directives/productGridView.js"> </script>
- <script src="assets/scripts/directives/productListView.js"> </script>
- <script src="assets/scripts/directives/loading.js"> </script>
- <script src="assets/scripts/directives/appspecific.js"> </script>
- <script src="assets/scripts/directives/starRating.js"> </script>
- <script src="assets/scripts/services/products.js"> </script>
- <script src="assets/scripts/services/categories.js"> </script>
- <script src="assets/scripts/filters/filters.js"> </script>
+
+ <script src="assets/scripts/services/index.js"> </script>
+ <script src="assets/scripts/directives/index.js"> </script>
+ <script src="assets/scripts/filters/index.js"> </script>
+ <script src="assets/scripts/controllers/index.js"> </script>
  <script src="assets/scripts/controllers/navCtrl.js"> </script>
  <script src="assets/scripts/controllers/hompageCtrl.js"> </script>
- <script src="assets/scripts/controllers/productListingCtrl.js"> </script>
- <script src="assets/scripts/controllers/productDetailsCtrl.js"> </script>
  <script src="assets/scripts/controllers/loginCtrl.js"> </script>
  <script src="assets/scripts/controllers/signupCtrl.js"> </script>
  <script src="assets/scripts/controllers/profileCtrl.js"> </script>
  <script src="assets/scripts/controllers/socialConnectCtrl.js"> </script>
- <script src="assets/scripts/controllers/productFullmodeCtrl.js"> </script>
  <script src="assets/scripts/controllers/ratingController.js"> </script>
-  
-
- <!-- <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '241587526185299',
-      xfbml      : true,
-      version    : 'v2.5'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
- -->
-
-<!-- <div
-  class="fb-like"
-  data-share="true"
-  data-width="450"
-  data-show-faces="true">
-</div> -->
-
+ <script src="assets/scripts/controllers/productListingCtrl.js"> </script>
+ <script src="assets/scripts/controllers/productDetailsCtrl.js"> </script>
+ <script src="assets/scripts/controllers/productFullmodeCtrl.js"> </script>
+ <script src="assets/scripts/app.js"> </script>
+ 
 </body>
 </html>

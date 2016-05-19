@@ -1,4 +1,4 @@
-cartApp.controller('productListingCtrl', function( $scope, $routeParams, productService, categoryService ){
+angular.module('sampleCartApp.controller').controller('productListingCtrl', function( $scope, $routeParams, productService, categoryService ){
 	$scope.message = "Product Listing Page!"; //just for testing purpose
 	$scope.layout = 'grid';
 	$scope.filters = [

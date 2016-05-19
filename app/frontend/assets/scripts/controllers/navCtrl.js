@@ -1,4 +1,5 @@
-cartApp.controller('navCtrl', function( $scope, $http, $location, $rootScope, categoryService ){
+angular.module('sampleCartApp.controller').controller('navCtrl', function( $scope, $http, $location, $rootScope, categoryService ){
+	
 	$scope.navbarCollapsed = true;
 	getCategories();
 	function getCategories(){

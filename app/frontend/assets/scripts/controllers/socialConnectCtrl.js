@@ -1,4 +1,4 @@
-cartApp.controller('socialConnectCtrl', function( $scope, $rootScope, $http, $location, $timeout, $interval, $window ){
+angular.module('sampleCartApp.controller').controller('socialConnectCtrl', function( $scope, $rootScope, $http, $location, $timeout, $interval, $window ){
 	
 	var catchInterval;
 	

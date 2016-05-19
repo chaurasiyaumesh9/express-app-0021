@@ -1,4 +1,4 @@
-cartApp.controller('ratingController', function( $scope ){
+angular.module('sampleCartApp.controller').controller('ratingController', function( $scope ){
 	/*this.rating1 = 5;
     this.rating2 = 1;
 	this.averageRating = 2;
