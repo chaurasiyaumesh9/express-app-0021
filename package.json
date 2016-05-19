@@ -4,16 +4,17 @@
   "version": "0.1.1",
   "engines": {
     "node": "5.1.0",
-    "npm":  "3.7.2"
+    "npm": "3.7.2"
   },
   "scripts": {
     "start": "node server.js",
-    "postinstall":"bower install"
+    "postinstall": "bower install"
   },
   "dependencies": {
-  "bower": "latest",
     "bcrypt-nodejs": "latest",
     "body-parser": "latest",
+    "bower": "latest",
+    "cloudinary": "^1.3.1",
     "connect-flash": "latest",
     "cookie-parser": "latest",
     "ejs": "latest",

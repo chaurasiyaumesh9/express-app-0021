@@ -57,10 +57,10 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 		$scope.loading = true;
 		product.updated_at = new Date();
 		$scope.uploadFiles( product ).then( function( response ){
-			//console.log('uploaded all!',product);
+			console.log('uploaded all!',product);
 			productService.updateProduct( product ).then( function( response ){
 				//console.log('updated to DB!');
-				//console.log('updateProduct response :',response);
+				console.log('updateProduct response :',response);
 				$scope.loading = false;
 				$scope.product = response;
 				$scope.product.valid_from = common.stringToDate( $scope.product.valid_from );
@@ -149,11 +149,11 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 					url: "/admin/uploads",
 					data: { productPic: file }
 				}).then(function (response) {
-					//console.log('response :',response);
+					console.log('response :',response);
 					var objectRole = response.config.data['productPic']['role'];
 					//var objectUrl = response.data['image']['url'];
 					var objectUrl = response.data['image'];
-					//console.log('objectUrl :',objectUrl);
+					console.log('objectUrl :',objectUrl);
 					var o = { role : objectRole, url: objectUrl};
 					//console.log('o :',o);
 					product['images'].push( o );
