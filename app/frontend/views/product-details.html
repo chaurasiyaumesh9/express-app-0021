@@ -13,13 +13,13 @@
 	
 				<div data="product.images" slick-slider="{dots: false, arrows: false, draggable: true, slidesToShow:1, infinite:false}" slider-product-view >
 					<div class="product-image-wrapper" ng-repeat="image in product.images" on-finish-render-filters>
-						<a href="#!/products/{{activeCategory._id}}/{{product._id}}/fullmode" > <img ng-src="{{ image.url }}" class="product-image"  /> </a>
+						<a href="#!/products/{{activeCategory._id}}/{{product._id}}/fullmode" > <img ng-src="{{ image.imgdata.secure_url }}" class="product-image"  /> </a>
 					</div>
 				</div>
 				 <div class="thumbnail-view clearfix" data="product.images" slick-slider="{dots: false, arrows: true, draggable: false, slidesToShow:4, slidesToScroll:4, infinite:false, responsive: [{ breakpoint: 1170, settings: { slidesToShow: 4, slidesToScroll: 4 } }, { breakpoint: 992, settings: { slidesToShow: 3, slidesToScroll: 3 } }, { breakpoint: 768,  settings: { slidesToShow: 3, slidesToScroll: 3 } }, { breakpoint: 480, settings: { slidesToShow: 1,  slidesToScroll: 1 } } ] }" auto-slide-thumb >
 					<div class="product-wrapper" ng-repeat="image in product.images" >
 						<div class="thumbnail-box">
-							<a href="" class="{{ activeSlide === $index?'active':''}}" ng-click="switchThumbView( $index )" ><img ng-src="{{ image.url }}" /></a>
+							<a href="" class="{{ activeSlide === $index?'active':''}}" ng-click="switchThumbView( $index )" ><img ng-src="{{ image.imgdata.secure_url }}" /></a>
 						</div>
 					</div>
 				</div> 

@@ -11,7 +11,7 @@
 			<div  class="col-sm-12">
 				<div data="activeProduct.images" slick-slider="{dots: true, arrows: false, draggable: true, slidesToShow:1, infinite:false}"  slider-product-view >
 					<div class="product-image-wrapper" ng-repeat="image in activeProduct.images" on-finish-render-filters style="height:{{ windowHeight }}px;" window-height-resize  >
-						<img ng-src="{{ image.url }}" class="product-image" />
+						<img ng-src="{{ image.imgdata.secure_url }}" class="product-image" />
 					</div>
 				</div>
 			</div>

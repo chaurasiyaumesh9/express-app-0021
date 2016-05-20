@@ -4,7 +4,6 @@ angular.module('sampleCartApp.filter', [])
 		return input ? 'Yes' : 'No';
 	}
 })
-
 .filter('smallImg', function( ){
 	return function( arr ){
 		for (var i=0;i<arr.length ;i++ )
@@ -12,7 +11,14 @@ angular.module('sampleCartApp.filter', [])
 			//console.log('arr :',arr[i]);
 			if ( arr[i].role['small'])
 			{
-				return arr[i]['url'];
+				//return arr[i]['url'];
+				
+				if ( arr[i]['imgdata'] )
+				{
+					return arr[i]['imgdata']['secure_url'];
+				}else if( arr[i]['url'] ){
+					return arr[i]['url'];
+				}
 			}
 		}
 	}
