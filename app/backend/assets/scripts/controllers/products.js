@@ -61,7 +61,7 @@ angular.module('sampleCartAdmin.controllers')
 			//console.log('uploaded all!',product);
 			productService.updateProduct( product ).then( function( response ){
 				//console.log('updated to DB!');
-				console.log('updateProduct response :',response);
+				//console.log('updateProduct response :',response);
 				$scope.loading = false;
 				$scope.product = response;
 				$scope.product.valid_from = common.stringToDate( $scope.product.valid_from );

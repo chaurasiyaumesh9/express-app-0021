@@ -142,22 +142,18 @@ var products = {
 
 		function Step1(){
 			for ( var i=0;i< updatedProduct['images'].length; i++ ){
-				if ( updatedProduct['images'][i]['deleted'] ){
-					if ( updatedProduct['images'][i]['url'] )
+				if ( updatedProduct['images'][i]['deleted'] ){	
+					if ( updatedProduct['images'][i]['imgdata'] )
 					{
-						//var splitUrl = updatedProduct['images'][i]['url'].split('/');
-						//var uploadPath = process.env.UPLOAD_PATH;
-						//var filePath = uploadPath + splitUrl[splitUrl.length - 1]  ;
-						updatedProduct['images'].splice(i,1);
-						toBeDeleted.push( updatedProduct['images'][i] );
-						Step1();
+						toBeDeleted.push( updatedProduct['images'][i]['imgdata']['public_id'] );
 					}
-					
+					updatedProduct['images'].splice(i,1);
+					Step1();
 				}
 			 }
 		}
 		Step1();
-		//Step2();
+		Step2();
 		
 		function Step2(){
 			//delete from either filesystem or cloud 
@@ -169,11 +165,10 @@ var products = {
 				  }
 			});	*/
 
-			
-			/*toBeDeleted.forEach( function( filepath ){
-				console.log(filepath);
-				cloudinary.uploader.destroy(filepath.url, function(result) { console.log(result) });
-			})*/
+			toBeDeleted.forEach( function( publicid ){
+				//console.log( 'publicid:', publicid);
+				cloudinary.uploader.destroy( publicid, function(result) { console.log('removing... ',result) });
+			})
 
 		}
 		// Step - 3
