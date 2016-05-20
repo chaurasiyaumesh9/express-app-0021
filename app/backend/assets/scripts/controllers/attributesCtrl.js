@@ -1,4 +1,5 @@
-adminApp.controller('attributesCtrl', function($scope, $http, $routeParams, attributeService, $timeout, $rootScope, $q ){
+angular.module('sampleCartAdmin.controllers')
+.controller('attributesCtrl', function($scope, $http, $routeParams, attributeService, $timeout, $rootScope, $q ){
 	$scope.message = "Manage Attributes";
 	$scope.showDelete = false;
 	$scope.deleteCount = 0;

@@ -1,4 +1,5 @@
-adminApp.service("attributeSetsService", function($http, $q){
+angular.module('sampleCartAdmin.services').
+service("attributeSetsService", function($http, $q){
 	return({
         addNew: addNew,
         getAll: getAll, 

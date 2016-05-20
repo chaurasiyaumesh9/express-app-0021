@@ -26,6 +26,7 @@
     "slick-carousel": "latest",
     "angular-bootstrap": "latest",
     "requirejs": "latest",
-    "domReady": "requirejs-domready#^2.0.1"
+    "domReady": "requirejs-domready#^2.0.1",
+    "angular-filepicker": "^1.1.4"
   }
 }

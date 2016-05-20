@@ -1,4 +1,5 @@
-adminApp.controller('attributeSetsCtrl', function($scope, $http, $routeParams, attributeService, attributeSetsService, $timeout, $rootScope, $q ){
+angular.module('sampleCartAdmin.controllers')
+.controller('attributeSetsCtrl', function($scope, $http, $routeParams, attributeService, attributeSetsService, $timeout, $rootScope, $q ){
 	$scope.message = "Make New Attribute Set";
 	$rootScope.alerts = [];
 	$scope.loadDefaults = function(){

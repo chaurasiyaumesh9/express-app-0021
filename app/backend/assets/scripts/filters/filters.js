@@ -1,23 +1,31 @@
-adminApp.filter('yesNo', function() {
+angular.module('sampleCartAdmin.filters',[])
+.filter('yesNo', function() {
     return function(input) {
         return input ? 'Yes' : 'No';
     }
-});
+})
 
-adminApp.filter('smallImg', function( ){
+.filter('smallImg', function( ){
 	return function( arr ){
 		for (var i=0;i<arr.length ;i++ )
 		{
 			//console.log('arr :',arr[i]);
 			if ( arr[i].role['small'])
 			{
-				return arr[i]['url'];
+				//return arr[i]['url'];
+				
+				if ( arr[i]['imgdata'] )
+				{
+					return arr[i]['imgdata']['secure_url'];
+				}else if( arr[i]['url'] ){
+					return arr[i]['url'];
+				}
 			}
 		}
 	}
-});
+})
 
-adminApp.filter('removeDeleted', function( ){
+.filter('removeDeleted', function( ){
 	return function( arr ){
 		if ( !arr)
 		{
@@ -33,9 +41,9 @@ adminApp.filter('removeDeleted', function( ){
 		}
 		return arr;
 	}
-});
+})
 
-adminApp.filter('filterProductsByCategory', function( ){
+.filter('filterProductsByCategory', function( ){
 	return function( list, searchCategory ){
 		if ( !searchCategory )
 		{

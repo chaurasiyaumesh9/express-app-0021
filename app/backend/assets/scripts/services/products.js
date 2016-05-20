@@ -1,4 +1,5 @@
-adminApp.service('productService', function($http, $q){
+angular.module('sampleCartAdmin.services')
+.service('productService', function($http, $q){
 	
 	return({
 		getProductList: getProductList,

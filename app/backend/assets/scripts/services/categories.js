@@ -1,4 +1,5 @@
-adminApp.service("categoryService", function($http, $q){
+angular.module('sampleCartAdmin.services')
+.service("categoryService", function($http, $q){
 	return({
         addNewCategory: addNewCategory, //done
         getAllCategories: getAllCategories, //done

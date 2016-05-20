@@ -1,4 +1,5 @@
-adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, productService, categoryService, attributeSetsService, $timeout, common,Upload, $q){
+angular.module('sampleCartAdmin.controllers')
+.controller('productsCtrl', function($scope,$rootScope, $routeParams, productService, categoryService, attributeSetsService, $timeout, common,Upload, $http, $q){
 	$scope.message = "Manage Your Products";
 	$rootScope.alerts = [];
 	$scope.currentPage = 1;
@@ -60,7 +61,7 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 			//console.log('uploaded all!',product);
 			productService.updateProduct( product ).then( function( response ){
 				//console.log('updated to DB!');
-				//console.log('updateProduct response :',response);
+				console.log('updateProduct response :',response);
 				$scope.loading = false;
 				$scope.product = response;
 				$scope.product.valid_from = common.stringToDate( $scope.product.valid_from );
@@ -144,6 +145,8 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 			if ( !$scope.product['toBeUploaded'][i]['deleted'])
 			{
 				var file = $scope.product['toBeUploaded'][i];
+				//console.log('file :',file);
+				//console.log('string :',JSON.parse( JSON.stringify( file ) ));
 				requests[i] = Upload.upload({ 
 					method: "post",
 					url: "/admin/uploads",
@@ -152,9 +155,11 @@ adminApp.controller('productsCtrl', function($scope,$rootScope, $routeParams, pr
 					//console.log('response :',response);
 					var objectRole = response.config.data['productPic']['role'];
 					//var objectUrl = response.data['image']['url'];
-					var objectUrl = response.data['image'];
+					//var objectUrl = response.data['image'];
+					var imgData = response.data['image'];
 					//console.log('objectUrl :',objectUrl);
-					var o = { role : objectRole, url: objectUrl};
+					//var o = { role : objectRole, url: objectUrl};
+					var o = { role : objectRole, imgdata: imgData};
 					//console.log('o :',o);
 					product['images'].push( o );
 					$timeout(function () {

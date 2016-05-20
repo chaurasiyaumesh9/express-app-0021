@@ -4,7 +4,9 @@ var multer  =   require('multer');
 var fs = require('fs');  
 var path = require('path');
 var mongoose = require('mongoose');
+var cloudinary = require('cloudinary');
 
+/*
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
     callback(null, '././uploads');
@@ -19,11 +21,18 @@ var storage =   multer.diskStorage({
 	callback(null, newFileName );
   }
 });
-var cloudinary = require('cloudinary');
-cloudinary.config({ 
-  cloud_name: 'drieypcyz', 
-  api_key: '131957787152229', 
-  api_secret: 'sBObmg6MjtjkcMy3tzEU1ZJOd0g' 
+*/
+
+var storage =   multer.diskStorage({
+  filename: function (req, file, callback) {
+	 // console.log(req.params.id );
+	  var pid = req.params.id;
+    //callback(null, file.fieldname + '-' + Date.now());
+	var datetimestamp = Date.now();
+	var newFileName = file.fieldname + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1];
+	var url = "../../uploads/" + newFileName;
+	callback(null, newFileName );
+  }
 });
 
 
@@ -85,7 +94,11 @@ var products = {
 		
 	},
 	uploadImages: function( req, res ){
-		//console.log('file :',req.file);
+		//if ( req.file )
+		//{
+			//console.log('req.files  :',req.file);
+		//}
+		
 		var upload = multer({ storage : storage, inMemory: true }).single('productPic');
 		upload( req, res, function(err) {
 			if(err) {
@@ -96,20 +109,20 @@ var products = {
 				
 				//console.log('file :',file);
 				//console.log('data :',req.data);
-				var path = "../uploads/" + file.filename;
-				var img = {
-					url:  path
-				}
-				//res.json( {image: img} );
+				//var path = "../uploads/" + file.filename;
+				//var img = {
+				//	url:  path
+				//}
+				//res.json( {image: path } );
 				//res.json( img );
-				cloudinary.uploader.upload( "./uploads/" + file.filename , function(result) { 
+				cloudinary.uploader.upload( file.path , function(result) { 
 				  console.log(result) ;
-				  res.json( {image: result.secure_url } );
+				  //res.json( {image: result.secure_url } );
+				  res.json( {image: result } );
 				});
 			}
 			//res.redirect("/");
 		});
-		
 		
 	},
 	updateProduct: function(req, res){
@@ -132,11 +145,11 @@ var products = {
 				if ( updatedProduct['images'][i]['deleted'] ){
 					if ( updatedProduct['images'][i]['url'] )
 					{
-						var splitUrl = updatedProduct['images'][i]['url'].split('/');
-						var uploadPath = process.env.UPLOAD_PATH;
-						var filePath = uploadPath + splitUrl[splitUrl.length - 1]  ;
+						//var splitUrl = updatedProduct['images'][i]['url'].split('/');
+						//var uploadPath = process.env.UPLOAD_PATH;
+						//var filePath = uploadPath + splitUrl[splitUrl.length - 1]  ;
 						updatedProduct['images'].splice(i,1);
-						toBeDeleted.push( filePath );
+						toBeDeleted.push( updatedProduct['images'][i] );
 						Step1();
 					}
 					
@@ -144,16 +157,24 @@ var products = {
 			 }
 		}
 		Step1();
-		Step2();
+		//Step2();
 		
 		function Step2(){
-			deleteFiles( toBeDeleted, function( err ){
+			//delete from either filesystem or cloud 
+			/*deleteFiles( toBeDeleted, function( err ){
 				if (err) {
 					console.log(err);
 				  } else {
 					console.log('all files removed');
 				  }
-			});	
+			});	*/
+
+			
+			/*toBeDeleted.forEach( function( filepath ){
+				console.log(filepath);
+				cloudinary.uploader.destroy(filepath.url, function(result) { console.log(result) });
+			})*/
+
 		}
 		// Step - 3
 		Product.findByIdAndUpdate( updatedProduct._id, updatedProduct,{new: true}, function(err, product) {
@@ -207,8 +228,8 @@ module.exports =  function( router ){
 	router.post('/products', function(req, res){
 		products.addNewProduct( req, res );
 	});
-	router.post('/uploads', function(req, res){
-		products.uploadImages( req, res );
+	router.post('/uploads', function(req, res, next ){
+		products.uploadImages( req, res, next );
 	});
 	router.delete('/products/:id', function(req, res){
 		products.deleteProduct( req, res );

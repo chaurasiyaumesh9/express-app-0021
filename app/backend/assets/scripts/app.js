@@ -1,4 +1,4 @@
-var adminApp = angular.module('sampleCartAdmin', ['ngRoute','ngAnimate','ui.bootstrap','angularUtils.directives.dirPagination','ngMaterial','ngFileUpload']);
+var adminApp = angular.module('sampleCartAdmin', ['ngRoute','ngAnimate','ui.bootstrap','angularUtils.directives.dirPagination','ngMaterial','ngFileUpload','sampleCartAdmin.directives','sampleCartAdmin.services','sampleCartAdmin.filters','sampleCartAdmin.controllers']);
 
 adminApp.config(function($routeProvider, $locationProvider) {
 	$routeProvider

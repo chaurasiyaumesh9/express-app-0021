@@ -1,4 +1,5 @@
-adminApp.controller('categoriesCtrl', function($scope, $http, $routeParams, categoryService, $timeout, $rootScope, $q ){
+angular.module('sampleCartAdmin.controllers')
+.controller('categoriesCtrl', function($scope, $http, $routeParams, categoryService, $timeout, $rootScope, $q ){
 	$scope.message = "Manage Categories";
 	$rootScope.alerts = [];
 	$scope.showDelete = false;

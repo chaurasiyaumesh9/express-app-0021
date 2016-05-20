@@ -3,7 +3,11 @@ var config = {};
 config.db = { prod:{}, local:{}};
 config.db.prod.url = "mongodb://su:welcome123@ds011158.mlab.com:11158/sample2";
 config.db.local.url = "mongodb://localhost:27017/sample2";
-
+config.cloudinary = { 
+  cloud_name: 'drieypcyz', 
+  api_key: '131957787152229', 
+  api_secret: 'sBObmg6MjtjkcMy3tzEU1ZJOd0g' 
+}
 config.social = {
 	prod:{
 		facebook:{

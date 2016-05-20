@@ -105,9 +105,9 @@
 						</thead>
 						
 						<tbody>
-							<tr ng-repeat="image in product.images" ng-hide="image.deleted">
+							<tr ng-repeat="image in product.images" ng-if="!image.deleted">
 								<td> 
-									<img src="{{ image.url }}" class="img-preview" />
+									<img src="{{ image.imgdata.secure_url }}" class="img-preview" />
 								</td>
 								<td> <input type="checkbox" ng-model="image.role.large" > </td>
 								<td> <input type="checkbox" ng-model="image.role.small" > </td>

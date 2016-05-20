@@ -14,7 +14,7 @@ var frontend =  require('./routes/frontend/frontend')(passport);
 var UserSchema   = require('./models/user');
 var preRendered = require('prerender-node');
 var User = appConfig.db.conn.model('User', UserSchema);
-
+var cloudinary = require('cloudinary');
 
 
 process.env.NODE_ENV = 'production';
@@ -27,6 +27,7 @@ process.env.CLOUDINARY_URL= "cloudinary://131957787152229:sBObmg6MjtjkcMy3tzEU1Z
 //app.use(preRendered.set('prerenderServiceUrl', 'http://localhost:3000'));
 app.use(preRendered.set('prerenderServiceUrl', 'https://prerender-test402.herokuapp.com'));
 //app.use(require('prerender-node').set('crawlerUserAgents',arr));
+cloudinary.config( appConfig.cloudinary );
 
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)

@@ -1,4 +1,5 @@
-adminApp.service('common', function(){
+angular.module('sampleCartAdmin.services')
+.service('common', function(){
 	return({
 		stringToDate: stringToDate
 	});
