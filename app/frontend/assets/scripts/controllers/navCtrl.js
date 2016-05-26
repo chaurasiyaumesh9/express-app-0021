@@ -11,7 +11,7 @@ angular.module('sampleCartApp.controller').controller('navCtrl', function( $scop
 	}
 	$scope.setActiveCategory = function( category ){
 		$scope.activeCategory = category;
-		$scope.loading = true;
+		//$scope.loading = true;
 	}
 	$scope.logout = function(){
 		$http.post('/logout').success( function(){

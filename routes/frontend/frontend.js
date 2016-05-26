@@ -33,7 +33,7 @@ var categories = {
 
 var products = {
 	getProductList: function (req, res){
-		Product.find({ discontinued:false }, function(err, results) {
+		Product.find({ discontinued:{$ne: true} }, function(err, results) {
 		  if (!err)
 			{
 				res.json( results );
@@ -43,9 +43,10 @@ var products = {
 		});
 
 	},
-	getProductsByCategory: function (req, res){
+	getProductsByCategory: function ( req, res, next ){
 		//var cUrl = req.params.categoryUrl;
-		var cId = req.params.cid;
+		//console.log('cid : ', req.param('cid'));
+		var cId = req.cid;
 		//console.log('cId :',cId);
 		Product.find( { categories: { $elemMatch: { selected: true, _id: cId } }, discontinued:{$ne: true} } , function(err, results) {
 			if (!err)
@@ -58,7 +59,7 @@ var products = {
 	},
 	getProductById: function (req, res){
 		//var cUrl = req.params.categoryUrl;
-		var pId = req.params.pid;
+		var pId = req.pid;
 		//console.log('pId :',pId);
 		Product.find( { _id: pId , discontinued:{$ne: true} } , function(err, results) {
 			if (!err)
@@ -66,7 +67,7 @@ var products = {
 				//console.log('results :',results);
 				res.json( results[0] );
 			}else{
-				console.log('Error while performing the query..check function products.getProductsByCategory() for more details..', err );
+				console.log('Error while performing the query..check function products.getProductById() for more details..', err );
 			}
 		});
 	}
@@ -83,26 +84,34 @@ module.exports = function( passport ){
 		next();
 	});
 
+	router.param('cid', function(req, res, next, cid) {
+		var modified = cid ;//+ '-products';
+		//console.log('modified :',modified);
+		// save name to the request
+		req.cid = modified;
+
+		//req.results = products.getProductsByCategory( req,res, next );
+		//console.log('req.results : ', req.results);
+		next();
+	});
+	router.param('pid', function(req, res, next, pid) {
+		var modified = pid ;//+ '-products';
+		//console.log('modified :',modified);
+		// save name to the request
+		req.pid = modified;
+
+		//req.results = products.getProductsByCategory( req,res, next );
+		//console.log('req.results : ', req.results);
+		next();
+	});
+
 
 	
-	router.get('/categories', function(req, res){
-		categories.getCategories( req, res );
-	});
-
-	router.get('/categories/:id', function(req, res){
-		categories.getCategoryById( req, res );
-	});
-
-	router.get('/products', function(req, res){
-		products.getProductList(req, res);
-	});
-	router.get('/products/:cid', function(req, res){
-		products.getProductsByCategory(req, res);
-	});
-
-	router.get('/product/:pid', function(req, res){
-		products.getProductById(req, res);
-	});
+	router.get('/categories', categories.getCategories );
+	router.get('/categories/:id', categories.getCategoryById );
+	router.get('/products', products.getProductList);
+	router.get('/products/:cid', products.getProductsByCategory );
+	router.get('/product/:pid', products.getProductById);
 
 	router.post('/login', function(req, res, next) {
 	  passport.authenticate('local-login', function(err, user, info) {
@@ -168,6 +177,7 @@ module.exports = function( passport ){
     router.get('/auth/google/callback',	passport.authenticate('google', {successRedirect : '/#/profile',failureRedirect : '/login'}));
 	router.get('/auth/twitter', passport.authenticate('twitter'));
     router.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedirect : '/#/profile',failureRedirect : '/login' }));
+
 
 	return router;
 }

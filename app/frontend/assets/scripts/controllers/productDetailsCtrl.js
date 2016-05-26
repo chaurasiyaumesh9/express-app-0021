@@ -3,12 +3,13 @@ angular.module('sampleCartApp.controller').controller('productDetailsCtrl', func
 	
 	$scope.message = "Product Details Page!"; //just for testing purpose
 	$scope.activeSlide = 0;
-	if ( $routeParams.cid && $routeParams.pid )
+	if ( $routeParams.pid )
 	{
 		
-		var cId = $routeParams.cid;
+		//var cId = $routeParams.cid;
 		var pId = $routeParams.pid;
 		$scope.loading = true;
+		//console.log('pId :',pId);
 		productService.getProductById( pId ).then( function( response ){
 			//console.log('response :',response);
 
@@ -19,13 +20,13 @@ angular.module('sampleCartApp.controller').controller('productDetailsCtrl', func
 			console.warn( errorMessage );
 		});
 		
-		categoryService.getCategoryById( cId ).then( function( response ){
+		/*categoryService.getCategoryById( cId ).then( function( response ){
 			//console.log('getCategoryById response :', response);
 			$scope.activeCategory = response;
 			$rootScope.activeCategory = response; //setting up the root scope to access full mode
 		} , function(errorMessage ){ 
 			console.warn( errorMessage );
-		});
+		});*/
 		
 	}
 	$scope.switchThumbView = function( index ){

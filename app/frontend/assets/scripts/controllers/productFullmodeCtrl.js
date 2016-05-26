@@ -20,7 +20,7 @@ angular.module('sampleCartApp.controller').controller('productFullmodeCtrl', fun
 				console.warn( errorMessage );
 			});
 		}
-		if ( $routeParams.cid )
+		/*if ( $routeParams.cid )
 		{
 			var cId = $routeParams.cid;
 			$scope.loading = true;
@@ -30,7 +30,7 @@ angular.module('sampleCartApp.controller').controller('productFullmodeCtrl', fun
 			} , function(errorMessage ){ 
 				console.warn( errorMessage );
 			});
-		}
+		}*/
 	}
 	$scope.switchThumbView = function( index ){
 		$scope.activeSlide = index;

@@ -27,6 +27,8 @@ angular.module('sampleCartApp.controller').controller('productListingCtrl', func
 		field: "SKU",
 		reverse: false
 	};
+
+
 	if ( $routeParams.cid )
 	{
 		//var cUrl = $routeParams.curl; // check if in edit/view mode
@@ -47,6 +49,8 @@ angular.module('sampleCartApp.controller').controller('productListingCtrl', func
 		} , function(errorMessage ){ 
 			console.warn( errorMessage );
 		});
+	}else{
+		getTop100Products();
 	}
 	$scope.setActiveFilter = function( f ){
 		$scope.activeFilter = f;
@@ -60,4 +64,14 @@ angular.module('sampleCartApp.controller').controller('productListingCtrl', func
 		$scope.setActiveFilter( $scope.defaultFilter );
 	}
 	$scope.setActiveFilter( $scope.defaultFilter ); //setting up default filter
+
+	function getTop100Products(){
+		productService.getAllProducts( ).then( function( response ){
+			//console.log('response :',response);
+			$scope.productList = response;
+			$scope.loading = false;
+		} , function(errorMessage ){ 
+			console.warn( errorMessage );
+		});
+	}
 });

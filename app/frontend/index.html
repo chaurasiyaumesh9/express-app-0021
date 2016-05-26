@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
 	<meta charset="UTF-8">
-	<!-- <base href="/"> -->
+	<base href="/"> 
 	<title> An E-commerce Web App using MEAN Stack </title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="google-site-verification" content="Z686TVbvd51-En3-YD9BOhFwcTr0ytN-EDDM03bh9hs" />
@@ -37,7 +37,7 @@
 				<div class="collapse navbar-collapse" uib-collapse="navbarCollapsed">
 				  <ul class="nav navbar-nav">
 					<li> <a href="#!/" ng-click="hideNav()"><span class="fa fa-home"></span> Home</a> </li>
-					<li ng-repeat="category in categories" ><a href="#!/products/{{ category._id }}" ng-click="hideNav()"> {{category.name}} </a></li>
+					<li ng-repeat="category in categories" ><a href="#!/products/{{ category._id }}" ng-click="hideNav(); setActiveCategory(category)"> {{category.name}} </a></li>
 				  </ul>
 				  <ul class="nav navbar-nav navbar-right">
 					<li> <a href="#!/login" ng-hide="activeUser" ng-click="hideNav()"> <span class="glyphicon glyphicon-log-in"></span> Login </a> </li>

@@ -6,15 +6,19 @@ cartApp.config(function( $routeProvider, $locationProvider, $httpProvider ) {
 			templateUrl : 'views/homepage.html',
 			controller:'hompageCtrl'
 		})
+		.when('/products', {
+			templateUrl : 'views/product-listing.html',
+			controller:'productListingCtrl'
+		})
 		.when('/products/:cid', {
 			templateUrl : 'views/product-listing.html',
 			controller:'productListingCtrl'
 		})
-		.when('/products/:cid/:pid', {
+		.when('/product/:pid', {
 			templateUrl : 'views/product-details.html',
 			controller:'productDetailsCtrl'
 		})
-		.when('/products/:cid/:pid/fullmode', {
+		.when('/product/:pid/fullmode', {
 			templateUrl : 'views/product-full-mode.html',
 			controller:'productFullmodeCtrl'
 		})
