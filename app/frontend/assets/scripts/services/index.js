@@ -80,5 +80,12 @@ function handleError( response ) {
 	return( $q.reject( response.data.message ) );
 }
 function handleSuccess( response ) {
-	return( response.data );
-}
+	//console.log( typeof response.data );
+	if( typeof response.data =='object' ){
+		return( response.data );
+	}	
+	else{
+		return;		
+	}
+	
+}	

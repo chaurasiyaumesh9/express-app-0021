@@ -8,13 +8,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var appConfig = require('./config/appconfig');
-
-var backend =  require('./routes/backend/backend');
 var useroAuth = require('./routes/frontend/oAuth')(passport);
+var backend =  require('./routes/backend/backend');
 var frontend =  require('./routes/frontend/frontend')(passport);
-var UserSchema   = require('./models/user');
 var preRendered = require('prerender-node');
-var User = appConfig.db.conn.model('User', UserSchema);
 var cloudinary = require('cloudinary');
 
 
@@ -30,6 +27,12 @@ app.use(preRendered.set('prerenderServiceUrl', 'https://prerender-test402.heroku
 //app.use(require('prerender-node').set('crawlerUserAgents',arr));
 cloudinary.config( appConfig.cloudinary );
 
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+});
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()) // parse application/json
@@ -48,8 +51,16 @@ app.use("/uploads", express.static(__dirname + '/uploads'));
 app.use('/admin', express.static(__dirname + '/app/backend') ); //go to static directoy backend while accessing /admin from url
 app.use('/admin', backend);  //accessing /admin will get you to route backend
 
+
 app.use('/', express.static(__dirname + '/app/frontend') ); //go to static directoy fronend while accessing / from url
+
+
 app.use('/', frontend); //accessing / will get you to frontend route
+
+/*app.all('/*', function(req, res, next) {
+    // Just send the index.html for other files to support HTML5Mode
+    res.sendFile('index.html', { root: './app/frontend/' });
+});*/
 
 
 //app.use(preRendered.set('prerenderServiceUrl', 'https://prerender-test402.herokuapp.com/').set('prerenderToken', 'fnu9gwOPhdT0b30IXLI8'));

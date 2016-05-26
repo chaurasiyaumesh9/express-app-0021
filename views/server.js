@@ -8,8 +8,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var appConfig = require('./config/appconfig');
-var useroAuth = require('./routes/frontend/oAuth')(passport);
+
 var backend =  require('./routes/backend/backend');
+var useroAuth = require('./routes/frontend/oAuth')(passport);
 var frontend =  require('./routes/frontend/frontend')(passport);
 var UserSchema   = require('./models/user');
 var preRendered = require('prerender-node');

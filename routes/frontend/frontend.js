@@ -83,27 +83,18 @@ module.exports = function( passport ){
 		}
 		next();
 	});
-
+	
 	router.param('cid', function(req, res, next, cid) {
-		var modified = cid ;//+ '-products';
-		//console.log('modified :',modified);
-		// save name to the request
+		var modified = cid ;
 		req.cid = modified;
-
-		//req.results = products.getProductsByCategory( req,res, next );
-		//console.log('req.results : ', req.results);
 		next();
 	});
 	router.param('pid', function(req, res, next, pid) {
-		var modified = pid ;//+ '-products';
-		//console.log('modified :',modified);
-		// save name to the request
+		var modified = pid ;
 		req.pid = modified;
-
-		//req.results = products.getProductsByCategory( req,res, next );
-		//console.log('req.results : ', req.results);
 		next();
 	});
+
 
 
 	
@@ -112,6 +103,8 @@ module.exports = function( passport ){
 	router.get('/products', products.getProductList);
 	router.get('/products/:cid', products.getProductsByCategory );
 	router.get('/product/:pid', products.getProductById);
+
+	
 
 	router.post('/login', function(req, res, next) {
 	  passport.authenticate('local-login', function(err, user, info) {

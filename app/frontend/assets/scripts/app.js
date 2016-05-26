@@ -56,7 +56,6 @@ cartApp.config(function( $routeProvider, $locationProvider, $httpProvider ) {
     });
 
 	$locationProvider.html5Mode(false).hashPrefix('!');
-	
 });
 
 cartApp.run(getActiveUser);

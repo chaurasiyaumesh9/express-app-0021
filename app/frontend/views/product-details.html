@@ -13,7 +13,8 @@
 	
 				<div data="product.images" slick-slider="{dots: false, arrows: false, draggable: true, slidesToShow:1, infinite:false}" slider-product-view >
 					<div class="product-image-wrapper" ng-repeat="image in product.images" on-finish-render-filters>
-						<a href="#!/product/{{product._id}}/fullmode" > <img ng-src="{{ image.imgdata.secure_url }}" class="product-image"  /> </a>
+						<!-- <a href="#!/product/{{product._id}}/fullmode" > <img ng-src="{{ image.imgdata.secure_url }}" ez-zoom class="product-image" ez-zoom-config="{'tint':true, 'tintColour':'#F90', 'tintOpacity':0.5}" ez-zoom-image="{{activeSlide === $index ? image.zoom : ''}}" /> </a> -->
+						 <img ng-src="{{ image.imgdata.secure_url }}" class="product-image" ng-elevate-zoom zoom-image="{{ image.imgdata.secure_url }}" />
 					</div>
 				</div>
 				 <div class="thumbnail-view clearfix" data="product.images" slick-slider="{dots: false, arrows: true, draggable: false, slidesToShow:4, slidesToScroll:4, infinite:false, responsive: [{ breakpoint: 1170, settings: { slidesToShow: 4, slidesToScroll: 4 } }, { breakpoint: 992, settings: { slidesToShow: 3, slidesToScroll: 3 } }, { breakpoint: 768,  settings: { slidesToShow: 3, slidesToScroll: 3 } }, { breakpoint: 480, settings: { slidesToShow: 1,  slidesToScroll: 1 } } ] }" auto-slide-thumb >
@@ -64,32 +65,29 @@
 						<span class="price special-price" ng-show="product.special_price > 0"><i class="fa fa-inr"></i>{{ product.special_price }}</span> 
 					</div>
 				</p>
+				
+				<p class="descritpion">
+					{{ product.description }}
+				</p>
+				<hr/>
 				<p >
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-sm-2">
 							<div >
-								<span > Quantity :</span>
-								<input type="text" style="width:41px;text-align:center;border-radius:4px;border:1px solid #eaeaea;padding:5px;" value="1" name="qty" />
+								<!-- <span > Quantity :</span> -->
+								<input type="text" style="width:41px;text-align:center;border-radius:4px;border:1px solid #eaeaea;padding:5px;display:block;margin:6px auto;" value="1" name="qty" />
 							</div>			
+						</div>
+						<div class="col-sm-10">
+							<button class="btn btn-primary btn-primary-spacing" ng-hide="!product.in_stock"> <i class="fa fa-shopping-cart"></i>  Add To Cart </button>
+							<button class="btn btn-warning btn-primary-spacing" ng-show="!product.in_stock" ng-disabled="true"> <i class="fa fa-shopping-cart" ></i>  Out of Stock </button>
+							<button class="btn btn-primary btn-primary-spacing"><!-- <i class="fa fa-heart"></i> --> Add To Wishlist </button>
+							<button class="btn btn-primary btn-primary-spacing"><!-- <i class="fa fa-signal"></i> --> Add To Compare </button>
 						</div>
 						<!-- <div class="col-lg-4">
 							<label style="line-height:31px;" ng-show="!product.in_stock" > Out of Stock </label>
 						</div> -->
 					</div>
-					
-				</p>
-				<p class="descritpion">
-					{{ product.description }}
-				</p>
-				<p>
-					<button class="btn btn-primary" ng-hide="!product.in_stock"> <i class="fa fa-shopping-cart"></i>  Add To Cart </button>
-					<button class="btn btn-warning" ng-show="!product.in_stock" ng-disabled="true"> <i class="fa fa-shopping-cart" ></i>  Out of Stock </button>
-				</p>
-				<p>
-					<button class="btn btn-primary"><i class="fa fa-heart"></i> Add To Wishlist </button>
-				</p>
-				<p>
-					<button class="btn btn-primary"><i class="fa fa-signal"></i> Add To Compare </button>
 				</p>
 			</div>
 		</div>

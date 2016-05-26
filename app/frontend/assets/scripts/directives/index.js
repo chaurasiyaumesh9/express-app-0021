@@ -179,3 +179,34 @@ angular.module('sampleCartApp.directive', [])
 	 }
 
  })
+.directive('ngElevateZoom', function() {
+  return {
+    restrict: 'A',
+    link: function(scope, element, attrs) {
+      element.attr('data-zoom-image',attrs.zoomImage);
+      $(element).elevateZoom({
+      	zoomType : "lens", lensShape : "round", lensSize : 200 
+      });
+    }
+  };
+})
+.directive('zoomContainer', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+        	scope.$watch('activeSlide', function( newValueSlide, oldValueSlide ){
+				console.log(newValueSlide,',', oldValueSlide );
+				if( newValueSlide >=0 ){
+					console.log( element.children('div.zoomContainer') );
+					//element.children('div.zoomContainer').remove();	
+				}
+				//var target = element.children('div.zoomContainer').remove();
+			});
+            scope.$on('$routeChangeSuccess', function() {
+
+              //  var target = element.children('div.zoomContainer').remove();
+            })
+        }
+    }
+
+});

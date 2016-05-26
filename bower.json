@@ -27,6 +27,8 @@
     "angular-bootstrap": "latest",
     "requirejs": "latest",
     "domReady": "requirejs-domready#^2.0.1",
-    "angular-filepicker": "^1.1.4"
+    "angular-filepicker": "^1.1.4",
+    "angular-elevate-zoom": "^1.0.3",
+    "elevatezoom": "^2.2.3"
   }
 }
