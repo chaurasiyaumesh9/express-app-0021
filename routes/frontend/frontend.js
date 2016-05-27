@@ -36,11 +36,13 @@ var products = {
 		Product.find({ discontinued:{$ne: true} }, function(err, results) {
 		  if (!err)
 			{
+				//db.foo.find().sort({date_added:-1}).limit(50);
+
 				res.json( results );
 			}else{
 				console.log('Error while performing the query..check function products.getProductList() for more details..', err );
 			}
-		});
+		}).sort({date_added:-1}).limit(5);
 
 	},
 	getProductsByCategory: function ( req, res, next ){

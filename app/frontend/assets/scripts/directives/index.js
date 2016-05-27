@@ -202,7 +202,7 @@ angular.module('sampleCartApp.directive', [])
         restrict: 'A',
         link: function(scope, element, attrs) {
         	scope.$watch('activeSlide', function( newValueSlide, oldValueSlide ){
-				console.log(newValueSlide,',', oldValueSlide );
+				//console.log(newValueSlide,',', oldValueSlide );
 				if( newValueSlide >=0 ){
 					//console.log( element[0].querySelector('div.zoomContainer') );
 					var target = element[0].querySelector('div.zoomContainer');
