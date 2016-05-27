@@ -183,10 +183,17 @@ angular.module('sampleCartApp.directive', [])
   return {
     restrict: 'A',
     link: function(scope, element, attrs) {
-      element.attr('data-zoom-image',attrs.zoomImage);
-      $(element).elevateZoom({
-      	zoomType : "lens", lensShape : "round", lensSize : 200 
-      });
+    	attrs.$observe('zoomImage',function(){
+	        linkElevateZoom();
+	      });
+    	function linkElevateZoom(){
+	        //Check if its not empty
+	        if (!attrs.zoomImage) return;
+	        element.attr('data-zoom-image',attrs.zoomImage);
+	        $(element).elevateZoom({zoomType : "lens", lensShape : "round", lensSize : 200});
+	      }
+
+	      linkElevateZoom();
     }
   };
 })
@@ -197,13 +204,19 @@ angular.module('sampleCartApp.directive', [])
         	scope.$watch('activeSlide', function( newValueSlide, oldValueSlide ){
 				console.log(newValueSlide,',', oldValueSlide );
 				if( newValueSlide >=0 ){
-					console.log( element.children('div.zoomContainer') );
-					//element.children('div.zoomContainer').remove();	
+					//console.log( element[0].querySelector('div.zoomContainer') );
+					var target = element[0].querySelector('div.zoomContainer');
+					if( target ){
+						target.remove();
+					}
 				}
 				//var target = element.children('div.zoomContainer').remove();
 			});
             scope.$on('$routeChangeSuccess', function() {
-
+            	var target = element[0].querySelector('div.zoomContainer');
+					if( target ){
+						target.remove();
+					}
               //  var target = element.children('div.zoomContainer').remove();
             })
         }
