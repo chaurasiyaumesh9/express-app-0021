@@ -8,6 +8,8 @@ var mongoose = require('mongoose');
 var Product = appconfig.db.conn.model('Product', ProductSchema);
 var Category = appconfig.db.conn.model('Category', CategorySchema);
 
+
+// note added
 var categories = {
 	getCategories: function (req, res){
 		Category.find({active:true}, function(err, results) {
