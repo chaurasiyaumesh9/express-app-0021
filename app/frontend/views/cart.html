@@ -1,5 +1,49 @@
 <div class="container">
 	<div class="jumbotron text-center">
-		 <h1> <span class="glyphicon glyphicon-fire" aria-hidden="true"></span> {{ message }} </h1>
+		 <h2> <span class="glyphicon glyphicon-fire" aria-hidden="true"></span> {{ message }} </h2>
 	</div>
 </div> 
+
+<div class="view-cart-page">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-xs-12">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<div class="panel-title">
+							<div class="row">
+								<div class="col-md-6">
+									<h5><span class="glyphicon glyphicon-shopping-cart"> Cart</span></h5>
+								</div>
+								<div class="col-md-6">
+									<a href="#!/products" class="btn btn-primary btn-sm pull-right">
+										<span class="glyphicon glyphicon-share-alt"></span> Continue Shopping
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div ng-repeat="product in cart">
+							<div class="row" >
+								<div class="col-md-2 col-xs-12">
+									<div class="product-image-wrapper">
+										<a href="#!/product/{{product._id}}"> <img src="{{ product.images | smallImg }}" class="product-image"   /> </a>	
+									</div>
+								</div>
+								<div class="col-md-4 col-xs-12">
+									<p class="product-name">  <a href="#!/product/{{product._id}}">  <span style="font-weight:bold;">{{ product.name }}</span>  <span class="title">{{ product.title }}</span></a>
+								</div>
+							</div>
+							<hr/>
+						</div>
+						
+					</div>
+					<div class="panel-footer">
+						Panel footer
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

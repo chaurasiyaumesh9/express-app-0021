@@ -1,4 +1,4 @@
-angular.module('sampleCartApp.controller').controller('productListingCtrl', function( $scope, $routeParams, productService, categoryService ){
+angular.module('sampleCartApp.controller').controller('productListingCtrl', function( $scope, $rootScope, $routeParams, productService, categoryService ){
 	$scope.message = "Product Listing Page!"; //just for testing purpose
 	$scope.layout = 'grid';
 	$scope.filters = [
@@ -75,5 +75,11 @@ angular.module('sampleCartApp.controller').controller('productListingCtrl', func
 		} , function(errorMessage ){ 
 			console.warn( errorMessage );
 		});
+	}
+	$scope.addToCart = function( product ){
+		if( !$rootScope.cart ){
+			$rootScope.cart = [];
+		}
+		$rootScope.cart.push( product );
 	}
 });

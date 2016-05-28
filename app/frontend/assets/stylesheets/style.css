@@ -286,3 +286,8 @@ section, footer, header, aside, nav{
 		margin:6px auto;
 	}
 }
+
+
+.view-cart-page .product-image-wrapper{
+	height:90px;
+}
