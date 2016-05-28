@@ -22,6 +22,14 @@ cartApp.config(function( $routeProvider, $locationProvider, $httpProvider ) {
 			templateUrl : 'views/product-full-mode.html',
 			controller:'productFullmodeCtrl'
 		})
+		.when('/cart', {
+			templateUrl : 'views/cart.html',
+			controller:'cartCtrl'
+		})
+		.when('/checkout', {
+			templateUrl : 'views/checkout.html',
+			controller:'checkoutCtrl'
+		})
 		.when('/login', {
 			templateUrl : 'views/login.html',
 			controller:'loginCtrl',

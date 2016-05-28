@@ -16,8 +16,8 @@
 				{{ product.short_description }}
 			</p>
 			<p>
-				<button class="btn btn-primary" ng-hide="!product.in_stock"> <i class="fa fa-shopping-cart"></i>  Add To Cart </button>
-				<button class="btn btn-warning" ng-show="!product.in_stock" ng-disabled="true"> <i class="fa fa-shopping-cart" ></i>  Out of Stock </button>
+				<a class="btn btn-primary" ng-hide="!product.in_stock" href="#!/cart"> <i class="fa fa-cart-plus" aria-hidden="true"></i>  Add To Cart </a>
+				<button class="btn btn-warning" ng-show="!product.in_stock" ng-disabled="true"> <i class="fa fa-cart-plus" aria-hidden="true"></i>  Out of Stock </button>
 				<button class="btn btn-primary"><!-- <i class="fa fa-heart"></i> --> Add To Wishlist </button>
 			</p>
 		</div>

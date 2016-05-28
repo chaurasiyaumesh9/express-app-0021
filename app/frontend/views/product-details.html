@@ -79,7 +79,7 @@
 							</div>			
 						</div>
 						<div class="col-sm-10">
-							<button class="btn btn-primary btn-primary-spacing" ng-hide="!product.in_stock"> <i class="fa fa-shopping-cart"></i>  Add To Cart </button>
+							<a class="btn btn-primary btn-primary-spacing" ng-hide="!product.in_stock" href="#!/cart"> <i class="fa fa-cart-plus" aria-hidden="true"></i>  Add To Cart </a>
 							<button class="btn btn-warning btn-primary-spacing" ng-show="!product.in_stock" ng-disabled="true"> <i class="fa fa-shopping-cart" ></i>  Out of Stock </button>
 							<button class="btn btn-primary btn-primary-spacing"><!-- <i class="fa fa-heart"></i> --> Add To Wishlist </button>
 							<button class="btn btn-primary btn-primary-spacing"><!-- <i class="fa fa-signal"></i> --> Add To Compare </button>
