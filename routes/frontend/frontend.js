@@ -78,19 +78,34 @@ var products = {
 			
 };
 
-var cart = {
-	products: [],
-	addProduct: function( p ){
-		var l = this.products.length;
-		for (var i = 0 - 1; i<l; i++) {
-			//if( p['_id'] === this.products[i]['_id'])
-			
-		}
-	},
-	removeProduct: function(){
+var cart = ( function(){
+	
 
+	//var products = [];
+	function addProduct( productlist, product ){
+		if ( ifAlreadyAdded( productlist, product ) != -1 ) {
+			var index = ifAlreadyAdded( productlist, product );
+			//console.log( productlist[index] );
+			productlist[index].qty++;
+		}else{
+			productlist.push( {item: product, qty: 1});
+		}
 	}
-};
+
+	function ifAlreadyAdded( list, p ){
+		var l = list.length;
+		for (var i = 0; i<l; i++) {
+			if( p['_id'] === list[i]['item']['_id'])
+			return i;
+		}
+		return -1;
+	}
+	return {
+		addProduct: addProduct
+	}
+
+})();
+
 module.exports = function( passport ){
 	router.use(frontendsession({ secret: 'meanstack402 frontend', cart: [], cookie: { maxAge: 60000 }, saveUninitialized: true, resave: true})); // session secret
 	router.use( function(req, res, next ){
@@ -129,7 +144,9 @@ module.exports = function( passport ){
 		if( !sess.cart ){
 			sess.cart = [];
 		}
-		sess.cart.push( req.body.product );
+		cart.addProduct( sess.cart, req.body.product);
+		
+		//sess.cart.push( req.body.product );
 		res.send( sess.cart );
 	});
 	router.get('/cart', function( req, res, next ){
