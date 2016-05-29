@@ -151,6 +151,15 @@ module.exports = function( passport ){
 	router.get('/loggedin', function( req, res ){
 		res.send( req.isAuthenticated()?req.user: '0')
 	});
+	router.post('/cart', function( req, res ){
+		var cart = req.session.cart || [];  
+		cart.push(req.body.product);
+		//res.redirect('/cart');
+	});
+	router.get('/cart', function( req, res, next ){
+		var cart = req.session.cart || [];
+		res.send( cart );
+	});
 
 	/*router.get('/auth/facebook', function(req, res, next) {
 	  passport.authenticate('facebook', { scope : 'email' }, function(err, user, info) {

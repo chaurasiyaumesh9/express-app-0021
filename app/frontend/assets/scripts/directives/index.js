@@ -179,7 +179,7 @@ angular.module('sampleCartApp.directive', [])
 	 }
 
  })
-.directive('ngElevateZoom', function() {
+.directive('ngElevateZoom', function($window) {
   return {
     restrict: 'A',
     link: function(scope, element, attrs) {
@@ -189,9 +189,19 @@ angular.module('sampleCartApp.directive', [])
     	function linkElevateZoom(){
 	        //Check if its not empty
 	        if (!attrs.zoomImage) return;
-	        element.attr('data-zoom-image',attrs.zoomImage);
-	        $(element).elevateZoom({zoomType : "lens", lensShape : "round", lensSize : 200});
+	        var screenWidth = $window.innerWidth;
+            if (screenWidth >= 768) {
+            	element.attr('data-zoom-image',attrs.zoomImage);
+        		$(element).elevateZoom({zoomType : "lens", lensShape : "round", lensSize : 200});
+            }else{
+            	//destroy zoom
+            }
+	        
 	      }
+	      $window.onresize = function() {
+            linkElevateZoom();
+            scope.$apply();
+        };
 
 	      linkElevateZoom();
     }

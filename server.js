@@ -38,7 +38,7 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()) // parse application/json
 app.use(bodyParser.urlencoded({ extended: true })) // parse application/x-www-form-urlencoded
 
-app.use(session({ secret: 'meanstack402', saveUninitialized: true, resave: true})); // session secret
+app.use(session({ cart:[], secret: 'meanstack402', saveUninitialized: true, resave: true})); // session secret
 app.use(express.static( path.join(__dirname + '/app')));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
