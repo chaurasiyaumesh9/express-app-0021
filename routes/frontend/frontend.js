@@ -4,7 +4,7 @@ var appconfig = require('../../config/appconfig');
 var CategorySchema = require('../../models/category');
 var ProductSchema = require('../../models/product');
 var mongoose = require('mongoose');
-
+var frontendsession      = require('express-session');
 var Product = appconfig.db.conn.model('Product', ProductSchema);
 var Category = appconfig.db.conn.model('Category', CategorySchema);
 
@@ -77,7 +77,22 @@ var products = {
 	}
 			
 };
+
+var cart = {
+	products: [],
+	addProduct: function( p ){
+		var l = this.products.length;
+		for (var i = 0 - 1; i<l; i++) {
+			//if( p['_id'] === this.products[i]['_id'])
+			
+		}
+	},
+	removeProduct: function(){
+
+	}
+};
 module.exports = function( passport ){
+	router.use(frontendsession({ secret: 'meanstack402 frontend', cart: [], cookie: { maxAge: 60000 }, saveUninitialized: true, resave: true})); // session secret
 	router.use( function(req, res, next ){
 		//console.log('executing route:');
 		if ( req.user )
@@ -108,7 +123,24 @@ module.exports = function( passport ){
 	router.get('/products/:cid', products.getProductsByCategory );
 	router.get('/product/:pid', products.getProductById);
 
-	
+	router.post('/cart', function( req, res, next ){
+		var sess = req.session;
+		//console.log('sess post : ',sess);
+		if( !sess.cart ){
+			sess.cart = [];
+		}
+		sess.cart.push( req.body.product );
+		res.send( sess.cart );
+	});
+	router.get('/cart', function( req, res, next ){
+		var sess = req.session;
+		//console.log('sess get : ',sess);
+		if( sess.cart ){
+			res.send( sess.cart );
+		}else{
+			res.send([]);
+		}
+	});
 
 	router.post('/login', function(req, res, next) {
 	  passport.authenticate('local-login', function(err, user, info) {
@@ -151,15 +183,7 @@ module.exports = function( passport ){
 	router.get('/loggedin', function( req, res ){
 		res.send( req.isAuthenticated()?req.user: '0')
 	});
-	router.post('/cart', function( req, res ){
-		var cart = req.session.cart || [];  
-		cart.push(req.body.product);
-		//res.redirect('/cart');
-	});
-	router.get('/cart', function( req, res, next ){
-		var cart = req.session.cart || [];
-		res.send( cart );
-	});
+	
 
 	/*router.get('/auth/facebook', function(req, res, next) {
 	  passport.authenticate('facebook', { scope : 'email' }, function(err, user, info) {

@@ -71,7 +71,37 @@ angular.module('sampleCartApp.service', [])
 		return( request.then( handleSuccess, handleError ) );
 	}
 })
+.service('cartService', function($http, $q){
+	return({
+		addToCart: addToCart,
+		getCart: getCart
+	});
 
+	function addToCart( product ){
+		var request = $http({
+            method: "post",
+            url: "/cart",
+            params: {
+                action: "add"
+            },
+            data: {
+                product: product
+            }
+        });
+        return( request.then( handleSuccess, handleError ) );
+	}
+	function getCart(){
+		var request = $http({
+			method: "get",
+			url: "/cart",
+			params: {
+				action: "get"
+			}
+		});
+		return( request.then( handleSuccess, handleError ) );
+	}
+	
+})
 function handleError( response ) {
 	if ( ! angular.isObject( response.data ) || ! response.data.message ) {
 		return( $q.reject( "An unknown error occurred." ) );

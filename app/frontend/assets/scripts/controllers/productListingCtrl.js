@@ -1,4 +1,4 @@
-angular.module('sampleCartApp.controller').controller('productListingCtrl', function( $scope, $rootScope, $routeParams, productService, categoryService, $http ){
+angular.module('sampleCartApp.controller').controller('productListingCtrl', function( $scope, $rootScope, $routeParams, productService, categoryService, cartService, $location ){
 	$scope.message = "Product Listing Page!"; //just for testing purpose
 	$scope.layout = 'grid';
 	$scope.filters = [
@@ -77,41 +77,15 @@ angular.module('sampleCartApp.controller').controller('productListingCtrl', func
 		});
 	}
 	$scope.addToCart = function( product ){
-		addToCart( product ).then( function(response){
-			console.log('addToCart :',response);
+		//console.log('addToCart product :',product);
+		cartService.addToCart( product ).then( function(response){
+			//console.log('addToCart response :',response);
 			$rootScope.cart = response;
+			$location.url('/cart');
 		}, function(errorMessage){
 			console.log('addToCart errorMessage : ',errorMessage);
 		});
 	}
-	function addToCart( product ){
-		var request = $http({
-            method: "post",
-            url: "/cart",
-            params: {
-                action: "add"
-            },
-            data: {
-                product: product
-            }
-        });
-        return( request.then( handleSuccess, handleError ) );
-	}
-	function handleError( response ) {
-		if ( ! angular.isObject( response.data ) || ! response.data.message ) {
-			return( $q.reject( "An unknown error occurred." ) );
-		}
-		// Otherwise, use expected error message.
-		return( $q.reject( response.data.message ) );
-	}
-	function handleSuccess( response ) {
-		//console.log( typeof response.data );
-		if( typeof response.data =='object' ){
-			return( response.data );
-		}	
-		else{
-			return;		
-		}
+	
 		
-	}	
 });
