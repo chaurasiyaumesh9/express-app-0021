@@ -69,7 +69,7 @@ angular.module('sampleCartApp.controller').controller('productListingCtrl', func
 
 		productService.getAllProducts( ).then( function( response ){
 			//console.log('response :',response);
-			$scope.listingTitle = "TOP 50 PRODUCT(S)";
+			$scope.listingTitle = "TOP 50 PRODUCT(S) FOR YOU";
 			$scope.productList = response;
 			$scope.loading = false;
 		} , function(errorMessage ){ 

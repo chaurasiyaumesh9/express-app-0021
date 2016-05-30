@@ -166,7 +166,7 @@ module.exports = function( passport ){
 		cart.addProduct( sess.cart, req.body.product);
 		
 		//sess.cart.push( req.body.product );
-		res.send( {cart:sess.cart, message:"Product Added Succesfully!"} );
+		res.send( {cart:sess.cart, message:"Product succesfully added to cart!"} );
 	});
 	router.get('/cart', function( req, res, next ){
 		var sess = req.session;
@@ -183,7 +183,10 @@ module.exports = function( passport ){
 		var updatedCart = cart.updateCart( sess.cart, req.body.cart );
 		//console.log('updatedCart : ',updatedCart);
 		sess.cart = updatedCart;
-		res.send( {cart: sess.cart, message:"Cart Updated Successfully!"} );
+		if( sess.cart.length > 0)
+			res.send( {cart: sess.cart, message:"Cart Updated Successfully!"} );
+		else
+			res.send( {cart: sess.cart, message:"Cart Has Been Cleared Successfully!"} );
 	});
 
 	router.post('/login', function(req, res, next) {

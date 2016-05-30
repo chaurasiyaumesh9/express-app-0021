@@ -107,7 +107,7 @@
 						<tbody>
 							<tr ng-repeat="image in product.images" ng-if="!image.deleted">
 								<td> 
-									<img src="{{ image.imgdata.secure_url }}" class="img-preview" />
+									<img ng-src="{{ image.imgdata.secure_url }}" class="img-preview" />
 								</td>
 								<td> <input type="checkbox" ng-model="image.role.large" > </td>
 								<td> <input type="checkbox" ng-model="image.role.small" > </td>
@@ -193,7 +193,7 @@
 				<md-content class="md-padding">  
 					<div class="row">
 						<div class="col-md-3">
-							<div class="panel panel-default">
+							<div class="panel panel-info">
 								<div class="panel-heading clearfix">  
 									<span class="fwb"> Sets Available/ Chosen </span>
 									<div  class="pull-right">
@@ -227,7 +227,7 @@
 										<div class="form-group clearfix" ng-repeat="at in set.attributes" >
 										  <label class="control-label col-sm-4" for="{{ at.code }}"> {{ at.label }} </label>
 										  <div class="col-sm-8">
-											<input type="text" class="form-control" id="{{ at.code }}" ng-if="at.type === 'Open Text'" placeholder="Enter {{ at.label }}" >
+											<input type="text" ng-model="at.newText" class="form-control" id="{{ at.code }}" ng-if="at.type === 'Open Text'" placeholder="Enter {{ at.label }}" >
 											
 											<div class="container_fluid" ng-if="at.type === 'Single Choice'">
 												<div class="row">
@@ -255,9 +255,9 @@
 										</div>
 
 										<div class="form-group clearfix">        
-										  <div class="col-sm-12">
+										 <!--  <div class="col-sm-12">
 											<a type="submit" class="btn btn-default pull-right" href="">Submit</a>
-										  </div>
+										  </div> -->
 										</div>
 									</form>
 								</uib-accordion-group>

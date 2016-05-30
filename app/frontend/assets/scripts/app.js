@@ -73,6 +73,9 @@ cartApp.run(function($rootScope) {
        $rootScope.fullmode = false;
     })
     $rootScope.alerts = [];
+    $rootScope.closeAlert = function(index) {
+		$rootScope.alerts.splice(index, 1);
+  	};
 })
 
 function checkLogin( $q, $timeout, $http, $location, $rootScope ){
