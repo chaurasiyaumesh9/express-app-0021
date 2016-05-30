@@ -61,8 +61,8 @@
 
 				<p>
 					<div class="price-block"> 
-						<span class="price regular-price {{ product.special_price > 0? 'strickeout':'' }}"><i class="fa fa-inr"></i>{{ product.price }}</span> 
-						<span class="price special-price" ng-show="product.special_price > 0"><i class="fa fa-inr"></i>{{ product.special_price }}</span> 
+						<span class="price regular-price {{ product.special_price > 0? 'strickeout':'' }}"><i class="fa fa-inr"></i>{{ product.price | currency:'':0 }}</span> 
+						<span class="price special-price" ng-show="product.special_price > 0"><i class="fa fa-inr"></i>{{ product.special_price | currency:'':0}}</span> 
 					</div>
 				</p>
 				
@@ -79,7 +79,8 @@
 							</div>			
 						</div>
 						<div class="col-sm-10">
-							<a class="btn btn-primary btn-primary-spacing" ng-hide="!product.in_stock" href="#!/cart"> <i class="fa fa-cart-plus" aria-hidden="true"></i>  Add To Cart </a>
+							<a class="btn btn-primary" ng-hide="!product.in_stock" ng-click="addToCart( product )" href=""> <i class="fa fa-cart-plus" aria-hidden="true"></i>  Add To Cart </a>
+
 							<button class="btn btn-warning btn-primary-spacing" ng-show="!product.in_stock" ng-disabled="true"> <i class="fa fa-shopping-cart" ></i>  Out of Stock </button>
 							<button class="btn btn-primary btn-primary-spacing"><!-- <i class="fa fa-heart"></i> --> Add To Wishlist </button>
 							<button class="btn btn-primary btn-primary-spacing"><!-- <i class="fa fa-signal"></i> --> Add To Compare </button>

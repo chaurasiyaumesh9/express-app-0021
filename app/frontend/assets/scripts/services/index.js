@@ -74,7 +74,8 @@ angular.module('sampleCartApp.service', [])
 .service('cartService', function($http, $q){
 	return({
 		addToCart: addToCart,
-		getCart: getCart
+		getCart: getCart,
+		getTotal: getTotal
 	});
 
 	function addToCart( product ){
@@ -99,6 +100,15 @@ angular.module('sampleCartApp.service', [])
 			}
 		});
 		return( request.then( handleSuccess, handleError ) );
+	}
+
+	function getTotal( cart ){
+		var total = 0;
+		for (var i = 0;i <cart.length; i++ ) {
+			var product = cart[i];
+			total += product.qty * ( product.item.special_price || product.item.price );
+		};
+		return total;
 	}
 	
 })
