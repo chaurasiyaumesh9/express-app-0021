@@ -33,6 +33,7 @@ angular.module('sampleCartApp.controller').controller('cartCtrl', function( $sco
   		var index = $scope.cart.indexOf( product );
   		if( index >=0 ){
   			$scope.cart.splice(index,1);
+  			$rootScope.alerts.push({type:"danger", msg:  "Product Removed!" });
   		}
   	}
 
@@ -44,6 +45,6 @@ angular.module('sampleCartApp.controller').controller('cartCtrl', function( $sco
   			})
   		}
   	}
-  	
+
 	
 });

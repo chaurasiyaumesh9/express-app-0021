@@ -13,7 +13,7 @@
 			
 		</div>
 		
-		<div class="row">
+		<div class="row" >
 			<div class="col-md-12 col-xs-12">
 				<div class="panel panel-info">
 					<div class="panel-heading">
@@ -24,15 +24,23 @@
 
 								</div>
 								<div class="col-md-6">
-									<a href="#!/products" class="btn btn-primary btn-md pull-right">
+									<a ng-if="cart.length>0" href="#!/products" class="btn btn-primary btn-md pull-right">
 										<span class="glyphicon glyphicon-share-alt"></span> Continue Shopping
 									</a>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="panel-body">
-						<div class="header">
+					<div class="panel-body" ng-if="cart.length==0 || !cart">
+						<div class="well-md">
+							<h4> You have no product(s) in cart right now. </h4>
+							<a ng-if="cart.length==0 || !cart" href="#!/products" class="btn btn-primary btn-md">
+										<span class="glyphicon glyphicon-share-alt"></span> Add Product(s) To Your Cart
+									</a>
+						</div>
+					</div>
+					<div class="panel-body" ng-if="cart.length>0">
+						<div class="header" >
 							<div class="row">
 								<div class="col-md-2 col-xs-12 text-center">
 									<h5> <strong> Product Picture </strong></h5>
@@ -53,7 +61,7 @@
 							<div class="row" >
 								<div class="col-md-2 col-xs-12">
 									<div class="product-image-wrapper">
-										<a href="#!/product/{{product.item._id}}"> <img src="{{ product.item.images | smallImg }}" class="product-image"   /> </a>	
+										<a href="#!/product/{{product.item._id}}"> <img ng-src="{{ product.item.images | smallImg }}" class="product-image"   /> </a>	
 									</div>
 								</div>
 								<div class="col-md-4 col-xs-12">
@@ -62,23 +70,18 @@
 
 								</div>
 								<div class="col-md-6 col-xs-12">
-									<div class="col-md-3 text-center">
+									<div class="col-md-3 col-xs-3 text-center">
 										<h5> <strong> <i class="fa fa-inr"></i>{{ (product.item.special_price || product.item.price) | currency:'':0}}</strong> x </h5>
 									</div>
-									<div class="col-md-3 col-xs-9 text-center">
+									<div class="col-md-3 col-xs-3 text-center">
 										<input type="text" class="form-control input-sm" ng-model="product.qty">
 									</div>
-									<div class="col-md-3 col-xs-9 text-center">
+									<div class="col-md-3 col-xs-3 text-center">
 										<h5> <strong> <i class="fa fa-inr"></i>{{ ((product.item.special_price || product.item.price) * product.qty) | currency:'':0}}</strong></h5>
 									</div>
-									<div class="col-md-3 col-xs-2 text-center">
+									<div class="col-md-3 col-xs-3 text-center">
 										<button class="btn btn-danger btn-sm" ng-click="removeFromCart( product )"> <span class="glyphicon glyphicon-trash"></span></button>
 									</div>
-									<!-- <p class="quantity"> {{ product.qty }}</p>
-									<p class="price-block"> 
-										<span class="price regular-price {{ product.item.special_price > 0? 'strickeout':'' }}"><i class="fa fa-inr"></i>{{ product.item.price }}</span> 
-										<span class="price special-price" ng-show="product.item.special_price > 0"><i class="fa fa-inr"></i>{{ product.item.special_price }}</span> 
-									</p> -->
 								</div>
 							</div>
 							<hr/>
@@ -94,7 +97,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="panel-footer">
+					<div class="panel-footer" ng-if="cart.length>0">
 						<div class="row">
 							<div class="col-md-9 col-xs-12 text-right">
 								<h4> <strong>Total : <i class="fa fa-inr"></i> {{ cart | getCartTotalPrice | currency:'' }} </strong></h4>

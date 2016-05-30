@@ -276,9 +276,7 @@ section, footer, header, aside, nav{
 	.product-details-page .qty{
 		margin:6px;
 	}
-	.view-cart-page .header{
-		display:none;
-	}
+	
 }
 
 @media screen and (min-width:768px){
@@ -290,6 +288,11 @@ section, footer, header, aside, nav{
 	}
 }
 
+@media screen and (max-width:991px){
+	.view-cart-page .header{
+		display:none;
+	}
+}
 
 .view-cart-page .product-image-wrapper{
 	height:90px;
