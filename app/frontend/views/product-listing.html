@@ -36,7 +36,7 @@
 						  </ul>
 						</div>  -->
 						<div class="btn-group" uib-dropdown >
-						  <button type="button" class="btn btn-default" uib-dropdown-toggle >
+						  <button type="button" class="btn btn-default btn-md" uib-dropdown-toggle style="min-width:150px;">
 							{{ activeFilter.caption || 'Look-up By'}}  <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" uib-dropdown-menu role="menu" >
@@ -56,6 +56,7 @@
 					<div class="row">
 						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 anim-grid-check" ng-repeat="product in productList | orderBy:sortType:sortReverse:defaultFilter">
 							<product-grid-view></product-grid-view>
+							<hr/>
 						</div>
 					</div>
 				</div>
@@ -65,6 +66,7 @@
 			<div class="col-md-12"  >
 				<div ng-repeat="product in productList | orderBy:sortType:sortReverse:defaultFilter" class="anim-grid-check">
 					<product-list-view></product-list-view>
+					<hr ng-if="!$last"/>
 				</div>
 			</div>
 		</div>

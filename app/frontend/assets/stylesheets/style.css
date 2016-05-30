@@ -107,7 +107,7 @@ section, footer, header, aside, nav{
 
 .product-grid-view, .product-list-view{
 	margin: 10px auto;
-	border-bottom:1px solid #eaeaea;
+	/*border-bottom:1px solid #eaeaea;*/
 	padding:5px 15px;
 } 
 .product-details-page{

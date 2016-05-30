@@ -23,7 +23,7 @@ angular.module('sampleCartApp.controller').controller('productListingCtrl', func
 	
 	$scope.loading = true;
 	$scope.defaultFilter = {
-		caption: "Sort By",
+		caption: "Look Up By",
 		field: "SKU",
 		reverse: false
 	};
