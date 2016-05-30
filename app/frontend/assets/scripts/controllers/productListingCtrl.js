@@ -80,8 +80,10 @@ angular.module('sampleCartApp.controller').controller('productListingCtrl', func
 		//console.log('addToCart product :',product);
 		cartService.addToCart( product ).then( function(response){
 			//console.log('addToCart response :',response);
-			$rootScope.cart = response;
+			$rootScope.cart = response.cart;
+			$rootScope.alerts.push({type:"success", msg:  response.message });
 			$location.url('/cart');
+
 		}, function(errorMessage){
 			console.log('addToCart errorMessage : ',errorMessage);
 		});

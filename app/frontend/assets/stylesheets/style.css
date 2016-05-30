@@ -276,6 +276,9 @@ section, footer, header, aside, nav{
 	.product-details-page .qty{
 		margin:6px;
 	}
+	.view-cart-page .header{
+		display:none;
+	}
 }
 
 @media screen and (min-width:768px){

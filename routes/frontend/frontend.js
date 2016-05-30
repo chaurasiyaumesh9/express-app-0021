@@ -83,13 +83,31 @@ var cart = ( function(){
 
 	//var products = [];
 	function addProduct( productlist, product ){
+		var qty = 1;
+		if( product['qty'] ){
+			qty = parseInt( product['qty'] );
+		}
 		if ( ifAlreadyAdded( productlist, product ) != -1 ) {
 			var index = ifAlreadyAdded( productlist, product );
 			//console.log( productlist[index] );
-			productlist[index].qty++;
+			var oldqty = parseInt( productlist[index].qty );
+			var updatedqty = oldqty + qty;
+			productlist[index].qty = updatedqty;
+			oldqty = null, updatedqty = null;
 		}else{
-			productlist.push( {item: product, qty: 1});
+			productlist.push( {item: product, qty: qty });			
 		}
+	}
+
+	function updateCart( oldlist, newlist ){
+		//console.log('oldlist before : ',oldlist);
+		//console.log('newlist before : ',newlist);
+		oldlist = null;
+		oldlist = newlist;
+		newlist = null;
+		//console.log('oldlist after : ',oldlist);
+		//console.log('newlist after : ',newlist);
+		return oldlist;
 	}
 
 	function ifAlreadyAdded( list, p ){
@@ -101,7 +119,8 @@ var cart = ( function(){
 		return -1;
 	}
 	return {
-		addProduct: addProduct
+		addProduct: addProduct,
+		updateCart: updateCart
 	}
 
 })();
@@ -147,7 +166,7 @@ module.exports = function( passport ){
 		cart.addProduct( sess.cart, req.body.product);
 		
 		//sess.cart.push( req.body.product );
-		res.send( sess.cart );
+		res.send( {cart:sess.cart, message:"Product Added Succesfully!"} );
 	});
 	router.get('/cart', function( req, res, next ){
 		var sess = req.session;
@@ -157,6 +176,14 @@ module.exports = function( passport ){
 		}else{
 			res.send([]);
 		}
+	});
+	router.put('/cart', function( req, res, next ){
+		//console.log('cart : ', req.body.cart );
+		var sess = req.session;
+		var updatedCart = cart.updateCart( sess.cart, req.body.cart );
+		//console.log('updatedCart : ',updatedCart);
+		sess.cart = updatedCart;
+		res.send( {cart: sess.cart, message:"Cart Updated Successfully!"} );
 	});
 
 	router.post('/login', function(req, res, next) {

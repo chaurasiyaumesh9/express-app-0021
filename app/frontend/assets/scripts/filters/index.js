@@ -45,3 +45,13 @@ angular.module('sampleCartApp.filter', [])
 		return out;
 	  }
 })
+.filter('getCartTotalPrice', function () {
+    return function ( p ) {
+    	//console.log('product : ',product)
+        var total = 0;
+        angular.forEach( p, function (product, index) {
+            total += product.qty * ( parseInt(product.item.special_price) || parseInt(product.item.price) );
+        });
+        return total;
+    }
+});

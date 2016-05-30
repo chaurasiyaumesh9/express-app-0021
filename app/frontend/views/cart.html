@@ -7,6 +7,13 @@
 <div class="view-cart-page">
 	<div class="container">
 		<div class="row">
+			<div class="col-xs-12">
+				<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+			</div>
+			
+		</div>
+		
+		<div class="row">
 			<div class="col-md-12 col-xs-12">
 				<div class="panel panel-info">
 					<div class="panel-heading">
@@ -36,7 +43,7 @@
 								<div class="col-md-6 col-xs-12 ">
 									<div class="col-md-3 col-xs-12 text-center"> <h5> <strong> Price </strong></h5> </div>
 									<div class="col-md-3 col-xs-12 text-center"> <h5> <strong> Quantity </strong></h5> </div>
-									<div class="col-md-3 col-xs-12 text-center"> <h5> <strong> Total </strong></h5> </div>
+									<div class="col-md-3 col-xs-12 text-center"> <h5> <strong> Subtotal </strong></h5> </div>
 									<div class="col-md-3 col-xs-12 text-center"> <h5> <strong> Delete </strong></h5> </div>
 								</div>
 							</div>
@@ -62,10 +69,10 @@
 										<input type="text" class="form-control input-sm" ng-model="product.qty">
 									</div>
 									<div class="col-md-3 col-xs-9 text-center">
-										<h4> <strong> <i class="fa fa-inr"></i>{{ ((product.item.special_price || product.item.price) * product.qty) | currency:'':0}}</strong></h4>
+										<h5> <strong> <i class="fa fa-inr"></i>{{ ((product.item.special_price || product.item.price) * product.qty) | currency:'':0}}</strong></h5>
 									</div>
 									<div class="col-md-3 col-xs-2 text-center">
-										<button class="btn btn-danger btn-sm"> <span class="glyphicon glyphicon-trash"></span></button>
+										<button class="btn btn-danger btn-sm" ng-click="removeFromCart( product )"> <span class="glyphicon glyphicon-trash"></span></button>
 									</div>
 									<!-- <p class="quantity"> {{ product.qty }}</p>
 									<p class="price-block"> 
@@ -82,7 +89,7 @@
 									<h5> Added/ Modified Items? </h5>
 								</div>
 								<div class="col-md-3 col-xs-12">
-									<a class="btn btn-default btn-md btn-block" ng-href=""> Update Cart </a>
+									<a class="btn btn-default btn-md btn-block" ng-href="" ng-click="updateCart( cart )"> Update Cart </a>
 								</div>
 							</div>
 						</div>
@@ -90,7 +97,7 @@
 					<div class="panel-footer">
 						<div class="row">
 							<div class="col-md-9 col-xs-12 text-right">
-								<h4> <strong>Total : <i class="fa fa-inr"></i>{{ cartTotal | currency:'' }}</strong></h4>
+								<h4> <strong>Total : <i class="fa fa-inr"></i> {{ cart | getCartTotalPrice | currency:'' }} </strong></h4>
 							</div>
 							<div class="col-md-3 col-xs-12">
 								<button class="btn btn-success btn-md btn-block"> Checkout </button>

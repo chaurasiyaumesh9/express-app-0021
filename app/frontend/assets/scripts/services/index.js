@@ -75,8 +75,22 @@ angular.module('sampleCartApp.service', [])
 	return({
 		addToCart: addToCart,
 		getCart: getCart,
-		getTotal: getTotal
+		getTotal: getTotal,
+		updateCart: updateCart
 	});
+	function updateCart( cart ) {
+        var request = $http({
+            method: "put",
+            url: "/cart",
+            params: {
+                action: "update"
+            },
+            data: {
+                cart: cart
+            }
+        });
+        return( request.then( handleSuccess, handleError ) );
+    }
 
 	function addToCart( product ){
 		var request = $http({

@@ -72,6 +72,7 @@ cartApp.run(function($rootScope) {
     $rootScope.$on('$routeChangeSuccess', function () {
        $rootScope.fullmode = false;
     })
+    $rootScope.alerts = [];
 })
 
 function checkLogin( $q, $timeout, $http, $location, $rootScope ){

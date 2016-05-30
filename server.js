@@ -72,12 +72,12 @@ app.set('view engine','ejs');
 app.set('view cache', false);
 
 
-/*
+
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
-});*/
+});
 var port = process.env.PORT || 8010;
 
 app.listen(port, function(){

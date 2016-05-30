@@ -3,6 +3,7 @@ angular.module('sampleCartApp.controller').controller('productDetailsCtrl', func
 	
 	$scope.message = "Product Details Page!"; //just for testing purpose
 	$scope.activeSlide = 0;
+
 	if ( $routeParams.pid )
 	{
 		
@@ -15,6 +16,7 @@ angular.module('sampleCartApp.controller').controller('productDetailsCtrl', func
 
 			$scope.product = response;
 			$rootScope.activeProduct = response; //setting up the root scope to access full mode
+			$scope.product.qty = 1;
 			$scope.loading = false;
 		} , function(errorMessage ){ 
 			console.warn( errorMessage );
@@ -37,7 +39,8 @@ angular.module('sampleCartApp.controller').controller('productDetailsCtrl', func
 		//console.log('addToCart product :',product);
 		cartService.addToCart( product ).then( function(response){
 			//console.log('addToCart response :',response);
-			$rootScope.cart = response;
+			$rootScope.cart = response.cart;
+			$rootScope.alerts.push({type:"success", msg:  response.message });
 			$location.url('/cart');
 		}, function(errorMessage){
 			console.log('addToCart errorMessage : ',errorMessage);
