@@ -111,9 +111,9 @@ section, footer, header, aside, nav{
 	
 } 
 .product-grid-view{
-	box-shadow :0px 0px 6px #666;
+	/*box-shadow :0px 0px 6px #666;
 	border-radius: 5px;
-	border: none;
+	border: none;*/
 }
 .product-grid-view .wrapper, .product-list-view .wrapper{
 	padding:15px;

@@ -76,6 +76,14 @@ angular.module('sampleCartApp.controller').controller('productListingCtrl', func
 			console.warn( errorMessage );
 		});
 	}
+
+	function getCategories(){
+		categoryService.getActiveCategories().then( function( response ){
+			$scope.categories = response;
+		} , function(errorMessage ){ 
+			console.warn( errorMessage );
+		});
+	}
 	$scope.addToCart = function( product ){
 		//console.log('addToCart product :',product);
 		cartService.addToCart( product ).then( function(response){
@@ -88,6 +96,10 @@ angular.module('sampleCartApp.controller').controller('productListingCtrl', func
 			console.log('addToCart errorMessage : ',errorMessage);
 		});
 	}
-	
+	getCategories();
+	$scope.setActiveCategory = function( category ){
+		$scope.activeCategory = category;
+		//$scope.loading = true;
+	}
 		
 });
