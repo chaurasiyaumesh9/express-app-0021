@@ -1,4 +1,7 @@
 var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+
+
 var config = {};
 config.db = { prod:{}, local:{}};
 config.db.prod.url = "mongodb://su:welcome123@ds011158.mlab.com:11158/sample2";
