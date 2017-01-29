@@ -1,48 +1,20 @@
 <div class="container">
-	<div class="jumbotron text-center">
-		<h2> <i class="fa fa-tags"></i>  {{ activeCategory.name || listingTitle }}  </h2>
-	</div>
-	<!-- <div class="well well-lg text-center">
-		Home / <span style="font-weight:bold;">{{ activeCategory.name || listingTitle }}</span>
-	</div> -->
+	<ol class="breadcrumb">
+	  <li class="breadcrumb-item"><a href="#!/">Home</a></li>
+	  <li class="breadcrumb-item active"> {{ activeCategory.name || listingTitle }}  </li>
+	</ol>
 </div>
 
 <loader></loader> 
-<div id="main" ng-hide="loading" >
-	<div class="container">
-		<div class="col-md-3">
-			<ul class="list-group">
-				<a class="{{category._id === activeCategory._id ?'list-group-item active':'list-group-item'}}" ng-repeat="category in categories" ng-href="#!/products/{{ category._id }}"> {{category.name}}  <!-- <a href="#!/products/{{ category._id }}" ng-click="setActiveCategory(category)"> {{category.name}} </a> --> </a>
-			</ul>
-		</div>
-		<div class="col-md-9">
+<div id="main" ng-hide="loading" class="container" >
+	<div class="row">
+		<div class="col-md-12">
 			<div class="container_fluid">
-				<!-- <div class="row">
-					<div class="col-md-8"></div>
-					<div class="col-md-4">
-						<div class="well well-sm clearfix">
-							<div class="btn-group pull-right">
-								<a href="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span></a> 
-								<a href="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span></a>
-							</div>
-						</div> 
-					</div> 
-				</div> -->
 				<div class="row">
 					
 					<div class="col-xs-12">
 						<div class="bar">
 							<div class="pull-left">
-								 <!-- <div class="btn-group">
-								  <button type="button" class="btn btn-primary"> <i class="fa fa-filter"></i> {{ activeFilter.caption || 'Sort By'}}</button>
-								  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<span class="caret"></span>
-									<span class="sr-only">Toggle Dropdown</span>
-								  </button>
-								  <ul class="dropdown-menu">
-									<li ng-repeat="filter in filters">  <a href="" ng-click="setActiveFilter( filter )" > {{ filter.caption }} </a> </li>
-								  </ul>
-								</div>  -->
 								<div class="btn-group" uib-dropdown >
 								  <button type="button" class="btn btn-default btn-md" uib-dropdown-toggle style="min-width:150px;">
 									{{ activeFilter.caption || 'Look-up By'}}  <span class="caret"></span>
@@ -62,7 +34,7 @@
 					<div class="col-md-12 col-sm-12 col-xs-12"  >
 						<div class="container_fluid" >
 							<div class="row">
-								<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 anim-grid-check" ng-repeat="product in productList | orderBy:sortType:sortReverse:defaultFilter">
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 anim-grid-check" ng-repeat="product in productList | orderBy:sortType:sortReverse:defaultFilter">
 									<product-grid-view></product-grid-view>
 									<hr/>
 								</div>

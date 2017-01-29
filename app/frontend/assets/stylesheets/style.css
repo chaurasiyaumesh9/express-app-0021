@@ -292,7 +292,8 @@ section, footer, header, aside, nav{
 		display:none;
 	}
 	.product-details-page .qty{
-		margin:6px auto;
+		/*margin:6px auto;*/
+		width: 50px;
 	}
 }
 

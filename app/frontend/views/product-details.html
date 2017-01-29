@@ -1,8 +1,12 @@
  <div class="container">
-	<div class="jumbotron text-center">
+	<div class="jumbotron text-center hidden">
 		<h3> {{ product.name }} {{ product.title }} </h3>
 		
 	</div>
+	<ol class="breadcrumb">
+	  <li class="breadcrumb-item"><a href="#!/">Home</a></li>
+	  <li class="breadcrumb-item active"> {{ product.name }}  </li>
+	</ol>
 </div>
 
 <loader></loader>
@@ -66,29 +70,34 @@
 					</div>
 				</p>
 				
-				<p class="descritpion">
-					{{ product.description }}
-				</p>
-				<hr/>
+				
+				
 				<p >
 					<div class="row">
-						<div class="col-sm-2">
-							<div>
-								<!-- <span > Quantity :</span> -->
-								<input type="text" class="qty" style="width:41px;text-align:center;border-radius:4px;border:1px solid #eaeaea;padding:5px;display:block;" ng-model="product.qty" name="qty" />
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label > Quantity :</label>
+								<input type="text" class="qty form-control" ng-model="product.qty" name="qty" />
 							</div>			
 						</div>
-						<div class="col-sm-10">
-							<a class="btn btn-primary" ng-hide="!product.in_stock" ng-click="addToCart( product )" href=""> <i class="fa fa-cart-plus" aria-hidden="true"></i>  Add To Cart </a>
+						<div class="col-sm-12">
+							<div class="btn-group">
+								<a class="btn btn-default" ng-hide="!product.in_stock" ng-click="addToCart( product )" href=""> <i class="fa fa-cart-plus" aria-hidden="true"></i>  Add To Cart </a>
 
-							<button class="btn btn-warning btn-primary-spacing" ng-show="!product.in_stock" ng-disabled="true"> <i class="fa fa-shopping-cart" ></i>  Out of Stock </button>
-							<button class="btn btn-primary btn-primary-spacing"><!-- <i class="fa fa-heart"></i> --> Add To Wishlist </button>
-							<button class="btn btn-primary btn-primary-spacing"><!-- <i class="fa fa-signal"></i> --> Add To Compare </button>
+								<button class="btn btn-warning" ng-show="!product.in_stock" ng-disabled="true"> <i class="fa fa-shopping-cart" ></i>  Out of Stock </button>
+								<button class="btn btn-default"><!-- <i class="fa fa-heart"></i> --> Add To Wishlist </button>
+								<button class="btn btn-default"><!-- <i class="fa fa-signal"></i> --> Add To Compare </button>
+							</div>
+							
 						</div>
 						<!-- <div class="col-lg-4">
 							<label style="line-height:31px;" ng-show="!product.in_stock" > Out of Stock </label>
 						</div> -->
 					</div>
+				</p>
+				<hr/>
+				<p class="descritpion">
+					{{ product.description }}
 				</p>
 			</div>
 		</div>
