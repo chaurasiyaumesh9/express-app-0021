@@ -1,7 +1,7 @@
 {
   "name": "ecommerce-app",
   "main": "server.js",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "engines": {
     "node": "5.1.0",
     "npm": "3.7.2"
@@ -22,6 +22,7 @@
     "express-session": "latest",
     "method-override": "latest",
     "mongoose": "latest",
+    "bluebird":"latest",
     "morgan": "latest",
     "multer": "latest",
     "nodemon": "latest",
