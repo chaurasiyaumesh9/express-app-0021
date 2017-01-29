@@ -20,7 +20,7 @@
 						<div class="panel-title">
 							<div class="row">
 								<div class="col-md-6">
-									<h5 class="pull-left"> <i class="fa fa-shopping-cart" aria-hidden="true"> </i> Your Cart </h5>
+									<h5 class="pull-left"> <i class="fa fa-shopping-cart" aria-hidden="true"> </i> Your Shopping Cart </h5>
 
 								</div>
 								<div class="col-md-6">
@@ -65,8 +65,8 @@
 									</div>
 								</div>
 								<div class="col-md-4 col-xs-12">
-									<p class="product-name">  <a href="#!/product/{{product.item._id}}">  <span style="font-weight:bold;">{{ product.item.name }}</span>  <span class="title">{{ product.item.title }}</span></a></p>
-									<h4 style="max-height:35px;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;"> <small> {{ product.item.short_description }} </small></h4>
+									<p class="product-name">  <a href="#!/product/{{product.item._id}}">  <span style="font-weight:bold;">{{ ::product.item.name }}</span>  <span class="title">{{ product.item.title }}</span></a></p>
+									<h4 class="hidden"> <small> {{ ::product.item.short_description }} </small></h4>
 
 								</div>
 								<div class="col-md-6 col-xs-12">
@@ -88,7 +88,7 @@
 						</div>
 						<div>
 							<div class="row">
-								<div class="col-md-6 col-xs-12 text-right">
+								<div class="col-md-6 col-xs-12 text-left">
 									<a class="btn btn-danger btn-md" ng-href="" ng-click="clearCart()"> Clear Your Cart </a>
 								</div>
 								<div class="col-md-3 col-xs-12 text-right">
